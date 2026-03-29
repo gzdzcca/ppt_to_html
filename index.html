@@ -301,15 +301,29 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
   color: var(--gray-800);
   font-weight: 500;
 }
-#slide-about .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+#slide-about .investor-logos {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+#slide-about .investor-logo {
+  height: 28px;
+  object-fit: contain;
+  opacity: 0.75;
+  transition: opacity 0.2s;
+}
+#slide-about .investor-logo:hover { opacity: 1; }
+#slide-about .badges { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
 #slide-about .badge {
   display: inline-flex;
   align-items: center;
-  padding: 6px 14px;
-  border-radius: 20px;
+  gap: 10px;
+  padding: 8px 16px;
+  border-radius: 12px;
   font-size: 12px;
   font-weight: 500;
-  background: var(--gray-50);
+  background: var(--white);
   border: 1px solid var(--gray-200);
   color: var(--gray-600);
   transition: all 0.2s;
@@ -319,16 +333,22 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
   background: rgba(37,99,235,0.04);
   color: var(--blue);
 }
+#slide-about .badge img {
+  height: 20px;
+  object-fit: contain;
+}
 #slide-about .mission-card {
   flex: 1;
-  background: linear-gradient(145deg, var(--gray-50) 0%, #EEF2FF 100%);
+  background: linear-gradient(145deg, #F0F4FF 0%, #EEF2FF 50%, #F5F3FF 100%);
   border-radius: var(--radius-lg);
-  padding: 48px;
+  padding: 40px 36px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 #slide-about .mission-label {
   font-size: 11px;
@@ -338,16 +358,23 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
   text-transform: uppercase;
 }
 #slide-about .mission-text {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 700;
   color: var(--gray-800);
   line-height: 1.6;
-  margin-top: 20px;
+  margin-top: 16px;
 }
-#slide-about .mission-img {
-  max-height: 200px;
-  margin-top: 32px;
-  object-fit: contain;
+#slide-about .mission-sub {
+  font-size: 13px;
+  color: var(--gray-400);
+  line-height: 1.8;
+  margin-top: 16px;
+  max-width: 340px;
+}
+#slide-about .mission-illustration {
+  margin-top: 24px;
+  width: 100%;
+  max-width: 320px;
 }
 
 /* ===== SLIDE 3: PRODUCTS ===== */
@@ -977,23 +1004,66 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
           </div>
           <div class="info-row animate-on-scroll delay-5">
             <span class="info-label">主要株主</span>
-            <span class="info-value" style="display:flex;gap:8px;flex-wrap:wrap;">
-              <span class="tooltip-trigger" data-tooltip="日本最大級のVC。AI・SaaS領域に強み。" style="font-weight:600;">Global Brain<span class="info-icon">i</span></span>
-              <span class="tooltip-trigger" data-tooltip="500 Startups Japan後継。シード・アーリー特化VC。" style="font-weight:600;">Coral Capital<span class="info-icon">i</span></span>
-              <span class="tooltip-trigger" data-tooltip="ソフトバンクグループのAI特化型VC。" style="font-weight:600;">DEEPCORE<span class="info-icon">i</span></span>
+            <span class="info-value">
+              <div class="investor-logos">
+                <img src="remotion-presentation/public/images/global-brain-logo.png" alt="Global Brain" class="investor-logo tooltip-trigger" data-tooltip="日本最大級のVC。AI・SaaS領域に強み。シリーズAリード投資。">
+                <img src="remotion-presentation/public/images/coral-capital-logo.png" alt="Coral Capital" class="investor-logo tooltip-trigger" data-tooltip="500 Startups Japan後継。シード・アーリー特化VC。">
+                <img src="remotion-presentation/public/images/deepcore-logo.png" alt="DEEPCORE" class="investor-logo tooltip-trigger" data-tooltip="ソフトバンクグループのAI特化型VC。ディープテック領域に特化。">
+              </div>
             </span>
           </div>
         </div>
         <div class="badges animate-on-scroll delay-6">
-          <span class="badge tooltip-trigger" data-tooltip="FOOMA JAPAN 2025（国際食品工業展）でDX推進ソリューションとして最優秀賞受賞。">🏆 FOOMA JAPAN 2025 グランプリ</span>
-          <span class="badge tooltip-trigger" data-tooltip="Forbes Asiaが選ぶアジアを代表する30歳未満の30人にCEO曽根が選出（2021年）。">🌏 Forbes 30 Under 30 Asia</span>
+          <span class="badge tooltip-trigger" data-tooltip="FOOMA JAPAN 2025（国際食品工業展）でDX推進ソリューションとして最優秀賞受賞。"><img src="remotion-presentation/public/images/fooma-logo.png" alt="FOOMA"> グランプリ受賞</span>
+          <span class="badge tooltip-trigger" data-tooltip="Forbes Asiaが選ぶアジアを代表する30歳未満の30人にCEO曽根が選出（2021年）。"><img src="remotion-presentation/public/images/forbes-badge.png" alt="Forbes 30 Under 30"> 選出</span>
           <span class="badge">📰 週刊東洋経済 すごいベンチャー100</span>
         </div>
       </div>
       <div class="mission-card animate-on-scroll delay-3">
         <span class="mission-label">Mission</span>
         <p class="mission-text">「行動の価値を、<br>誰でも認識できるように」</p>
-        <img src="remotion-presentation/public/images/mission.png" class="mission-img" alt="Mission">
+        <p class="mission-sub">人は行動で価値を生み出す。<br>しかしその価値は、見えなければ認識されない。<br>KOSKAは現場の行動データを可視化し、<br>すべての人の貢献を正しく届ける。</p>
+        <svg class="mission-illustration" viewBox="0 0 320 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Factory worker silhouette -->
+          <g opacity="0.9">
+            <circle cx="60" cy="50" r="14" fill="#93C5FD"/>
+            <rect x="48" y="66" width="24" height="32" rx="6" fill="#60A5FA"/>
+            <path d="M46 46 Q60 32 74 46" fill="#FCD34D" stroke="#F59E0B" stroke-width="1.5"/>
+            <rect x="44" y="44" width="32" height="3" rx="1.5" fill="#FCD34D"/>
+          </g>
+          <!-- Action waves emanating from worker -->
+          <circle cx="60" cy="70" r="30" stroke="#93C5FD" stroke-width="1" opacity="0.3" stroke-dasharray="4 3"/>
+          <circle cx="60" cy="70" r="45" stroke="#93C5FD" stroke-width="0.8" opacity="0.2" stroke-dasharray="4 3"/>
+          <circle cx="60" cy="70" r="60" stroke="#93C5FD" stroke-width="0.6" opacity="0.1" stroke-dasharray="4 3"/>
+          <!-- Arrow: action to data -->
+          <path d="M100 70 L140 70" stroke="#2563EB" stroke-width="2" stroke-dasharray="6 3" marker-end="url(#arrowBlue)"/>
+          <!-- KOSKA AI node -->
+          <rect x="142" y="48" width="44" height="44" rx="22" fill="url(#gradBlue)" opacity="0.9"/>
+          <text x="164" y="74" text-anchor="middle" fill="white" font-size="12" font-weight="700">AI</text>
+          <!-- Arrow: data to visibility -->
+          <path d="M188 70 L220 70" stroke="#2563EB" stroke-width="2" stroke-dasharray="6 3" marker-end="url(#arrowBlue)"/>
+          <!-- Visibility: chart/dashboard -->
+          <rect x="222" y="42" width="80" height="56" rx="8" fill="white" stroke="#C7D2FE" stroke-width="1.5"/>
+          <rect x="232" y="72" width="12" height="18" rx="2" fill="#93C5FD"/>
+          <rect x="248" y="62" width="12" height="28" rx="2" fill="#60A5FA"/>
+          <rect x="264" y="52" width="12" height="38" rx="2" fill="#2563EB"/>
+          <circle cx="262" cy="48" r="6" fill="#10B981"/>
+          <path d="M259 48 L261 50 L265 46" stroke="white" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <!-- Labels -->
+          <text x="60" y="115" text-anchor="middle" fill="#64748B" font-size="10">行動</text>
+          <text x="164" y="108" text-anchor="middle" fill="#64748B" font-size="10">解析</text>
+          <text x="262" y="115" text-anchor="middle" fill="#64748B" font-size="10">可視化</text>
+          <!-- Gradient defs -->
+          <defs>
+            <linearGradient id="gradBlue" x1="142" y1="48" x2="186" y2="92">
+              <stop offset="0%" stop-color="#2563EB"/>
+              <stop offset="100%" stop-color="#7C3AED"/>
+            </linearGradient>
+            <marker id="arrowBlue" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <path d="M0 0 L8 3 L0 6" fill="#2563EB"/>
+            </marker>
+          </defs>
+        </svg>
       </div>
     </div>
   </div>
