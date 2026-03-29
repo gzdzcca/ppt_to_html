@@ -4,11 +4,11 @@ import { AbsoluteFill, interpolate, useCurrentFrame, Easing } from "remotion";
 export const MissionFlow: React.FC = () => {
   const frame = useCurrentFrame();
 
-  // Phase 1: Worker appears (0-20)
-  const workerOpacity = interpolate(frame, [0, 15], [0, 1], { extrapolateRight: "clamp" });
-  const workerY = interpolate(frame, [0, 15], [20, 0], { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) });
+  // Phase 1: Icon appears (0-20)
+  const iconOpacity = interpolate(frame, [0, 15], [0, 1], { extrapolateRight: "clamp" });
+  const iconScale = interpolate(frame, [0, 18], [0.7, 1], { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) });
 
-  // Phase 2: Action waves pulse (15-90, looping)
+  // Phase 2: Action waves pulse (15+, looping)
   const wavePhase = frame * 0.06;
 
   // Phase 3: Data particles flow (25-80)
@@ -53,6 +53,10 @@ export const MissionFlow: React.FC = () => {
             <stop offset="0%" stopColor="#FFFFFF" />
             <stop offset="100%" stopColor="#F8FAFC" />
           </linearGradient>
+          <linearGradient id="mf-iconBg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#DBEAFE" />
+            <stop offset="100%" stopColor="#C7D2FE" />
+          </linearGradient>
           <filter id="mf-glow">
             <feGaussianBlur stdDeviation="6" result="blur" />
             <feMerge>
@@ -61,113 +65,108 @@ export const MissionFlow: React.FC = () => {
             </feMerge>
           </filter>
           <filter id="mf-softShadow">
-            <feDropShadow dx="0" dy="4" stdDeviation="6" floodColor="#000" floodOpacity="0.3" />
+            <feDropShadow dx="0" dy="3" stdDeviation="4" floodColor="#000" floodOpacity="0.15" />
           </filter>
         </defs>
 
         {/* ---- Connection lines ---- */}
-        {/* Line 1: Worker → AI */}
         <line
-          x1="120" y1="95" x2={120 + 100 * line1Progress} y2="95"
-          stroke="#3B82F6" strokeWidth="2" strokeDasharray="6 4" opacity={0.5 * line1Progress}
+          x1="115" y1="90" x2={115 + 105 * line1Progress} y2="90"
+          stroke="#93C5FD" strokeWidth="2" strokeDasharray="6 4" opacity={0.6 * line1Progress}
         />
-        {/* Line 2: AI → Dashboard */}
         <line
-          x1="295" y1="95" x2={295 + 80 * line2Progress} y2="95"
-          stroke="#3B82F6" strokeWidth="2" strokeDasharray="6 4" opacity={0.5 * line2Progress}
+          x1="290" y1="90" x2={290 + 85 * line2Progress} y2="90"
+          stroke="#93C5FD" strokeWidth="2" strokeDasharray="6 4" opacity={0.6 * line2Progress}
         />
 
         {/* ---- Floating data particles ---- */}
         {particlesActive && Array.from({ length: 6 }, (_, i) => {
           const speed = 1.2 + i * 0.3;
-          const px = ((frame - 20) * speed + i * 40) % 160;
-          const inRange = px < 150;
-          const py = 90 + Math.sin(frame * 0.1 + i * 1.2) * 12;
-          const pOp = inRange ? interpolate(px, [0, 20, 130, 150], [0, 0.7, 0.7, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }) : 0;
+          const px = ((frame - 20) * speed + i * 40) % 165;
+          const inRange = px < 155;
+          const py = 85 + Math.sin(frame * 0.1 + i * 1.2) * 12;
+          const pOp = inRange ? interpolate(px, [0, 20, 135, 155], [0, 0.6, 0.6, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }) : 0;
           return (
             <circle
               key={i}
-              cx={120 + px}
+              cx={115 + px}
               cy={py}
-              r={2.5 + (i % 3)}
-              fill={i % 2 === 0 ? "#60A5FA" : "#818CF8"}
+              r={2 + (i % 3)}
+              fill={i % 2 === 0 ? "#60A5FA" : "#A78BFA"}
               opacity={pOp * aiOpacity}
             />
           );
         })}
 
-        {/* ---- Worker figure ---- */}
-        <g opacity={workerOpacity} transform={`translate(0, ${workerY})`}>
-          {/* Pulsing action waves */}
-          {[35, 52, 69].map((r, i) => {
-            const wOp = 0.15 - i * 0.04 + Math.sin(wavePhase + i * 0.8) * 0.08;
+        {/* ---- Action Icon (clean, abstract — replaces crude worker figure) ---- */}
+        <g opacity={iconOpacity} transform={`translate(70, 90) scale(${iconScale})`}>
+          {/* Pulsing waves */}
+          {[28, 40, 52].map((r, i) => {
+            const wOp = 0.18 - i * 0.05 + Math.sin(wavePhase + i * 0.8) * 0.08;
             return (
               <circle
                 key={i}
-                cx="70" cy="95"
-                r={r + Math.sin(wavePhase + i) * 3}
+                cx="0" cy="0"
+                r={r + Math.sin(wavePhase + i) * 2}
                 fill="none"
-                stroke="#60A5FA"
+                stroke="#93C5FD"
                 strokeWidth={1.2 - i * 0.3}
                 opacity={Math.max(0, wOp)}
               />
             );
           })}
-          {/* Head */}
-          <circle cx="70" cy="65" r="18" fill="#1E40AF" opacity="0.15" />
-          <circle cx="70" cy="63" r="14" fill="#60A5FA" />
-          {/* Hard hat */}
-          <path d="M53 59 Q70 42 87 59" fill="#FCD34D" stroke="#F59E0B" strokeWidth="1.5" />
-          <rect x="51" y="57" width="38" height="4.5" rx="2" fill="#FCD34D" />
-          {/* Body */}
-          <rect x="56" y="82" width="28" height="34" rx="6" fill="#3B82F6" />
-          {/* Arms */}
-          <rect x="46" y="86" width="10" height="22" rx="5" fill="#2563EB" />
-          <rect x="84" y="86" width="10" height="22" rx="5" fill="#2563EB" />
-          {/* Clipboard in hand */}
-          <rect x="86" y="92" width="14" height="18" rx="2" fill="white" opacity="0.9" />
-          <line x1="89" y1="97" x2="97" y2="97" stroke="#CBD5E1" strokeWidth="1.5" />
-          <line x1="89" y1="101" x2="95" y2="101" stroke="#CBD5E1" strokeWidth="1.5" />
-          <line x1="89" y1="105" x2="97" y2="105" stroke="#CBD5E1" strokeWidth="1.5" />
+          {/* Rounded square background */}
+          <rect x="-24" y="-24" width="48" height="48" rx="14" fill="url(#mf-iconBg)" filter="url(#mf-softShadow)" />
+          {/* Clipboard icon */}
+          <rect x="-10" y="-14" width="20" height="26" rx="3" fill="white" stroke="#3B82F6" strokeWidth="1.5" />
+          <rect x="-5" y="-18" width="10" height="6" rx="2" fill="#3B82F6" />
+          <line x1="-5" y1="-4" x2="5" y2="-4" stroke="#93C5FD" strokeWidth="2" strokeLinecap="round" />
+          <line x1="-5" y1="1" x2="3" y2="1" stroke="#93C5FD" strokeWidth="2" strokeLinecap="round" />
+          <line x1="-5" y1="6" x2="5" y2="6" stroke="#93C5FD" strokeWidth="2" strokeLinecap="round" />
+          {/* Pen / writing indicator */}
+          <g transform="translate(10, 8) rotate(-30)">
+            <rect x="-2" y="-8" width="4" height="12" rx="1" fill="#2563EB" />
+            <path d="M-2 4 L0 7 L2 4" fill="#2563EB" />
+          </g>
         </g>
 
         {/* ---- AI Processing Node ---- */}
-        <g opacity={aiOpacity} transform={`translate(250, 95) scale(${aiScale})`} filter="url(#mf-glow)">
-          <circle cx="0" cy="0" r="32" fill="url(#mf-aiGrad)" />
+        <g opacity={aiOpacity} transform={`translate(250, 90) scale(${aiScale})`} filter="url(#mf-glow)">
+          <circle cx="0" cy="0" r="30" fill="url(#mf-aiGrad)" />
           {/* Orbiting ring */}
           <ellipse
-            cx="0" cy="0" rx="38" ry="14"
+            cx="0" cy="0" rx="36" ry="13"
             fill="none" stroke="#818CF8" strokeWidth="1.5" opacity="0.4"
             transform={`rotate(${frame * 1.5})`}
           />
           <circle
-            cx={38 * Math.cos(frame * 0.026)}
-            cy={14 * Math.sin(frame * 0.026)}
+            cx={36 * Math.cos(frame * 0.026)}
+            cy={13 * Math.sin(frame * 0.026)}
             r="3" fill="#A78BFA" opacity="0.8"
           />
           {/* AI text */}
-          <text x="0" y="2" textAnchor="middle" fill="white" fontSize="16" fontWeight="700" dominantBaseline="middle">AI</text>
+          <text x="0" y="2" textAnchor="middle" fill="white" fontSize="15" fontWeight="700" dominantBaseline="middle">AI</text>
           {/* Glow ring */}
-          <circle cx="0" cy="0" r={32 + aiGlow * 0.3} fill="none" stroke="#6366F1" strokeWidth="1" opacity={0.15 + Math.sin(frame * 0.08) * 0.1} />
+          <circle cx="0" cy="0" r={30 + aiGlow * 0.3} fill="none" stroke="#6366F1" strokeWidth="1" opacity={0.12 + Math.sin(frame * 0.08) * 0.08} />
         </g>
 
         {/* ---- Dashboard / Chart ---- */}
-        <g opacity={dashOpacity} transform={`translate(380, 55) scale(${dashScale})`} filter="url(#mf-softShadow)">
+        <g opacity={dashOpacity} transform={`translate(380, 50) scale(${dashScale})`} filter="url(#mf-softShadow)">
           <rect x="0" y="0" width="100" height="80" rx="10" fill="url(#mf-dashBg)" stroke="#E2E8F0" strokeWidth="1.5" />
           {/* Title bar dots */}
-          <circle cx="12" cy="12" r="3" fill="#EF4444" opacity="0.7" />
-          <circle cx="22" cy="12" r="3" fill="#F59E0B" opacity="0.7" />
-          <circle cx="32" cy="12" r="3" fill="#10B981" opacity="0.7" />
+          <circle cx="12" cy="12" r="3" fill="#EF4444" opacity="0.6" />
+          <circle cx="22" cy="12" r="3" fill="#F59E0B" opacity="0.6" />
+          <circle cx="32" cy="12" r="3" fill="#10B981" opacity="0.6" />
           {/* Bar chart */}
-          <rect x="16" y={70 - bar1H} width="16" height={bar1H} rx="3" fill="#60A5FA" />
-          <rect x="42" y={70 - bar2H} width="16" height={bar2H} rx="3" fill="#3B82F6" />
-          <rect x="68" y={70 - bar3H} width="16" height={bar3H} rx="3" fill="#2563EB" />
+          <rect x="16" y={70 - bar1H} width="16" height={bar1H} rx="3" fill="#93C5FD" />
+          <rect x="42" y={70 - bar2H} width="16" height={bar2H} rx="3" fill="#60A5FA" />
+          <rect x="68" y={70 - bar3H} width="16" height={bar3H} rx="3" fill="#3B82F6" />
         </g>
 
         {/* ---- Checkmark ---- */}
-        <g opacity={checkOpacity} transform={`translate(460, 48) scale(${checkScale})`}>
-          <circle cx="0" cy="0" r="12" fill="#10B981" />
-          <path d="M-5 0 L-1.5 4 L6 -4" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+        <g opacity={checkOpacity} transform={`translate(458, 44) scale(${checkScale})`}>
+          <circle cx="0" cy="0" r="11" fill="#10B981" />
+          <path d="M-4.5 0 L-1.5 3.5 L5.5 -3.5" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
         </g>
 
         {/* ---- Labels ---- */}

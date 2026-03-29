@@ -311,38 +311,42 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
   font-weight: 500;
 }
 #slide-about .investor-section {
-  margin-top: 20px;
-  padding: 16px 20px;
-  background: var(--gray-50);
+  margin-top: 24px;
+  padding: 20px 24px;
+  background: var(--white);
   border-radius: 12px;
-  border: 1px solid var(--gray-100);
+  border: 1px solid var(--gray-200);
+  box-shadow: var(--shadow-sm);
 }
 #slide-about .investor-section-label {
   font-size: 11px;
   font-weight: 600;
   color: var(--gray-400);
   letter-spacing: 0.05em;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
 }
 #slide-about .investor-logos {
   display: flex;
-  gap: 24px;
+  gap: 32px;
   align-items: center;
-  flex-wrap: wrap;
 }
 #slide-about .investor-logo {
-  height: 36px;
+  height: 28px;
+  max-width: 140px;
   object-fit: contain;
-  opacity: 0.7;
+  opacity: 0.65;
   transition: opacity 0.2s;
 }
 #slide-about .investor-logo:hover { opacity: 1; }
-#slide-about .badges { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+#slide-about .badges { display: flex; gap: 12px; margin-top: 16px; }
 #slide-about .badge {
-  display: inline-flex;
+  flex: 1;
+  display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
-  padding: 10px 16px;
+  padding: 12px 16px;
   border-radius: 12px;
   font-size: 12px;
   font-weight: 600;
@@ -351,6 +355,7 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
   color: var(--gray-600);
   transition: all 0.2s;
   box-shadow: var(--shadow-sm);
+  white-space: nowrap;
 }
 #slide-about .badge:hover {
   border-color: var(--blue);
@@ -359,7 +364,7 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
   box-shadow: var(--shadow);
 }
 #slide-about .badge img {
-  height: 24px;
+  height: 18px;
   object-fit: contain;
 }
 #slide-about .mission-card {
