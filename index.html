@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, initial-scale=1">
+<title>ながら記録 のご提案 | KOSKA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-snap-type: y mandatory; scroll-behavior: smooth; overflow-y: scroll; overflow-x: hidden; }
+body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1a2e; -webkit-font-smoothing: antialiased; }
+
+/* ===== DESIGN TOKENS ===== */
+:root {
+  --blue: #2563EB;
+  --blue-light: #60A5FA;
+  --blue-dark: #1E40AF;
+  --navy: #0B1628;
+  --navy-light: #1A2744;
+  --accent: #818CF8;
+  --green: #10B981;
+  --white: #FFFFFF;
+  --gray-50: #F8FAFC;
+  --gray-100: #F1F5F9;
+  --gray-200: #E2E8F0;
+  --gray-300: #CBD5E1;
+  --gray-400: #94A3B8;
+  --gray-500: #64748B;
+  --gray-600: #475569;
+  --gray-700: #334155;
+  --gray-800: #1E293B;
+  --gray-900: #0F172A;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+  --shadow-lg: 0 20px 40px -12px rgba(0,0,0,0.15);
+  --shadow-xl: 0 25px 50px -12px rgba(0,0,0,0.25);
+  --radius: 16px;
+  --radius-lg: 24px;
+}
+
+/* ===== SLIDE SYSTEM ===== */
+.slide {
+  width: 100vw;
+  height: 100vh;
+  scroll-snap-align: start;
+  position: relative;
+  overflow: clip;
+  display: flex;
+  flex-direction: column;
+}
+.slide-inner {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 60px 80px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes fadeRight {
+  from { opacity: 0; transform: translateX(-40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeLeft {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes slideInBar {
+  from { width: 0; }
+}
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes waveform {
+  0%, 100% { height: 6px; }
+  50% { height: 24px; }
+}
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.animate-on-scroll.visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+.delay-1 { transition-delay: 0.05s; }
+.delay-2 { transition-delay: 0.1s; }
+.delay-3 { transition-delay: 0.15s; }
+.delay-4 { transition-delay: 0.2s; }
+.delay-5 { transition-delay: 0.25s; }
+.delay-6 { transition-delay: 0.3s; }
+.delay-7 { transition-delay: 0.35s; }
+
+/* ===== SLIDE HEADER ===== */
+.slide-header {
+  margin-bottom: 48px;
+}
+.slide-header h2 {
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+.slide-header .subtitle {
+  font-size: 16px;
+  color: var(--gray-500);
+  margin-top: 12px;
+  line-height: 1.7;
+}
+.header-line {
+  width: 48px;
+  height: 3px;
+  background: var(--blue);
+  border-radius: 2px;
+  margin-top: 16px;
+}
+
+/* ===== TOOLTIP ===== */
+.tooltip-trigger {
+  position: relative;
+  cursor: help;
+}
+.tooltip-trigger::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%) scale(0.95);
+  background: var(--gray-900);
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.6;
+  padding: 12px 16px;
+  border-radius: 10px;
+  width: max-content;
+  max-width: 320px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+  z-index: 100;
+  box-shadow: var(--shadow-xl);
+  white-space: normal;
+}
+.tooltip-trigger:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+.info-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  margin-left: 6px;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+/* ===== NAV DOTS ===== */
+.nav-dots {
+  position: fixed;
+  right: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 1000;
+}
+.nav-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  border: 1.5px solid rgba(255,255,255,0.3);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.nav-dot.active {
+  background: var(--blue);
+  border-color: var(--blue);
+  transform: scale(1.3);
+}
+.nav-dot:hover { border-color: var(--blue-light); }
+
+/* ===== SLIDE 1: TITLE ===== */
+#slide-title {
+  background: var(--navy);
+  background: linear-gradient(160deg, #06080F 0%, #0B1628 40%, #0F1D3D 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+#slide-title .bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+#slide-title .bg-glow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(37,99,235,0.12) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#slide-title .logo {
+  height: 48px;
+  margin-bottom: 48px;
+  animation: fadeIn 1s ease both;
+}
+#slide-title h1 {
+  font-size: 72px;
+  font-weight: 900;
+  color: var(--white);
+  letter-spacing: 0.08em;
+  animation: fadeUp 1s 0.3s ease both;
+}
+#slide-title .tagline {
+  font-size: 20px;
+  color: var(--blue-light);
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  margin-top: 16px;
+  animation: fadeUp 1s 0.5s ease both;
+}
+#slide-title .divider-line {
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--blue-light), transparent);
+  margin: 32px auto;
+  animation: fadeIn 1s 0.8s ease both;
+}
+#slide-title .sub-tagline {
+  font-size: 15px;
+  color: rgba(255,255,255,0.4);
+  font-weight: 300;
+  animation: fadeUp 1s 1s ease both;
+}
+
+/* ===== SLIDE 2: ABOUT ===== */
+#slide-about { background: var(--white); }
+#slide-about .content { display: flex; gap: 64px; flex: 1; }
+#slide-about .info-section { flex: 1; }
+#slide-about .info-table { width: 100%; }
+#slide-about .info-row {
+  display: flex;
+  align-items: baseline;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--gray-100);
+}
+#slide-about .info-label {
+  width: 100px;
+  font-size: 13px;
+  color: var(--gray-400);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+#slide-about .info-value {
+  font-size: 15px;
+  color: var(--gray-800);
+  font-weight: 500;
+}
+#slide-about .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+#slide-about .badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  color: var(--gray-600);
+  transition: all 0.2s;
+}
+#slide-about .badge:hover {
+  border-color: var(--blue);
+  background: rgba(37,99,235,0.04);
+  color: var(--blue);
+}
+#slide-about .mission-card {
+  flex: 1;
+  background: linear-gradient(145deg, var(--gray-50) 0%, #EEF2FF 100%);
+  border-radius: var(--radius-lg);
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+#slide-about .mission-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--blue);
+  text-transform: uppercase;
+}
+#slide-about .mission-text {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--gray-800);
+  line-height: 1.6;
+  margin-top: 20px;
+}
+#slide-about .mission-img {
+  max-height: 200px;
+  margin-top: 32px;
+  object-fit: contain;
+}
+
+/* ===== SLIDE 3: PRODUCTS ===== */
+#slide-products { background: var(--gray-50); }
+#slide-products .cards { display: flex; gap: 32px; flex: 1; }
+.product-card {
+  flex: 1;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--gray-200);
+  transition: box-shadow 0.3s, transform 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.product-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+.product-card.featured {
+  border-color: var(--blue);
+  background: linear-gradient(180deg, var(--white) 0%, #EEF2FF 100%);
+}
+.product-card .card-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: var(--blue);
+  color: var(--white);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 12px;
+  letter-spacing: 0.05em;
+}
+.product-card .card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+.product-card h3 { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+.product-card .card-desc {
+  font-size: 14px;
+  color: var(--gray-500);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+.product-card .card-img {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 16px 0;
+}
+.product-card .card-img img {
+  max-width: 100%;
+  max-height: 240px;
+  object-fit: contain;
+  border-radius: 12px;
+}
+.product-card .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+.product-card .tag {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+/* ===== SLIDE 4: TRACK RECORD ===== */
+#slide-track { background: var(--white); }
+#slide-track .logos-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  flex: 1;
+  align-content: center;
+}
+.logo-cell {
+  background: var(--gray-50);
+  border: 1px solid var(--gray-100);
+  border-radius: var(--radius);
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-600);
+  text-align: center;
+  transition: all 0.3s;
+  min-height: 80px;
+}
+.logo-cell:hover {
+  border-color: var(--blue);
+  background: rgba(37,99,235,0.03);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+.logo-cell.accent {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: var(--white);
+}
+.logo-cell.accent:hover {
+  background: var(--blue-dark);
+}
+
+/* ===== SLIDE 5: SECTION DIVIDER ===== */
+.slide-divider {
+  background: linear-gradient(160deg, #06080F, #0B1628, #0F1D3D);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.slide-divider .bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+.slide-divider h2 {
+  font-size: 56px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.04em;
+  animation: scaleIn 0.8s ease both;
+}
+.slide-divider .section-line {
+  width: 60px;
+  height: 3px;
+  background: var(--blue);
+  margin: 24px auto 0;
+  border-radius: 2px;
+  animation: fadeIn 1s 0.5s ease both;
+}
+.slide-divider .section-num {
+  font-size: 120px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.03);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  letter-spacing: 0.3em;
+}
+
+/* ===== SLIDE 6: DX CHALLENGES ===== */
+#slide-dx { background: var(--navy); color: var(--white); }
+#slide-dx h2 { color: var(--white); }
+#slide-dx .subtitle { color: rgba(255,255,255,0.5); }
+#slide-dx .header-line { background: var(--blue-light); }
+#slide-dx .content { display: flex; gap: 48px; flex: 1; align-items: center; }
+#slide-dx .chart-area { flex: 3; }
+#slide-dx .insight-area { flex: 2; }
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+.bar-label {
+  width: 220px;
+  text-align: right;
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  flex-shrink: 0;
+}
+.bar-track { flex: 1; height: 28px; background: rgba(255,255,255,0.04); border-radius: 6px; overflow: hidden; }
+.bar-fill {
+  height: 100%;
+  border-radius: 0 6px 6px 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: white;
+  transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+  width: 0;
+}
+.bar-fill.animate { /* set via JS */ }
+.insight-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  backdrop-filter: blur(12px);
+}
+.insight-card .big-blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.insight-card .big-block {
+  background: var(--blue);
+  color: var(--white);
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  padding: 14px;
+  border-radius: 12px;
+}
+.insight-card .insight-title {
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+.insight-card .stat-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.insight-card .stat-row .stat-num {
+  color: var(--blue-light);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+/* ===== SLIDE 7: PAIN POINTS ===== */
+#slide-pain { background: var(--white); }
+#slide-pain .columns { display: flex; gap: 40px; flex: 1; }
+#slide-pain .column { flex: 1; }
+.column-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 24px;
+  border-radius: var(--radius);
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.column-header.paper { background: #FFF7ED; color: #C2410C; border: 1px solid #FED7AA; }
+.column-header.digital { background: #EFF6FF; color: var(--blue); border: 1px solid #BFDBFE; }
+.pain-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px 20px;
+  border-radius: 14px;
+  border: 1px solid var(--gray-100);
+  margin-bottom: 12px;
+  transition: all 0.2s;
+  background: var(--white);
+}
+.pain-item:hover {
+  border-color: var(--gray-300);
+  box-shadow: var(--shadow);
+}
+.pain-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.pain-icon.orange { background: #FFF7ED; }
+.pain-icon.blue { background: #EFF6FF; }
+.pain-text { font-size: 14px; color: var(--gray-700); line-height: 1.6; }
+.dx-fatigue-box {
+  margin-top: 20px;
+  padding: 20px 24px;
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  border-radius: var(--radius);
+}
+.dx-fatigue-box .title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #DC2626;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.dx-fatigue-box p {
+  font-size: 13px;
+  color: #991B1B;
+  margin-top: 6px;
+  line-height: 1.6;
+}
+
+/* ===== COLUMN SEPARATOR ===== */
+.col-sep {
+  width: 1px;
+  background: var(--gray-200);
+  align-self: stretch;
+  margin: 40px 0;
+  position: relative;
+}
+.col-sep::after {
+  content: 'VS';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--white);
+  padding: 8px 4px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gray-400);
+  letter-spacing: 0.1em;
+}
+
+/* ===== SLIDE 8: FEATURES ===== */
+#slide-features { background: var(--navy); color: var(--white); }
+#slide-features h2 { color: var(--white); }
+#slide-features .subtitle { color: rgba(255,255,255,0.5); }
+#slide-features .header-line { background: var(--blue-light); }
+#slide-features .content { display: flex; gap: 48px; flex: 1; align-items: center; }
+#slide-features .demo-area { flex: 3; }
+#slide-features .demo-area video {
+  width: 100%;
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+#slide-features .features-list { flex: 2; display: flex; flex-direction: column; gap: 16px; }
+.feature-item {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius);
+  padding: 24px;
+  transition: all 0.3s;
+}
+.feature-item:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.15);
+  transform: translateX(4px);
+}
+.feature-item h4 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.feature-item p { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+.feature-item .feat-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(99,102,241,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.tech-badges {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+.tech-badge {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 14px 16px;
+  text-align: center;
+  flex: 1;
+  transition: all 0.2s;
+}
+.tech-badge:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.15);
+}
+.tech-badge .icon { font-size: 20px; margin-bottom: 6px; }
+.tech-badge .label { font-size: 11px; color: rgba(255,255,255,0.5); font-weight: 500; }
+
+/* ===== SLIDE 10: FLOW ===== */
+#slide-flow { background: var(--gray-50); }
+#slide-flow .flow-steps {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  flex: 1;
+  align-items: center;
+}
+.flow-step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+.flow-num {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+  color: white;
+  font-size: 20px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 24px rgba(37,99,235,0.25);
+  position: relative;
+  z-index: 2;
+}
+.flow-icon { font-size: 32px; margin-bottom: 12px; }
+.flow-title { font-size: 14px; font-weight: 700; color: var(--gray-800); line-height: 1.4; margin-bottom: 6px; }
+.flow-desc { font-size: 12px; color: var(--gray-500); }
+.flow-arrow {
+  position: absolute;
+  top: 32px;
+  right: -20px;
+  z-index: 1;
+  color: var(--gray-300);
+  font-size: 18px;
+}
+
+/* ===== SLIDE 11: PRICING ===== */
+#slide-pricing { background: var(--white); }
+#slide-pricing .pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  flex: 1;
+  align-content: center;
+}
+.price-card {
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s;
+  position: relative;
+  background: var(--white);
+}
+.price-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-xl);
+}
+.price-card.recommended {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 1px var(--blue), var(--shadow-lg);
+}
+.price-card.dark {
+  background: var(--gray-900);
+  border-color: var(--gray-700);
+  color: var(--white);
+}
+.price-card .recommend-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--blue);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 16px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+.price-card .plan-name {
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--gray-100);
+  margin-bottom: 16px;
+}
+.price-card.dark .plan-name { border-color: var(--gray-700); }
+.price-card .plan-desc {
+  font-size: 12px;
+  color: var(--gray-500);
+  text-align: center;
+  line-height: 1.6;
+  min-height: 40px;
+  margin-bottom: 20px;
+}
+.price-card.dark .plan-desc { color: var(--gray-400); }
+.price-card .price-display { text-align: center; margin-bottom: 20px; }
+.price-value {
+  font-size: 48px;
+  font-weight: 900;
+  color: var(--gray-900);
+  line-height: 1;
+}
+.price-card.dark .price-value { color: var(--white); }
+.price-unit { font-size: 14px; color: var(--gray-500); }
+.price-card.dark .price-unit { color: var(--gray-400); }
+.price-sub { font-size: 11px; color: var(--gray-400); margin-top: 6px; }
+.price-card .feature-list { list-style: none; flex: 1; }
+.price-card .feature-list li {
+  font-size: 13px;
+  color: var(--gray-600);
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.price-card.dark .feature-list li { color: var(--gray-300); }
+.check-icon { color: var(--green); font-size: 14px; flex-shrink: 0; }
+
+/* ===== SLIDE 12: OPTIONS ===== */
+#slide-options { background: var(--gray-50); }
+.option-section-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--blue);
+  background: rgba(37,99,235,0.06);
+  border: 1px solid rgba(37,99,235,0.12);
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+.option-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--white);
+  border: 1px solid var(--gray-100);
+  border-radius: 14px;
+  padding: 18px 24px;
+  margin-bottom: 10px;
+  transition: all 0.2s;
+}
+.option-item:hover {
+  border-color: var(--blue);
+  box-shadow: var(--shadow);
+  transform: translateX(4px);
+}
+.option-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gray-700);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.option-price {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--blue);
+  background: rgba(37,99,235,0.06);
+  padding: 6px 16px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+/* ===== SLIDE: PAGE NUMBER ===== */
+.page-num {
+  position: absolute;
+  bottom: 24px;
+  right: 40px;
+  font-size: 12px;
+  color: var(--gray-400);
+  font-weight: 500;
+}
+.slide-divider .page-num,
+#slide-title .page-num,
+#slide-dx .page-num,
+#slide-features .page-num { color: rgba(255,255,255,0.2); }
+</style>
+</head>
+<body>
+
+<!-- Navigation dots -->
+<nav class="nav-dots" id="navDots"></nav>
+
+<!-- ===== SLIDE 1: TITLE ===== -->
+<section class="slide" id="slide-title">
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
+  <div style="position:relative;z-index:1;">
+    <img src="remotion-presentation/public/images/koska-logo.png" class="logo" alt="KOSKA">
+    <h1>ながら記録</h1>
+    <p class="tagline">のご提案</p>
+    <div class="divider-line"></div>
+    <p class="sub-tagline">AI × 音声入力で、作業しながら帳票記録</p>
+  </div>
+</section>
+
+<!-- ===== SLIDE 2: ABOUT ===== -->
+<section class="slide" id="slide-about">
+  <div class="slide-inner">
+    <div class="slide-header animate-on-scroll">
+      <h2>株式会社KOSKAについて</h2>
+      <div class="header-line"></div>
+    </div>
+    <div class="content">
+      <div class="info-section">
+        <img src="remotion-presentation/public/images/koska-logo.png" style="height:40px;margin-bottom:32px;display:block;" alt="KOSKA" class="animate-on-scroll">
+        <div class="info-table">
+          <div class="info-row animate-on-scroll delay-1">
+            <span class="info-label">代表者</span>
+            <span class="info-value tooltip-trigger" data-tooltip="一橋大学管理会計博士課程出身。シリコンバレーのスタートアップでエンジニアとして勤務後、製造現場IoT実験を経て創業。">曽根健一朗 <span class="info-icon">i</span></span>
+          </div>
+          <div class="info-row animate-on-scroll delay-2">
+            <span class="info-label">創業</span>
+            <span class="info-value">2018年10月</span>
+          </div>
+          <div class="info-row animate-on-scroll delay-3">
+            <span class="info-label">本社</span>
+            <span class="info-value">東京都千代田区神田須田町</span>
+          </div>
+          <div class="info-row animate-on-scroll delay-4">
+            <span class="info-label">資本金</span>
+            <span class="info-value tooltip-trigger" data-tooltip="シード: 500 Startups Japanより3,000万円。シリーズA: Global Brain、Coral Capital、DEEPCOREより約2.5億円。">1億2,500万円 <span class="info-icon">i</span></span>
+          </div>
+          <div class="info-row animate-on-scroll delay-5">
+            <span class="info-label">主要株主</span>
+            <span class="info-value" style="display:flex;gap:8px;flex-wrap:wrap;">
+              <span class="tooltip-trigger" data-tooltip="日本最大級のVC。AI・SaaS領域に強み。" style="font-weight:600;">Global Brain<span class="info-icon">i</span></span>
+              <span class="tooltip-trigger" data-tooltip="500 Startups Japan後継。シード・アーリー特化VC。" style="font-weight:600;">Coral Capital<span class="info-icon">i</span></span>
+              <span class="tooltip-trigger" data-tooltip="ソフトバンクグループのAI特化型VC。" style="font-weight:600;">DEEPCORE<span class="info-icon">i</span></span>
+            </span>
+          </div>
+        </div>
+        <div class="badges animate-on-scroll delay-6">
+          <span class="badge tooltip-trigger" data-tooltip="FOOMA JAPAN 2025（国際食品工業展）でDX推進ソリューションとして最優秀賞受賞。">🏆 FOOMA JAPAN 2025 グランプリ</span>
+          <span class="badge tooltip-trigger" data-tooltip="Forbes Asiaが選ぶアジアを代表する30歳未満の30人にCEO曽根が選出（2021年）。">🌏 Forbes 30 Under 30 Asia</span>
+          <span class="badge">📰 週刊東洋経済 すごいベンチャー100</span>
+        </div>
+      </div>
+      <div class="mission-card animate-on-scroll delay-3">
+        <span class="mission-label">Mission</span>
+        <p class="mission-text">「行動の価値を、<br>誰でも認識できるように」</p>
+        <img src="remotion-presentation/public/images/mission.png" class="mission-img" alt="Mission">
+      </div>
+    </div>
+  </div>
+  <span class="page-num">02</span>
+</section>
+
+<!-- ===== SLIDE 3: PRODUCTS ===== -->
+<section class="slide" id="slide-products">
+  <div class="slide-inner">
+    <div class="slide-header animate-on-scroll">
+      <h2>提供プロダクトについて</h2>
+      <div class="header-line"></div>
+    </div>
+    <div class="cards">
+      <div class="product-card animate-on-scroll delay-1">
+        <div class="card-icon" style="background:#F1F5F9;">⚙️</div>
+        <h3 style="color:var(--gray-800);" class="tooltip-trigger" data-tooltip="IoTセンサーとカメラで製造現場の人・モノ・機械データを自動取得し、原価管理を可視化するプラットフォーム。">GenKan <span class="info-icon">i</span></h3>
+        <p class="card-desc">加工原価に対する必要な人・モノ・機械のデータを<br>作業者さんの負担をかけず自動で取得</p>
+        <div class="card-img">
+          <img src="remotion-presentation/public/images/genkan-demo.png" alt="GenKan">
+        </div>
+        <div class="tags">
+          <span class="tag" style="background:var(--gray-100);color:var(--gray-600);">IoTセンサー</span>
+          <span class="tag" style="background:var(--gray-100);color:var(--gray-600);">カメラ検知</span>
+          <span class="tag" style="background:var(--gray-100);color:var(--gray-600);">RFID</span>
+          <span class="tag" style="background:var(--gray-100);color:var(--gray-600);">原価可視化</span>
+        </div>
+      </div>
+      <div class="product-card featured animate-on-scroll delay-2">
+        <span class="card-badge">NEW</span>
+        <div class="card-icon" style="background:#EEF2FF;">🎙️</div>
+        <h3 style="color:var(--blue);" class="tooltip-trigger" data-tooltip="2025年4月リリース。Google Gemini搭載のAI音声認識で、作業中にハンズフリーで帳票入力。FOOMA JAPAN 2025最優秀賞受賞。">ながら記録 <span class="info-icon">i</span></h3>
+        <p class="card-desc">AI × 音声入力の帳票革命<br>作業の手を止めず、話すだけで帳票入力</p>
+        <div class="card-img">
+          <img src="remotion-presentation/public/images/nagara-demo.png" alt="ながら記録">
+        </div>
+        <div class="tags">
+          <span class="tag" style="background:rgba(37,99,235,0.08);color:var(--blue);">AI音声認識</span>
+          <span class="tag" style="background:rgba(37,99,235,0.08);color:var(--blue);">ハンズフリー</span>
+          <span class="tag" style="background:rgba(37,99,235,0.08);color:var(--blue);">Gemini搭載</span>
+          <span class="tag" style="background:rgba(37,99,235,0.08);color:var(--blue);">多言語対応</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="page-num">03</span>
+</section>
+
+<!-- ===== SLIDE 4: TRACK RECORD ===== -->
+<section class="slide" id="slide-track">
+  <div class="slide-inner">
+    <div class="slide-header animate-on-scroll">
+      <h2>支援範囲と実績</h2>
+      <p class="subtitle">データをもとに改善につながる仕組み化を支援。<br>業界・規模を問わず、さまざまな企業にご利用いただいています。</p>
+      <div class="header-line"></div>
+    </div>
+    <div class="logos-grid">
+      <div class="logo-cell animate-on-scroll delay-1">ファーストフーズ名古屋</div>
+      <div class="logo-cell animate-on-scroll delay-1">トオカツフーズ</div>
+      <div class="logo-cell animate-on-scroll delay-2">九州エヌエスフーズ</div>
+      <div class="logo-cell animate-on-scroll delay-2">Noritake</div>
+      <div class="logo-cell animate-on-scroll delay-3">秋田エプソン</div>
+      <div class="logo-cell animate-on-scroll delay-3">TOYODA GOSEI KYUSHU</div>
+      <div class="logo-cell animate-on-scroll delay-4">NITTO KOHKI</div>
+      <div class="logo-cell animate-on-scroll delay-4">山口製作所</div>
+      <div class="logo-cell animate-on-scroll delay-5">METICS</div>
+      <div class="logo-cell animate-on-scroll delay-5">苫良</div>
+      <div class="logo-cell animate-on-scroll delay-6">Townard</div>
+      <div class="logo-cell accent animate-on-scroll delay-7 tooltip-trigger" data-tooltip="食品製造、自動車部品、電子機器、建設など幅広い業界でご導入いただいています。">他20社以上</div>
+    </div>
+  </div>
+  <span class="page-num">04</span>
+</section>
+
+<!-- ===== SLIDE 5: DIVIDER ===== -->
+<section class="slide slide-divider">
+  <div class="bg-grid"></div>
+  <div style="position:relative;z-index:1;">
+    <span class="section-num">02</span>
+    <h2>ながら記録のご紹介</h2>
+    <div class="section-line"></div>
+  </div>
+  <span class="page-num">05</span>
+</section>
+
+<!-- ===== SLIDE 6: DX CHALLENGES ===== -->
+<section class="slide" id="slide-dx">
+  <div class="slide-inner">
+    <div class="slide-header animate-on-scroll">
+      <h2>デジタル化に向けての課題</h2>
+      <p class="subtitle">取り組むべき内容は見えているが、下記の課題が大きく進まない</p>
+      <div class="header-line"></div>
+    </div>
+    <div class="content">
+      <div class="chart-area">
+        <div class="bar-row animate-on-scroll delay-1">
+          <span class="bar-label">ITに関わる人材が不足している</span>
+          <div class="bar-track"><div class="bar-fill" data-width="80%" style="background:linear-gradient(90deg,#3B82F6,#60A5FA);">28.1%</div></div>
+        </div>
+        <div class="bar-row animate-on-scroll delay-2">
+          <span class="bar-label">DX推進に関わる人材が不足</span>
+          <div class="bar-track"><div class="bar-fill" data-width="70%" style="background:linear-gradient(90deg,#6366F1,#818CF8);">24.7%</div></div>
+        </div>
+        <div class="bar-row animate-on-scroll delay-3">
+          <span class="bar-label">具体的な効果や成果が見えない</span>
+          <div class="bar-track"><div class="bar-fill" data-width="65%" style="background:linear-gradient(90deg,#8B5CF6,#A78BFA);">22.7%</div></div>
+        </div>
+        <div class="bar-row animate-on-scroll delay-3">
+          <span class="bar-label">何から始めてよいかわからない</span>
+          <div class="bar-track"><div class="bar-fill" data-width="57%" style="background:linear-gradient(90deg,#A78BFA,#C4B5FD);">19.9%</div></div>
+        </div>
+        <div class="bar-row animate-on-scroll delay-4">
+          <span class="bar-label">予算の確保が難しい</span>
+          <div class="bar-track"><div class="bar-fill" data-width="56%" style="background:linear-gradient(90deg,#C4B5FD,#DDD6FE);">19.5%</div></div>
+        </div>
+        <p style="font-size:11px;color:rgba(255,255,255,0.25);margin-top:20px;" class="animate-on-scroll delay-5">※ 独立行政法人 中小企業基盤整備機構『中小企業のDX推進に関する調査（2024）』より引用</p>
+      </div>
+      <div class="insight-area animate-on-scroll delay-4">
+        <div class="insight-card">
+          <div class="big-blocks">
+            <div class="big-block">人材</div>
+            <div class="big-block">予算</div>
+          </div>
+          <p class="insight-title">全体の7割以上を占める<br>大きな課題</p>
+          <div class="stat-row tooltip-trigger" data-tooltip="経済産業省「DXレポート」で指摘。既存ITシステムの老朽化により2025年以降年間最大12兆円の経済損失が生じるという警告。">
+            <span class="stat-num">89.2%</span>が「2025年の崖」を認識 <span class="info-icon">i</span>
+          </div>
+          <div class="stat-row tooltip-trigger" data-tooltip="実際にDXを達成した中小企業はわずか9.6%。多くは基本的なデジタル化の段階にとどまっている。">
+            DX達成はわずか<span class="stat-num">9.6%</span> <span class="info-icon">i</span>
+          </div>
+          <div class="stat-row tooltip-trigger" data-tooltip="約70%の製造現場が今なお紙やExcelでの記録を続けている。">
+            <span class="stat-num">70%</span>の現場が紙/Excelを使用 <span class="info-icon">i</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="page-num">06</span>
+</section>
+
+<!-- ===== SLIDE 7: PAIN POINTS ===== -->
+<section class="slide" id="slide-pain">
+  <div class="slide-inner">
+    <div class="slide-header animate-on-scroll">
+      <h2>帳票記録におけるよくお聞きする課題</h2>
+      <p class="subtitle">記入に手間がかかるため、現場に負担をかけるだけではなく、デジタル化もなかなか進みにくい</p>
+      <div class="header-line"></div>
+    </div>
+    <div class="columns">
+      <div class="column">
+        <div class="column-header paper animate-on-scroll">📄 紙</div>
+        <div class="pain-item animate-on-scroll delay-1 tooltip-trigger" data-tooltip="紙に記録した後、同じデータをExcelや基幹システムに手入力する二重作業が発生。1日30分〜1時間のロス。">
+          <div class="pain-icon orange">📝</div>
+          <span class="pain-text">システムに転記する手間がかかる…</span>
+        </div>
+        <div class="pain-item animate-on-scroll delay-2 tooltip-trigger" data-tooltip="記入忘れや転記ミスが頻発。品質管理上の問題につながるリスクも。">
+          <div class="pain-icon orange">❌</div>
+          <span class="pain-text">抜け漏れが発生する…</span>
+        </div>
+        <div class="pain-item animate-on-scroll delay-3 tooltip-trigger" data-tooltip="紙帳票の保管・検索・集計に膨大な時間がかかる。過去データの活用も困難。">
+          <div class="pain-icon orange">🗄️</div>
+          <span class="pain-text">管理が大変…</span>
+        </div>
+      </div>
+      <div class="col-sep"></div>
+      <div class="column">
+        <div class="column-header digital animate-on-scroll">📱 電子帳票（タッチ式）</div>
+        <div class="pain-item animate-on-scroll delay-2 tooltip-trigger" data-tooltip="電子帳票システムは設定の専門知識が必要。IT人材不足の現場では展開が停滞し、「DX疲れ」に陥るケースも。">
+          <div class="pain-icon blue">⚙️</div>
+          <span class="pain-text">システムを導入したが設定が難しい…<br>展開出来ず、数帳票で止まっている…</span>
+        </div>
+        <div class="pain-item animate-on-scroll delay-3 tooltip-trigger" data-tooltip="手袋着用や手が汚れる環境ではタッチ操作が困難。作業を中断する必要があり、生産性低下の原因に。">
+          <div class="pain-icon blue">😟</div>
+          <span class="pain-text">タブレットを都度タッチするため、<br>現場は入力効率が悪くなって大変…</span>
+        </div>
+        <div class="dx-fatigue-box animate-on-scroll delay-5 tooltip-trigger" data-tooltip="デジタル化に失敗した企業が「やはり紙の方が楽」とアナログに戻る現象。ながら記録はこの課題を音声入力で根本解決。">
+          <p class="title">⚠️ 「DX疲れ」の発生</p>
+          <p>一部の企業ではデジタル化に疲弊し、アナログに回帰する現象も…</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="page-num">07</span>
+</section>
+
+<!-- ===== SLIDE 8: FEATURES ===== -->
+<section class="slide" id="slide-features">
+  <div class="slide-inner">
+    <div class="slide-header animate-on-scroll">
+      <h2>シンプルかつ簡単操作にこだわった<br>「ながら記録」</h2>
+      <p class="subtitle">最先端AIが今までのすべての課題をクリアし、作業しながらハンズフリーでの帳票記録を可能に。</p>
+      <div class="header-line"></div>
+    </div>
+    <div class="content">
+      <div class="demo-area animate-on-scroll delay-1">
+        <video src="voice-demo.mp4" autoplay loop muted playsinline></video>
+      </div>
+      <div class="features-list">
+        <div class="feature-item animate-on-scroll delay-2 tooltip-trigger" data-tooltip="Google Geminiが音声内容を解析し、どのフォームフィールドに入力すべきかを自動判定。ドロップダウン選択や手動フィールド指定が不要に。">
+          <h4><span class="feat-icon">🤖</span> AIが入力場所を自動選択</h4>
+          <p>手で選ぶ必要なし</p>
+        </div>
+        <div class="feature-item animate-on-scroll delay-3 tooltip-trigger" data-tooltip="「えーと」「あの」などのフィラー語や言い直しを自動除去。騒音環境でも文脈からデータを正確に抽出。入力時間を従来の1/3以下に短縮。">
+          <h4><span class="feat-icon">✨</span> AIが必要な情報だけ抽出</h4>
+          <p>言い淀みなどを自動除去</p>
+        </div>
+        <div class="feature-item animate-on-scroll delay-4 tooltip-trigger" data-tooltip="「さっきの数量を530に訂正」のように音声で修正指示。画面タッチ不要で完全ハンズフリーを実現。手袋着用でも問題なし。">
+          <h4><span class="feat-icon">🗣️</span> 修正も音声だけで可能</h4>
+          <p>手を止めずに修正できる</p>
+        </div>
+        <div class="tech-badges animate-on-scroll delay-5">
+          <div class="tech-badge tooltip-trigger" data-tooltip="外国人労働者が母国語で入力しても、AIが適切なフィールドに自動振り分け。">
+            <div class="icon">🌐</div>
+            <div class="label">多言語対応</div>
+          </div>
+          <div class="tech-badge tooltip-trigger" data-tooltip="Google Geminiベースの大規模言語モデルで高精度な文脈理解を実現。">
+            <div class="icon">🧠</div>
+            <div class="label">Gemini搭載</div>
+          </div>
+          <div class="tech-badge tooltip-trigger" data-tooltip="従来のタッチ入力と比較して入力時間を3分の1以下に短縮。">
+            <div class="icon">⚡</div>
+            <div class="label">入力時間 1/3</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="page-num">08</span>
+</section>
+
+<!-- ===== SLIDE 9: DIVIDER ===== -->
+<section class="slide slide-divider">
+  <div class="bg-grid"></div>
+  <div style="position:relative;z-index:1;">
+    <span class="section-num">03</span>
+    <h2>「ながら記録」の費用</h2>
+    <div class="section-line"></div>
+  </div>
+  <span class="page-num">09</span>
+</section>
+
+<!-- ===== SLIDE 10: FLOW ===== -->
+<section class="slide" id="slide-flow">
+  <div class="slide-inner">
+    <div class="slide-header animate-on-scroll">
+      <h2>提案 → 導入 → 支援 までの流れ</h2>
+      <p class="subtitle">ご導入前テストで使用感を確かめた上での検討・導入が可能です。効果創出まで一気通貫でご支援いたします。</p>
+      <div class="header-line"></div>
+    </div>
+    <div class="flow-steps">
+      <div class="flow-step animate-on-scroll delay-1 tooltip-trigger" data-tooltip="現場の課題をヒアリングし、ながら記録のデモンストレーションを実施。導入効果のシミュレーションもご提示。">
+        <div class="flow-num">01</div>
+        <div class="flow-icon">💼</div>
+        <div class="flow-title">初回提案</div>
+        <div class="flow-desc">ヒアリング・デモ</div>
+        <span class="flow-arrow">→</span>
+      </div>
+      <div class="flow-step animate-on-scroll delay-2 tooltip-trigger" data-tooltip="実際の製造現場で1日間のトライアルを無料で実施。騒音環境での認識精度や操作感を現場スタッフが確認。">
+        <div class="flow-num">02</div>
+        <div class="flow-icon">📱</div>
+        <div class="flow-title">1day 現場テスト</div>
+        <div class="flow-desc">実環境で体験</div>
+        <span class="flow-arrow">→</span>
+      </div>
+      <div class="flow-step animate-on-scroll delay-3 tooltip-trigger" data-tooltip="テスト結果を踏まえ帳票設計・カスタマイズを検討。紙帳票を写真撮影するだけでAIがテンプレートを自動生成。">
+        <div class="flow-num">03</div>
+        <div class="flow-icon">📋</div>
+        <div class="flow-title">詳細すり合わせ<br>お申し込み</div>
+        <div class="flow-desc">帳票設計・契約</div>
+        <span class="flow-arrow">→</span>
+      </div>
+      <div class="flow-step animate-on-scroll delay-4 tooltip-trigger" data-tooltip="アカウント設定、帳票テンプレート作成、マスターデータ登録を支援。現場スタッフへの操作研修も実施。">
+        <div class="flow-num">04</div>
+        <div class="flow-icon">🤝</div>
+        <div class="flow-title">初期導入支援<br>設定支援</div>
+        <div class="flow-desc">セットアップ・研修</div>
+        <span class="flow-arrow">→</span>
+      </div>
+      <div class="flow-step animate-on-scroll delay-5 tooltip-trigger" data-tooltip="導入後もカスタマーサクセスが定期的にモニタリング。帳票追加・データ活用提案まで一気通貫サポート。">
+        <div class="flow-num">05</div>
+        <div class="flow-icon">📈</div>
+        <div class="flow-title">継続的な<br>活用支援</div>
+        <div class="flow-desc">運用・分析サポート</div>
+      </div>
+    </div>
+    <div class="animate-on-scroll delay-6" style="background:rgba(37,99,235,0.04);border:1px solid rgba(37,99,235,0.1);border-radius:12px;padding:16px 24px;text-align:center;margin-top:auto;">
+      <span style="font-size:14px;color:var(--blue);font-weight:600;">✓ 導入前の1day現場テストは無料　　✓ 最短2週間で本格稼働</span>
+    </div>
+  </div>
+  <span class="page-num">10</span>
+</section>
+
+<!-- ===== SLIDE 11: PRICING ===== -->
+<section class="slide" id="slide-pricing">
+  <div class="slide-inner">
+    <div class="slide-header animate-on-scroll">
+      <h2>ライセンス体系</h2>
+      <div class="header-line"></div>
+    </div>
+    <div class="pricing-grid">
+      <!-- Starter -->
+      <div class="price-card animate-on-scroll delay-1 tooltip-trigger" data-tooltip="1〜2ラインの最も負荷の高い帳票からデジタル化を開始。スモールスタートに最適。">
+        <div class="plan-name">Starter</div>
+        <p class="plan-desc">現場で負荷が大きい帳票を<br>まずは改善</p>
+        <div class="price-display">
+          <span class="price-unit">月額</span>
+          <span class="price-value">5</span>
+          <span class="price-unit">万円</span>
+          <p class="price-sub">+ 初期費用 20万円<br>税抜 / 1拠点あたり / 年間</p>
+        </div>
+        <ul class="feature-list">
+          <li><span class="check-icon">✓</span> 帳票5種類まで</li>
+          <li><span class="check-icon">✓</span> ユーザー数100名まで</li>
+          <li><span class="check-icon">✓</span> 1マスター1,000行まで</li>
+        </ul>
+      </div>
+      <!-- Standard -->
+      <div class="price-card recommended animate-on-scroll delay-2 tooltip-trigger" data-tooltip="最も選ばれているプラン。複数ラインの帳票を一括デジタル化し、全スタッフが利用可能。コスパに優れる。">
+        <span class="recommend-badge">おすすめ</span>
+        <div class="plan-name" style="color:var(--blue);">Standard</div>
+        <p class="plan-desc">帳票電子化に向けての<br>ベーシックプラン</p>
+        <div class="price-display">
+          <span class="price-unit">月額</span>
+          <span class="price-value" style="color:var(--blue);">8</span>
+          <span class="price-unit">万円</span>
+          <p class="price-sub">+ 初期費用 20万円<br>税抜 / 1拠点あたり / 年間</p>
+        </div>
+        <ul class="feature-list">
+          <li><span class="check-icon">✓</span> 帳票20種類まで</li>
+          <li><span class="check-icon">✓</span> ユーザー数無制限</li>
+          <li><span class="check-icon">✓</span> 1マスター1,000行まで</li>
+        </ul>
+      </div>
+      <!-- Business -->
+      <div class="price-card animate-on-scroll delay-3 tooltip-trigger" data-tooltip="全社展開向け。帳票制限なし、ダッシュボード追加可能。データドリブンな改善活動を推進。">
+        <div class="plan-name">Business</div>
+        <p class="plan-desc">制限を設けず、現場でフル活用<br>データ活用までご支援</p>
+        <div class="price-display">
+          <span class="price-unit">月額</span>
+          <span class="price-value">15</span>
+          <span class="price-unit">万円</span>
+          <p class="price-sub">+ 初期費用 20万円<br>税抜 / 1拠点あたり / 年間</p>
+        </div>
+        <ul class="feature-list">
+          <li><span class="check-icon">✓</span> 帳票種類無制限</li>
+          <li><span class="check-icon">✓</span> ユーザー数無制限</li>
+          <li><span class="check-icon">✓</span> 1マスター1,000行まで</li>
+        </ul>
+      </div>
+      <!-- Enterprise -->
+      <div class="price-card dark animate-on-scroll delay-4 tooltip-trigger" data-tooltip="既存基幹システムとのAPI連携、オンプレミス対応、SSOなど大企業向けフルカスタマイズプラン。">
+        <div class="plan-name">Enterprise</div>
+        <p class="plan-desc">お問い合わせ</p>
+        <div class="price-display">
+          <span class="price-value" style="font-size:28px;">お問い合わせ</span>
+        </div>
+        <ul class="feature-list">
+          <li><span class="check-icon">✓</span> 個別対応</li>
+          <li><span class="check-icon">✓</span> システム連携</li>
+          <li><span class="check-icon">✓</span> オンプレ開発等</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <span class="page-num">11</span>
+</section>
+
+<!-- ===== SLIDE 12: OPTIONS ===== -->
+<section class="slide" id="slide-options">
+  <div class="slide-inner">
+    <div class="slide-header animate-on-scroll">
+      <h2>オプション機能</h2>
+      <div class="header-line"></div>
+    </div>
+    <div class="option-section-label animate-on-scroll">全てのライセンス（Starter, Standard, Business）に追加可能</div>
+    <div class="animate-on-scroll delay-1">
+      <div class="option-item tooltip-trigger" data-tooltip="蓄積データをリアルタイム可視化。生産性推移・不良率分析・スケジュール管理機能を提供。">
+        <span class="option-name">✓ ながらダッシュボード（分析機能、タスクスケジュール機能）</span>
+        <span class="option-price">＋5万円/月額</span>
+      </div>
+    </div>
+    <div class="animate-on-scroll delay-2">
+      <div class="option-item">
+        <span class="option-name">✓ 1マスターあたり3,000行まで</span>
+        <span class="option-price">＋1万円/月額</span>
+      </div>
+    </div>
+    <div class="animate-on-scroll delay-2">
+      <div class="option-item">
+        <span class="option-name">✓ 1マスターあたり5,000行まで</span>
+        <span class="option-price">＋2万円/月額</span>
+      </div>
+    </div>
+    <div class="animate-on-scroll delay-3">
+      <div class="option-item">
+        <span class="option-name">✓ 1マスターあたり10,000行まで</span>
+        <span class="option-price">＋5万円/月額</span>
+      </div>
+    </div>
+
+    <div class="option-section-label animate-on-scroll delay-4" style="margin-top:32px;">Businessライセンスにのみ追加可能</div>
+    <div class="animate-on-scroll delay-5">
+      <div class="option-item tooltip-trigger" data-tooltip="ERPや基幹システムとのリアルタイムデータ連携。REST APIで生産データを自動同期。">
+        <span class="option-name">✓ APIデータ連携機能</span>
+        <span class="option-price">＋4万円/月額</span>
+      </div>
+    </div>
+    <div class="animate-on-scroll delay-5">
+      <div class="option-item tooltip-trigger" data-tooltip="SAML 2.0対応SSO、IP制限によるアクセス制御。セキュリティポリシーの厳しい大企業向け。">
+        <span class="option-name">✓ SSO/IP制限機能</span>
+        <span class="option-price">＋4万円/月額</span>
+      </div>
+    </div>
+  </div>
+  <span class="page-num">12</span>
+</section>
+
+<script>
+// ===== SLIDES & NAV =====
+const slides = document.querySelectorAll('.slide');
+const dotsContainer = document.getElementById('navDots');
+
+// Create nav dots
+slides.forEach((slide, i) => {
+  const dot = document.createElement('div');
+  dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+  dot.addEventListener('click', () => slide.scrollIntoView({ behavior: 'smooth' }));
+  dotsContainer.appendChild(dot);
+});
+
+// ===== SCROLL-BASED ANIMATION =====
+function activateSlide(slide) {
+  slide.querySelectorAll('.animate-on-scroll').forEach(el => {
+    el.classList.add('visible');
+  });
+  slide.querySelectorAll('.bar-fill').forEach((bar, i) => {
+    setTimeout(() => { bar.style.width = bar.dataset.width; }, i * 200);
+  });
+}
+
+function getCurrentSlideIndex() {
+  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+  const vh = window.innerHeight;
+  return Math.round(scrollTop / vh);
+}
+
+function onScroll() {
+  const idx = getCurrentSlideIndex();
+  // Activate current slide and adjacent ones
+  slides.forEach((s, i) => {
+    if (Math.abs(i - idx) <= 1) activateSlide(s);
+  });
+  // Update nav dots
+  dotsContainer.querySelectorAll('.nav-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === idx);
+  });
+}
+
+window.addEventListener('scroll', onScroll, { passive: true });
+// Activate first slide immediately
+activateSlide(slides[0]);
+onScroll();
+
+// ===== KEYBOARD NAV =====
+document.addEventListener('keydown', (e) => {
+  const current = Array.from(slides).findIndex(s => {
+    const r = s.getBoundingClientRect();
+    return r.top >= -100 && r.top < window.innerHeight / 2;
+  });
+  if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') {
+    e.preventDefault();
+    const next = Math.min(current + 1, slides.length - 1);
+    slides[next].scrollIntoView({ behavior: 'smooth' });
+  }
+  if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+    e.preventDefault();
+    const prev = Math.max(current - 1, 0);
+    slides[prev].scrollIntoView({ behavior: 'smooth' });
+  }
+});
+</script>
+</body>
+</html>

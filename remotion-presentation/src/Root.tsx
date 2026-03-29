@@ -1,22 +1,26 @@
 import { Composition } from "remotion";
-import { Presentation } from "./Presentation";
+import { VoiceDemo } from "./animations/VoiceDemo";
+import { BarChart } from "./animations/BarChart";
 import "./styles/global.css";
-
-const SLIDE_COUNT = 12;
-const SLIDE_DURATION = 150;
-const FPS = 30;
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
       <Composition
-        id="NagaraKirokuPresentation"
-        component={Presentation}
-        durationInFrames={SLIDE_COUNT * SLIDE_DURATION}
-        fps={FPS}
-        width={1920}
-        height={1080}
-        defaultProps={{}}
+        id="VoiceDemo"
+        component={VoiceDemo}
+        durationInFrames={210}
+        fps={30}
+        width={800}
+        height={400}
+      />
+      <Composition
+        id="BarChart"
+        component={BarChart}
+        durationInFrames={120}
+        fps={30}
+        width={700}
+        height={300}
       />
     </>
   );
