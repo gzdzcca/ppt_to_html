@@ -1286,176 +1286,202 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
   <span class="page-num">10</span>
 </section>
 
-<!-- ===== SLIDE 11: PRICING + COST SIMULATOR ===== -->
+<!-- ===== SLIDE 11: PRICING + OPTIONS ===== -->
 <section class="slide" id="slide-pricing">
-  <div class="slide-inner" style="padding:40px 60px;">
-    <div class="slide-header animate-on-scroll" style="margin-bottom:24px;">
-      <h2>ライセンス体系・年間コストシミュレーション</h2>
+  <div class="slide-inner" style="padding:48px 80px;">
+    <div class="slide-header animate-on-scroll" style="margin-bottom:32px;">
+      <h2>ライセンス体系・オプション</h2>
       <div class="header-line"></div>
     </div>
 
-    <!-- Top: Pricing cards (compact) + Options -->
-    <div style="display:flex;gap:24px;flex:1;min-height:0;">
-
-      <!-- Left: Pricing cards -->
-      <div style="flex:3;display:flex;flex-direction:column;gap:12px;">
-        <div class="pricing-grid animate-on-scroll delay-1" style="grid-template-columns:repeat(4,1fr);gap:12px;flex:1;">
-          <!-- Starter -->
-          <div class="price-card tooltip-trigger" data-tooltip="1〜2ラインの最も負荷の高い帳票からスモールスタート。" style="padding:20px 16px;">
-            <div class="plan-name" style="font-size:15px;padding-bottom:10px;margin-bottom:10px;">Starter</div>
-            <div class="price-display" style="margin-bottom:12px;">
-              <span class="price-unit">月額</span>
-              <span class="price-value" style="font-size:36px;">5</span>
-              <span class="price-unit">万円</span>
-              <p class="price-sub">+ 初期費用 20万円</p>
-            </div>
-            <ul class="feature-list">
-              <li><span class="check-icon">✓</span> 帳票5種類まで</li>
-              <li><span class="check-icon">✓</span> ユーザー100名まで</li>
-              <li><span class="check-icon">✓</span> 1マスター1,000行</li>
-            </ul>
-          </div>
-          <!-- Standard -->
-          <div class="price-card recommended tooltip-trigger" data-tooltip="最も選ばれているプラン。複数ライン一括デジタル化。コスパに優れる。" style="padding:20px 16px;">
-            <span class="recommend-badge">おすすめ</span>
-            <div class="plan-name" style="font-size:15px;padding-bottom:10px;margin-bottom:10px;color:var(--blue);">Standard</div>
-            <div class="price-display" style="margin-bottom:12px;">
-              <span class="price-unit">月額</span>
-              <span class="price-value" style="font-size:36px;color:var(--blue);">8</span>
-              <span class="price-unit">万円</span>
-              <p class="price-sub">+ 初期費用 20万円</p>
-            </div>
-            <ul class="feature-list">
-              <li><span class="check-icon">✓</span> 帳票20種類まで</li>
-              <li><span class="check-icon">✓</span> ユーザー数無制限</li>
-              <li><span class="check-icon">✓</span> 1マスター1,000行</li>
-            </ul>
-          </div>
-          <!-- Business -->
-          <div class="price-card tooltip-trigger" data-tooltip="全社展開向け。帳票制限なし、ダッシュボード追加可能。" style="padding:20px 16px;">
-            <div class="plan-name" style="font-size:15px;padding-bottom:10px;margin-bottom:10px;">Business</div>
-            <div class="price-display" style="margin-bottom:12px;">
-              <span class="price-unit">月額</span>
-              <span class="price-value" style="font-size:36px;">15</span>
-              <span class="price-unit">万円</span>
-              <p class="price-sub">+ 初期費用 20万円</p>
-            </div>
-            <ul class="feature-list">
-              <li><span class="check-icon">✓</span> 帳票種類無制限</li>
-              <li><span class="check-icon">✓</span> ユーザー数無制限</li>
-              <li><span class="check-icon">✓</span> 1マスター1,000行</li>
-            </ul>
-          </div>
-          <!-- Enterprise -->
-          <div class="price-card dark tooltip-trigger" data-tooltip="API連携、オンプレミス対応、SSOなど大企業向けフルカスタマイズ。" style="padding:20px 16px;">
-            <div class="plan-name" style="font-size:15px;padding-bottom:10px;margin-bottom:10px;">Enterprise</div>
-            <div class="price-display" style="margin-bottom:12px;">
-              <span class="price-value" style="font-size:22px;">お問い合わせ</span>
-            </div>
-            <ul class="feature-list">
-              <li><span class="check-icon">✓</span> 個別対応</li>
-              <li><span class="check-icon">✓</span> システム連携</li>
-              <li><span class="check-icon">✓</span> オンプレ開発等</li>
-            </ul>
-          </div>
+    <!-- Pricing cards -->
+    <div class="pricing-grid animate-on-scroll delay-1" style="flex:none;">
+      <!-- Starter -->
+      <div class="price-card tooltip-trigger" data-tooltip="1〜2ラインの最も負荷の高い帳票からスモールスタート。">
+        <div class="plan-name">Starter</div>
+        <p class="plan-desc">現場で負荷が大きい帳票を<br>まずは改善</p>
+        <div class="price-display">
+          <span class="price-unit">月額</span>
+          <span class="price-value">5</span>
+          <span class="price-unit">万円</span>
+          <p class="price-sub">+ 初期費用 20万円<br>税抜 / 1拠点あたり / 年間</p>
         </div>
-
-        <!-- Options (compact) -->
-        <div class="animate-on-scroll delay-2" style="background:var(--gray-50);border:1px solid var(--gray-200);border-radius:14px;padding:16px 20px;">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
-            <span style="font-size:13px;font-weight:700;color:var(--gray-800);">オプション機能</span>
-            <span style="font-size:11px;color:var(--gray-400);">全プラン追加可 / ※Businessのみ</span>
-          </div>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;">
-            <span class="tooltip-trigger" data-tooltip="蓄積データをリアルタイム可視化。生産性推移・不良率分析・スケジュール管理。" style="font-size:11px;padding:5px 10px;background:var(--white);border:1px solid var(--gray-200);border-radius:8px;color:var(--gray-600);cursor:help;">ダッシュボード <b style="color:var(--blue);">+5万</b></span>
-            <span style="font-size:11px;padding:5px 10px;background:var(--white);border:1px solid var(--gray-200);border-radius:8px;color:var(--gray-600);">3,000行 <b style="color:var(--blue);">+1万</b></span>
-            <span style="font-size:11px;padding:5px 10px;background:var(--white);border:1px solid var(--gray-200);border-radius:8px;color:var(--gray-600);">5,000行 <b style="color:var(--blue);">+2万</b></span>
-            <span style="font-size:11px;padding:5px 10px;background:var(--white);border:1px solid var(--gray-200);border-radius:8px;color:var(--gray-600);">10,000行 <b style="color:var(--blue);">+5万</b></span>
-            <span class="tooltip-trigger" data-tooltip="ERPや基幹システムとのリアルタイムデータ連携。REST API対応。" style="font-size:11px;padding:5px 10px;background:var(--white);border:1px solid var(--gray-200);border-radius:8px;color:var(--gray-600);cursor:help;">※API連携 <b style="color:var(--blue);">+4万</b></span>
-            <span class="tooltip-trigger" data-tooltip="SAML 2.0対応SSO、IP制限。セキュリティポリシーの厳しい企業向け。" style="font-size:11px;padding:5px 10px;background:var(--white);border:1px solid var(--gray-200);border-radius:8px;color:var(--gray-600);cursor:help;">※SSO/IP制限 <b style="color:var(--blue);">+4万</b></span>
-          </div>
-        </div>
+        <ul class="feature-list">
+          <li><span class="check-icon">✓</span> 帳票5種類まで</li>
+          <li><span class="check-icon">✓</span> ユーザー数100名まで</li>
+          <li><span class="check-icon">✓</span> 1マスター1,000行まで</li>
+        </ul>
       </div>
+      <!-- Standard -->
+      <div class="price-card recommended tooltip-trigger" data-tooltip="最も選ばれているプラン。複数ラインの帳票を一括デジタル化し、全スタッフが利用可能。">
+        <span class="recommend-badge">おすすめ</span>
+        <div class="plan-name" style="color:var(--blue);">Standard</div>
+        <p class="plan-desc">帳票電子化に向けての<br>ベーシックプラン</p>
+        <div class="price-display">
+          <span class="price-unit">月額</span>
+          <span class="price-value" style="color:var(--blue);">8</span>
+          <span class="price-unit">万円</span>
+          <p class="price-sub">+ 初期費用 20万円<br>税抜 / 1拠点あたり / 年間</p>
+        </div>
+        <ul class="feature-list">
+          <li><span class="check-icon">✓</span> 帳票20種類まで</li>
+          <li><span class="check-icon">✓</span> ユーザー数無制限</li>
+          <li><span class="check-icon">✓</span> 1マスター1,000行まで</li>
+        </ul>
+      </div>
+      <!-- Business -->
+      <div class="price-card tooltip-trigger" data-tooltip="全社展開向け。帳票制限なし、ダッシュボード追加可能。データドリブンな改善活動を推進。">
+        <div class="plan-name">Business</div>
+        <p class="plan-desc">制限を設けず、現場でフル活用<br>データ活用までご支援</p>
+        <div class="price-display">
+          <span class="price-unit">月額</span>
+          <span class="price-value">15</span>
+          <span class="price-unit">万円</span>
+          <p class="price-sub">+ 初期費用 20万円<br>税抜 / 1拠点あたり / 年間</p>
+        </div>
+        <ul class="feature-list">
+          <li><span class="check-icon">✓</span> 帳票種類無制限</li>
+          <li><span class="check-icon">✓</span> ユーザー数無制限</li>
+          <li><span class="check-icon">✓</span> 1マスター1,000行まで</li>
+        </ul>
+      </div>
+      <!-- Enterprise -->
+      <div class="price-card dark tooltip-trigger" data-tooltip="既存基幹システムとのAPI連携、オンプレミス対応、SSOなど大企業向けフルカスタマイズプラン。">
+        <div class="plan-name">Enterprise</div>
+        <p class="plan-desc">お問い合わせ</p>
+        <div class="price-display">
+          <span class="price-value" style="font-size:28px;">お問い合わせ</span>
+        </div>
+        <ul class="feature-list">
+          <li><span class="check-icon">✓</span> 個別対応</li>
+          <li><span class="check-icon">✓</span> システム連携</li>
+          <li><span class="check-icon">✓</span> オンプレ開発等</li>
+        </ul>
+      </div>
+    </div>
 
-      <!-- Right: Cost Simulator -->
-      <div class="animate-on-scroll delay-2" style="flex:2;display:flex;flex-direction:column;">
-        <div id="costSimulator" style="background:linear-gradient(145deg,var(--gray-900),#1a2744);border-radius:var(--radius-lg);padding:28px;flex:1;display:flex;flex-direction:column;color:white;">
-          <h3 style="font-size:16px;font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:8px;">
-            <span style="width:28px;height:28px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;">&#9889;</span>
-            年間コストシミュレーター
-          </h3>
-
-          <!-- Plan selector -->
-          <div style="margin-bottom:16px;">
-            <label style="font-size:11px;color:rgba(255,255,255,0.5);display:block;margin-bottom:6px;">プラン選択</label>
-            <div style="display:flex;gap:6px;" id="simPlanBtns">
-              <button onclick="simSelectPlan('starter')" class="sim-plan-btn" data-plan="starter" style="flex:1;padding:8px 4px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);background:transparent;color:rgba(255,255,255,0.6);font-size:12px;font-weight:600;cursor:pointer;transition:all 0.2s;font-family:inherit;">Starter</button>
-              <button onclick="simSelectPlan('standard')" class="sim-plan-btn active" data-plan="standard" style="flex:1;padding:8px 4px;border-radius:8px;border:1px solid var(--blue);background:var(--blue);color:white;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.2s;font-family:inherit;">Standard</button>
-              <button onclick="simSelectPlan('business')" class="sim-plan-btn" data-plan="business" style="flex:1;padding:8px 4px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);background:transparent;color:rgba(255,255,255,0.6);font-size:12px;font-weight:600;cursor:pointer;transition:all 0.2s;font-family:inherit;">Business</button>
-            </div>
+    <!-- Options (detailed) -->
+    <div class="animate-on-scroll delay-3" style="margin-top:24px;">
+      <div style="display:flex;gap:20px;">
+        <!-- All plans -->
+        <div style="flex:1;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:14px;padding:20px;">
+          <div style="font-size:13px;font-weight:700;color:var(--blue);margin-bottom:12px;">全プラン追加可能</div>
+          <div class="option-item tooltip-trigger" data-tooltip="蓄積データをリアルタイム可視化。生産性推移・不良率分析・タスクスケジュール管理機能を提供。データドリブンな改善活動を実現。" style="margin-bottom:8px;">
+            <span class="option-name" style="font-size:13px;">ながらダッシュボード（分析・スケジュール機能）</span>
+            <span class="option-price">＋5万円/月</span>
           </div>
-
-          <!-- Sites -->
-          <div style="margin-bottom:16px;">
-            <label style="font-size:11px;color:rgba(255,255,255,0.5);display:block;margin-bottom:6px;">拠点数</label>
-            <div style="display:flex;align-items:center;gap:12px;">
-              <input type="range" id="simSites" min="1" max="10" value="1" oninput="simUpdate()" style="flex:1;accent-color:var(--blue);">
-              <span id="simSitesVal" style="font-size:18px;font-weight:700;min-width:40px;text-align:right;">1</span>
-              <span style="font-size:12px;color:rgba(255,255,255,0.4);">拠点</span>
-            </div>
+          <div class="option-item" style="margin-bottom:8px;">
+            <span class="option-name" style="font-size:13px;">1マスターあたり3,000行まで拡張</span>
+            <span class="option-price">＋1万円/月</span>
           </div>
-
-          <!-- Options checkboxes -->
-          <div style="margin-bottom:20px;">
-            <label style="font-size:11px;color:rgba(255,255,255,0.5);display:block;margin-bottom:8px;">オプション追加</label>
-            <div style="display:flex;flex-wrap:wrap;gap:6px;">
-              <label style="font-size:11px;display:flex;align-items:center;gap:4px;padding:5px 8px;border-radius:6px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);cursor:pointer;color:rgba(255,255,255,0.6);transition:all 0.2s;" class="sim-opt">
-                <input type="checkbox" data-cost="5" onchange="simUpdate()" style="accent-color:var(--blue);"> ダッシュボード
-              </label>
-              <label style="font-size:11px;display:flex;align-items:center;gap:4px;padding:5px 8px;border-radius:6px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);cursor:pointer;color:rgba(255,255,255,0.6);transition:all 0.2s;" class="sim-opt">
-                <input type="checkbox" data-cost="1" onchange="simUpdate()" style="accent-color:var(--blue);"> 3,000行
-              </label>
-              <label style="font-size:11px;display:flex;align-items:center;gap:4px;padding:5px 8px;border-radius:6px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);cursor:pointer;color:rgba(255,255,255,0.6);transition:all 0.2s;" class="sim-opt">
-                <input type="checkbox" data-cost="2" onchange="simUpdate()" style="accent-color:var(--blue);"> 5,000行
-              </label>
-              <label style="font-size:11px;display:flex;align-items:center;gap:4px;padding:5px 8px;border-radius:6px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);cursor:pointer;color:rgba(255,255,255,0.6);transition:all 0.2s;" class="sim-opt">
-                <input type="checkbox" data-cost="5" onchange="simUpdate()" style="accent-color:var(--blue);"> 10,000行
-              </label>
-              <label style="font-size:11px;display:flex;align-items:center;gap:4px;padding:5px 8px;border-radius:6px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);cursor:pointer;color:rgba(255,255,255,0.6);transition:all 0.2s;" class="sim-opt">
-                <input type="checkbox" data-cost="4" onchange="simUpdate()" style="accent-color:var(--blue);"> API連携
-              </label>
-              <label style="font-size:11px;display:flex;align-items:center;gap:4px;padding:5px 8px;border-radius:6px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);cursor:pointer;color:rgba(255,255,255,0.6);transition:all 0.2s;" class="sim-opt">
-                <input type="checkbox" data-cost="4" onchange="simUpdate()" style="accent-color:var(--blue);"> SSO/IP制限
-              </label>
-            </div>
+          <div class="option-item" style="margin-bottom:8px;">
+            <span class="option-name" style="font-size:13px;">1マスターあたり5,000行まで拡張</span>
+            <span class="option-price">＋2万円/月</span>
           </div>
-
-          <!-- Result -->
-          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
-            <div style="display:flex;gap:16px;">
-              <!-- Year 1 -->
-              <div style="flex:1;background:rgba(37,99,235,0.12);border:1px solid rgba(37,99,235,0.25);border-radius:14px;padding:16px;text-align:center;">
-                <div style="font-size:11px;color:var(--blue-light);font-weight:600;margin-bottom:4px;">1年目（初期費用込み）</div>
-                <div style="font-size:32px;font-weight:900;color:white;line-height:1;" id="simYear1">116</div>
-                <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:2px;">万円<span style="font-size:10px;">（税抜）</span></div>
-                <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:6px;" id="simYear1Detail">月額8万×12ヶ月 + 初期20万×1拠点</div>
-              </div>
-              <!-- Year 2 -->
-              <div style="flex:1;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);border-radius:14px;padding:16px;text-align:center;">
-                <div style="font-size:11px;color:#6EE7B7;font-weight:600;margin-bottom:4px;">2年目以降（ランニングのみ）</div>
-                <div style="font-size:32px;font-weight:900;color:white;line-height:1;" id="simYear2">96</div>
-                <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:2px;">万円<span style="font-size:10px;">（税抜）</span></div>
-                <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:6px;" id="simYear2Detail">月額8万×12ヶ月</div>
-              </div>
-            </div>
-            <!-- Monthly breakdown -->
-            <div style="text-align:center;margin-top:12px;font-size:11px;color:rgba(255,255,255,0.35);" id="simMonthly">月額コスト: 8万円/月 ×1拠点 = 8万円/月</div>
+          <div class="option-item" style="margin-bottom:0;">
+            <span class="option-name" style="font-size:13px;">1マスターあたり10,000行まで拡張</span>
+            <span class="option-price">＋5万円/月</span>
+          </div>
+        </div>
+        <!-- Business only -->
+        <div style="flex:1;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:14px;padding:20px;">
+          <div style="font-size:13px;font-weight:700;color:var(--blue-dark);margin-bottom:12px;">Businessライセンスのみ追加可能</div>
+          <div class="option-item tooltip-trigger" data-tooltip="ERPや基幹システムとのリアルタイムデータ連携。REST APIで生産データを自動同期。SAP、Oracle、自社システムなどとの接続実績あり。" style="margin-bottom:8px;">
+            <span class="option-name" style="font-size:13px;">APIデータ連携機能</span>
+            <span class="option-price">＋4万円/月</span>
+          </div>
+          <div class="option-item tooltip-trigger" data-tooltip="SAML 2.0対応のシングルサインオン、IP制限によるアクセス制御。セキュリティポリシーの厳しい大企業向け。" style="margin-bottom:0;">
+            <span class="option-name" style="font-size:13px;">SSO / IP制限機能</span>
+            <span class="option-price">＋4万円/月</span>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <span class="page-num" style="color:var(--gray-400);">11</span>
+  <span class="page-num">11</span>
+</section>
+
+<!-- ===== SLIDE 12: COST SIMULATOR ===== -->
+<section class="slide" id="slide-simulator">
+  <div class="slide-inner" style="padding:48px 80px;">
+    <div class="slide-header animate-on-scroll" style="margin-bottom:32px;">
+      <h2>年間コストシミュレーション</h2>
+      <p class="subtitle">プラン・拠点数・オプションを選択すると、1年目・2年目以降の年間コストを自動計算します。</p>
+      <div class="header-line"></div>
+    </div>
+
+    <div style="display:flex;gap:40px;flex:1;align-items:stretch;" class="animate-on-scroll delay-1">
+      <!-- Left: Controls -->
+      <div id="costSimulator" style="flex:1;background:linear-gradient(145deg,var(--gray-900),#1a2744);border-radius:var(--radius-lg);padding:36px;display:flex;flex-direction:column;color:white;">
+        <h3 style="font-size:18px;font-weight:700;margin-bottom:28px;display:flex;align-items:center;gap:10px;">
+          <span style="width:32px;height:32px;background:var(--blue);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;">&#9889;</span>
+          条件を選択
+        </h3>
+
+        <!-- Plan selector -->
+        <div style="margin-bottom:24px;">
+          <label style="font-size:12px;color:rgba(255,255,255,0.5);display:block;margin-bottom:8px;">プラン選択</label>
+          <div style="display:flex;gap:8px;" id="simPlanBtns">
+            <button onclick="simSelectPlan('starter')" class="sim-plan-btn" data-plan="starter" style="flex:1;padding:12px 8px;border-radius:10px;border:1px solid rgba(255,255,255,0.15);background:transparent;color:rgba(255,255,255,0.6);font-size:13px;font-weight:600;cursor:pointer;transition:all 0.2s;font-family:inherit;">Starter<br><span style='font-size:10px;opacity:0.6;'>5万/月</span></button>
+            <button onclick="simSelectPlan('standard')" class="sim-plan-btn active" data-plan="standard" style="flex:1;padding:12px 8px;border-radius:10px;border:1px solid var(--blue);background:var(--blue);color:white;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.2s;font-family:inherit;">Standard<br><span style='font-size:10px;opacity:0.8;'>8万/月</span></button>
+            <button onclick="simSelectPlan('business')" class="sim-plan-btn" data-plan="business" style="flex:1;padding:12px 8px;border-radius:10px;border:1px solid rgba(255,255,255,0.15);background:transparent;color:rgba(255,255,255,0.6);font-size:13px;font-weight:600;cursor:pointer;transition:all 0.2s;font-family:inherit;">Business<br><span style='font-size:10px;opacity:0.6;'>15万/月</span></button>
+          </div>
+        </div>
+
+        <!-- Sites -->
+        <div style="margin-bottom:24px;">
+          <label style="font-size:12px;color:rgba(255,255,255,0.5);display:block;margin-bottom:8px;">拠点数</label>
+          <div style="display:flex;align-items:center;gap:16px;">
+            <input type="range" id="simSites" min="1" max="10" value="1" oninput="simUpdate()" style="flex:1;accent-color:var(--blue);height:6px;">
+            <span id="simSitesVal" style="font-size:28px;font-weight:800;min-width:48px;text-align:right;">1</span>
+            <span style="font-size:13px;color:rgba(255,255,255,0.4);">拠点</span>
+          </div>
+        </div>
+
+        <!-- Options checkboxes -->
+        <div>
+          <label style="font-size:12px;color:rgba(255,255,255,0.5);display:block;margin-bottom:10px;">オプション追加</label>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+            <label style="font-size:12px;display:flex;align-items:center;gap:6px;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);cursor:pointer;color:rgba(255,255,255,0.7);transition:all 0.2s;" class="sim-opt">
+              <input type="checkbox" data-cost="5" onchange="simUpdate()" style="accent-color:var(--blue);width:16px;height:16px;"> ダッシュボード <span style="margin-left:auto;color:var(--blue-light);font-size:11px;">+5万</span>
+            </label>
+            <label style="font-size:12px;display:flex;align-items:center;gap:6px;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);cursor:pointer;color:rgba(255,255,255,0.7);transition:all 0.2s;" class="sim-opt">
+              <input type="checkbox" data-cost="1" onchange="simUpdate()" style="accent-color:var(--blue);width:16px;height:16px;"> 3,000行 <span style="margin-left:auto;color:var(--blue-light);font-size:11px;">+1万</span>
+            </label>
+            <label style="font-size:12px;display:flex;align-items:center;gap:6px;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);cursor:pointer;color:rgba(255,255,255,0.7);transition:all 0.2s;" class="sim-opt">
+              <input type="checkbox" data-cost="4" onchange="simUpdate()" style="accent-color:var(--blue);width:16px;height:16px;"> API連携 <span style="margin-left:auto;color:var(--blue-light);font-size:11px;">+4万</span>
+            </label>
+            <label style="font-size:12px;display:flex;align-items:center;gap:6px;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);cursor:pointer;color:rgba(255,255,255,0.7);transition:all 0.2s;" class="sim-opt">
+              <input type="checkbox" data-cost="4" onchange="simUpdate()" style="accent-color:var(--blue);width:16px;height:16px;"> SSO/IP制限 <span style="margin-left:auto;color:var(--blue-light);font-size:11px;">+4万</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Results -->
+      <div style="flex:1;display:flex;flex-direction:column;gap:24px;">
+        <!-- Year 1 -->
+        <div style="flex:1;background:linear-gradient(135deg,#1E3A5F,#1E40AF);border-radius:var(--radius-lg);padding:36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;">
+          <div style="font-size:13px;color:var(--blue-light);font-weight:600;letter-spacing:0.05em;margin-bottom:8px;">1年目（初期費用込み）</div>
+          <div style="font-size:64px;font-weight:900;color:white;line-height:1;" id="simYear1">116</div>
+          <div style="font-size:18px;color:rgba(255,255,255,0.6);margin-top:4px;">万円<span style="font-size:12px;">（税抜）</span></div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:12px;line-height:1.5;" id="simYear1Detail">月額8万×12ヶ月 + 初期20万×1拠点</div>
+        </div>
+        <!-- Year 2 -->
+        <div style="flex:1;background:linear-gradient(135deg,#064E3B,#065F46);border-radius:var(--radius-lg);padding:36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;">
+          <div style="font-size:13px;color:#6EE7B7;font-weight:600;letter-spacing:0.05em;margin-bottom:8px;">2年目以降（ランニングのみ）</div>
+          <div style="font-size:64px;font-weight:900;color:white;line-height:1;" id="simYear2">96</div>
+          <div style="font-size:18px;color:rgba(255,255,255,0.6);margin-top:4px;">万円<span style="font-size:12px;">（税抜）</span></div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:12px;line-height:1.5;" id="simYear2Detail">月額8万×12ヶ月</div>
+        </div>
+        <!-- Monthly summary -->
+        <div style="background:var(--gray-50);border:1px solid var(--gray-200);border-radius:14px;padding:16px 24px;text-align:center;">
+          <span style="font-size:13px;color:var(--gray-600);" id="simMonthly">月額コスト: 8万円/月 ×1拠点 = <b style="color:var(--blue);">8万円/月</b></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="page-num">12</span>
 </section>
 
 <script>
@@ -1561,8 +1587,8 @@ function simUpdate() {
     `月額${monthlySite}万×12ヶ月×${sites}拠点 + 初期20万×${sites}拠点`;
   document.getElementById('simYear2Detail').textContent =
     `月額${monthlySite}万×12ヶ月×${sites}拠点`;
-  document.getElementById('simMonthly').textContent =
-    `月額コスト: ${baseMonthlySite}万${optText} = ${monthlySite}万/月 ×${sites}拠点 = ${monthlyTotal}万円/月`;
+  document.getElementById('simMonthly').innerHTML =
+    `月額コスト: ${baseMonthlySite}万${optText} = ${monthlySite}万/月 ×${sites}拠点 = <b style="color:var(--blue);">${monthlyTotal}万円/月</b>`;
 }
 </script>
 </body>
