@@ -511,15 +511,20 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
   overflow-y: auto;
   padding-right: 8px;
+  min-height: 0;
 }
+#slide-track .groups-container::-webkit-scrollbar { width: 4px; }
+#slide-track .groups-container::-webkit-scrollbar-track { background: transparent; }
+#slide-track .groups-container::-webkit-scrollbar-thumb { background: var(--gray-200); border-radius: 4px; }
 #slide-track .group-section {
   background: var(--gray-50);
   border: 1px solid var(--gray-100);
   border-radius: var(--radius);
-  padding: 16px 20px;
+  padding: 14px 18px;
+  flex-shrink: 0;
 }
 #slide-track .group-header {
   display: flex;
@@ -593,16 +598,75 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
   cursor: pointer;
 }
 #slide-track .more-chip:hover { background: rgba(37,99,235,0.1); }
+/* Rich company popup */
+.company-popup {
+  position: fixed;
+  z-index: 9999;
+  background: #FFFFFF;
+  border: 1px solid var(--gray-200);
+  border-radius: 14px;
+  padding: 16px 18px;
+  width: 320px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.04);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  backdrop-filter: none;
+}
+.company-popup.visible { opacity: 1; }
+.company-popup .popup-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.company-popup .popup-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  object-fit: contain;
+  background: var(--gray-50);
+  border: 1px solid var(--gray-100);
+}
+.company-popup .popup-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--gray-800);
+}
+.company-popup .popup-desc {
+  font-size: 12px;
+  color: var(--gray-500);
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+.company-popup .popup-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.company-popup .popup-tag {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: var(--gray-50);
+  color: var(--gray-500);
+  border: 1px solid var(--gray-100);
+}
+.company-popup .popup-tag.tag-blue { background: #EFF6FF; color: #1D4ED8; border-color: #DBEAFE; }
+.company-popup .popup-tag.tag-green { background: #ECFDF5; color: #059669; border-color: #D1FAE5; }
+#slide-track .slide-inner { overflow: hidden; }
+#slide-track .content { display: flex; flex-direction: column; flex: 1; min-height: 0; overflow: hidden; }
 #slide-track .stat-bar {
   display: flex;
   gap: 24px;
-  margin-bottom: 16px;
-  padding: 12px 0;
+  margin-bottom: 12px;
+  padding: 8px 0;
   border-bottom: 1px solid var(--gray-100);
 }
 #slide-track .stat-item { text-align: center; }
-#slide-track .stat-num { font-size: 28px; font-weight: 800; color: var(--blue); }
-#slide-track .stat-label { font-size: 11px; color: var(--gray-400); margin-top: 2px; }
+#slide-track .stat-num { font-size: 24px; font-weight: 800; color: var(--blue); }
+#slide-track .stat-label { font-size: 11px; color: var(--gray-400); }
 
 /* ===== SLIDE 5: SECTION DIVIDER ===== */
 .slide-divider {
@@ -1198,19 +1262,21 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
       <h2>導入実績</h2>
       <div class="header-line"></div>
     </div>
-    <div class="stat-bar animate-on-scroll delay-1">
-      <div class="stat-item"><div class="stat-num">54</div><div class="stat-label">契約数</div></div>
-      <div class="stat-item"><div class="stat-num">42</div><div class="stat-label">企業</div></div>
-      <div class="stat-item"><div class="stat-num">10+</div><div class="stat-label">業界</div></div>
-      <div class="stat-item"><div class="stat-num">7</div><div class="stat-label">地域</div></div>
+    <div class="content">
+      <div class="stat-bar animate-on-scroll delay-1">
+        <div class="stat-item"><div class="stat-num">54</div><div class="stat-label">契約数</div></div>
+        <div class="stat-item"><div class="stat-num">42</div><div class="stat-label">企業</div></div>
+        <div class="stat-item"><div class="stat-num">10+</div><div class="stat-label">業界</div></div>
+        <div class="stat-item"><div class="stat-num">7</div><div class="stat-label">地域</div></div>
+      </div>
+      <div class="filter-bar animate-on-scroll delay-2" id="trackFilters">
+        <button class="filter-btn active" data-group="industry" onclick="trackGroup('industry')">業界別</button>
+        <button class="filter-btn" data-group="size" onclick="trackGroup('size')">規模別</button>
+        <button class="filter-btn" data-group="area" onclick="trackGroup('area')">地域別</button>
+        <button class="filter-btn" data-group="service" onclick="trackGroup('service')">サービス別</button>
+      </div>
+      <div class="groups-container animate-on-scroll delay-3" id="trackGroups"></div>
     </div>
-    <div class="filter-bar animate-on-scroll delay-2" id="trackFilters">
-      <button class="filter-btn active" data-group="industry" onclick="trackGroup('industry')">業界別</button>
-      <button class="filter-btn" data-group="size" onclick="trackGroup('size')">規模別</button>
-      <button class="filter-btn" data-group="area" onclick="trackGroup('area')">地域別</button>
-      <button class="filter-btn" data-group="service" onclick="trackGroup('service')">サービス別</button>
-    </div>
-    <div class="groups-container animate-on-scroll delay-3" id="trackGroups"></div>
   </div>
   <span class="page-num">04</span>
 </section>
@@ -1634,58 +1700,72 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
 <script>
 // ===== TRACK RECORD DATA & GROUPING =====
 const companies = [
-  {name:"住友電工",industry:"電線・電子機器",area:"近畿",size:"大企業",services:["GenKan"],desc:"世界的電線メーカー。自動車用ワイヤーハーネス等を展開"},
-  {name:"秋田エプソン",industry:"電子機器",area:"東北",size:"中堅企業",services:["GenKan"],desc:"セイコーエプソン製造子会社。プリンター部品を製造"},
-  {name:"昭和食品",industry:"食品製造",area:"関東",size:"中小企業",services:["GenKan"],desc:"食品の製造・加工を手がける食品メーカー"},
-  {name:"人形町今半フーズプラント",industry:"食品製造",area:"関東",size:"中堅企業",services:["GenKan"],desc:"老舗すき焼き店グループの食品製造部門"},
-  {name:"トオカツフーズ",industry:"食品製造",area:"関東",size:"中堅企業",services:["GenKan"],desc:"日清製粉グループの中食メーカー"},
-  {name:"苫食",industry:"食品製造",area:"北海道",size:"中小企業",services:["GenKan"],desc:"北海道苫小牧市の水産加工品メーカー"},
-  {name:"吉田電材",industry:"電子部品",area:"関東",size:"中小企業",services:["GenKan"],desc:"電気機器・電材の製造を行う企業"},
-  {name:"ファーストフーズ名古屋",industry:"食品製造",area:"中部",size:"中小企業",services:["GenKan"],desc:"名古屋拠点の中食・弁当製造会社"},
-  {name:"糧商",industry:"食品製造",area:"関東",size:"中小企業",services:["GenKan"],desc:"食品の製造・販売を手がける食品会社"},
-  {name:"戸田フーズ",industry:"食品製造",area:"関東",size:"中小企業",services:["GenKan"],desc:"食品の製造・加工を行う食品メーカー"},
-  {name:"かね貞",industry:"食品製造",area:"中部",size:"中堅企業",services:["GenKan"],desc:"愛知県の練り製品メーカー。おでん種・はんぺん等"},
-  {name:"せいらくフーズ",industry:"食品製造",area:"関東",size:"中小企業",services:["GenKan"],desc:"食品の製造・加工を行う食品メーカー"},
-  {name:"フジッコNEWデリカ",industry:"食品製造",area:"近畿",size:"中堅企業",services:["GenKan"],desc:"フジッコグループの惣菜製造会社"},
-  {name:"ヨシデン",industry:"電子部品",area:"近畿",size:"中小企業",services:["GenKan","ながら記録"],desc:"電子部品・電子機器の製造を手がける企業"},
-  {name:"ジョイアス・フーズ",industry:"食品製造",area:"関東",size:"中小企業",services:["GenKan"],desc:"食品の製造・加工を行う食品メーカー"},
-  {name:"ホームデリカ",industry:"食品製造",area:"関東",size:"中堅企業",services:["GenKan"],desc:"コンビニ向け弁当・惣菜を製造する中食メーカー"},
-  {name:"秋本食品",industry:"食品製造",area:"関東",size:"中堅企業",services:["GenKan","ながら記録"],desc:"神奈川県の漬物メーカー。キムチや浅漬けなど"},
-  {name:"ロック・フィールド",industry:"食品製造",area:"近畿",size:"大企業",services:["GenKan"],desc:"「RF1」等のブランドでデパ地下惣菜を展開。東証プライム"},
-  {name:"鳥幸",industry:"食品製造",area:"関東",size:"中小企業",services:["GenKan"],desc:"鶏肉加工・食品製造を手がける企業"},
-  {name:"九州エヌエフフーズ",industry:"食品製造",area:"九州",size:"中小企業",services:["GenKan"],desc:"九州地方の惣菜・食品加工メーカー"},
-  {name:"武蔵野",industry:"食品製造",area:"関東",size:"中堅企業",services:["GenKan"],desc:"コンビニ向け弁当・おにぎりの大手中食メーカー"},
-  {name:"山口製作所",industry:"金属加工",area:"関東",size:"中小企業",services:["GenKan"],desc:"金属部品の加工・製造を手がける製造業"},
-  {name:"トーニチ",industry:"精密機器",area:"関東",size:"中堅企業",services:["GenKan"],desc:"トルクレンチ等の精密締付工具で国内トップシェア"},
-  {name:"にしき食品",industry:"食品製造",area:"東北",size:"中堅企業",services:["ながら記録"],desc:"レトルトカレー・パスタソース等を製造"},
-  {name:"エール・エル",industry:"食品製造",area:"近畿",size:"中小企業",services:["ながら記録"],desc:"神戸発の洋菓子メーカー。ワッフルケーキで有名"},
-  {name:"金印わさび",industry:"食品製造",area:"中部",size:"中堅企業",services:["ながら記録"],desc:"名古屋本社のわさび製品で国内大手"},
-  {name:"豊田合成九州",industry:"自動車部品",area:"九州",size:"中堅企業",services:["ながら記録"],desc:"豊田合成グループの九州拠点。ゴム・樹脂部品製造"},
-  {name:"一光",industry:"食品製造",area:"中部",size:"中小企業",services:["ながら記録"],desc:"食品の製造・加工を手がける企業"},
-  {name:"印南食品",industry:"食品製造",area:"関東",size:"中小企業",services:["ながら記録"],desc:"食品の製造・加工を行う食品メーカー"},
-  {name:"レゾナック",industry:"化学",area:"関東",size:"大企業",services:["ながら記録"],desc:"旧昭和電工×日立化成。半導体材料等の総合化学。東証プライム"},
-  {name:"あづまフーズ",industry:"食品製造",area:"近畿",size:"中堅企業",services:["ながら記録"],desc:"大阪本社の水産食品メーカー。寿司ネタ等"},
-  {name:"ツガワ",industry:"金属加工",area:"東北",size:"中堅企業",services:["ながら記録"],desc:"山形県の精密板金・金属加工メーカー"},
-  {name:"ノリタケ",industry:"セラミックス",area:"中部",size:"大企業",services:["ながら記録"],desc:"世界的陶磁器メーカー。工業用研削砥石も展開。東証プライム"},
-  {name:"セロレーベル",industry:"印刷・包装",area:"関東",size:"中小企業",services:["ながら記録"],desc:"ラベル・シールの製造を手がける印刷会社"},
-  {name:"オレンジベイフーズ",industry:"食品製造",area:"関東",size:"中堅企業",services:["ながら記録"],desc:"大手ファストフード向けハンバーガーパティ等を製造"},
-  {name:"日本ケミカル工業",industry:"化学",area:"関東",size:"中堅企業",services:["ながら記録"],desc:"化学薬品・工業用化学製品の製造メーカー"},
-  {name:"笠井食品",industry:"食品製造",area:"関東",size:"中小企業",services:["ながら記録"],desc:"食品の製造・加工を行う食品メーカー"},
-  {name:"ヤマイチ",industry:"食品製造",area:"中部",size:"中小企業",services:["ながら記録"],desc:"食品の製造・加工・販売を手がける企業"},
-  {name:"インターナショナル・ケミカル",industry:"化学",area:"関東",size:"中小企業",services:["ながら記録"],desc:"食品包装用フィルム・ラップ等の包装資材メーカー"},
-  {name:"三新化学工業",industry:"化学",area:"近畿",size:"中堅企業",services:["ながら記録"],desc:"ゴム用薬品・樹脂添加剤等の特殊化学品を製造"},
-  {name:"平牧工房",industry:"食品製造",area:"東北",size:"中小企業",services:["ながら記録"],desc:"平田牧場グループ。三元豚のハム・ソーセージ製造"},
-  {name:"小林桂",industry:"食品卸",area:"近畿",size:"中堅企業",services:["ながら記録"],desc:"ナッツ・ドライフルーツ等の輸入食品商社"},
-  {name:"富士ベークライト",industry:"化学",area:"関東",size:"中堅企業",services:["ながら記録"],desc:"フェノール樹脂等の熱硬化性樹脂メーカー"},
-  {name:"日本国民食",industry:"食品製造",area:"関東",size:"中小企業",services:["ながら記録"],desc:"食品の製造・販売を手がける食品会社"},
-  {name:"ファイマテック",industry:"精密機器",area:"中部",size:"中堅企業",services:["ながら記録"],desc:"精密部品・材料の製造加工を行うメーカー"},
-  {name:"さんれいフーズ",industry:"食品製造",area:"中国",size:"中堅企業",services:["ながら記録"],desc:"島根県安来市の冷凍食品メーカー"},
-  {name:"コスミックSY",industry:"金属加工",area:"関東",size:"中小企業",services:["ながら記録"],desc:"金属加工・製造を手がける企業"},
-  {name:"サトウ産業",industry:"食品製造",area:"関東",size:"中小企業",services:["ながら記録"],desc:"食品の製造・販売を手がける企業"},
-  {name:"三島食品",industry:"食品製造",area:"中国",size:"中堅企業",services:["ながら記録"],desc:"広島本社のふりかけメーカー。「ゆかり」で有名"}
+  {name:"住友電工",industry:"電線・電子機器",area:"近畿",size:"大企業",services:["GenKan"],desc:"世界的電線メーカー。自動車用ワイヤーハーネス、光ファイバー、超硬工具など幅広い事業を展開",domain:"sei.co.jp"},
+  {name:"秋田エプソン",industry:"電子機器",area:"東北",size:"中堅企業",services:["GenKan"],desc:"セイコーエプソンの製造子会社。秋田県でプリンター・電子デバイス部品を製造",domain:"epson.co.jp"},
+  {name:"昭和食品",industry:"食品製造",area:"関東",size:"中小企業",services:["GenKan"],desc:"食品の製造・加工を手がける食品メーカー",domain:""},
+  {name:"人形町今半フーズプラント",industry:"食品製造",area:"関東",size:"中堅企業",services:["GenKan"],desc:"老舗すき焼き店「人形町今半」グループの食品製造部門。精肉加工・惣菜製造を展開",domain:"imahan.com"},
+  {name:"トオカツフーズ",industry:"食品製造",area:"関東",size:"中堅企業",services:["GenKan"],desc:"日清製粉グループの中食メーカー。コンビニ向け弁当・惣菜の製造を手がける",domain:"tokatsu.co.jp"},
+  {name:"苫食",industry:"食品製造",area:"北海道",size:"中小企業",services:["GenKan"],desc:"北海道苫小牧市の食品製造会社。水産加工品などを製造",domain:"tomasyoku.jp"},
+  {name:"吉田電材",industry:"電子部品",area:"関東",size:"中小企業",services:["GenKan"],desc:"電気機器・電材の製造を行う企業",domain:"yoshida-denzai.co.jp"},
+  {name:"ファーストフーズ名古屋",industry:"食品製造",area:"中部",size:"中小企業",services:["GenKan"],desc:"名古屋拠点の食品製造会社。中食・弁当等の製造を手がける",domain:""},
+  {name:"糧商",industry:"食品製造",area:"関東",size:"中小企業",services:["GenKan"],desc:"食品の製造・販売を手がける食品会社",domain:""},
+  {name:"戸田フーズ",industry:"食品製造",area:"関東",size:"中小企業",services:["GenKan"],desc:"食品の製造・加工を行う食品メーカー",domain:"todafoods.co.jp"},
+  {name:"かね貞",industry:"食品製造",area:"中部",size:"中堅企業",services:["GenKan"],desc:"愛知県の練り製品メーカー。おでん種やはんぺん等の水産練り製品を製造",domain:"kanesada.com"},
+  {name:"せいらくフーズ",industry:"食品製造",area:"関東",size:"中小企業",services:["GenKan"],desc:"食品の製造・加工を行う食品メーカー",domain:""},
+  {name:"フジッコNEWデリカ",industry:"食品製造",area:"近畿",size:"中堅企業",services:["GenKan"],desc:"フジッコグループの惣菜製造会社。煮豆・惣菜等を製造",domain:"fujicco.co.jp"},
+  {name:"ヨシデン",industry:"電子部品",area:"近畿",size:"中小企業",services:["GenKan","ながら記録"],desc:"電子部品・電子機器の製造を手がける企業",domain:"yoshiden.co.jp"},
+  {name:"ジョイアス・フーズ",industry:"食品製造",area:"関東",size:"中小企業",services:["GenKan"],desc:"食品の製造・加工を行う食品メーカー",domain:"joyous.co.jp"},
+  {name:"ホームデリカ",industry:"食品製造",area:"関東",size:"中堅企業",services:["GenKan"],desc:"コンビニ・スーパー向けの弁当・惣菜を製造する中食メーカー",domain:""},
+  {name:"秋本食品",industry:"食品製造",area:"関東",size:"中堅企業",services:["GenKan","ながら記録"],desc:"神奈川県の漬物メーカー。キムチや浅漬けなど各種漬物を製造",domain:"akimoto.co.jp"},
+  {name:"ロック・フィールド",industry:"食品製造",area:"近畿",size:"大企業",services:["GenKan"],desc:"神戸本社の惣菜メーカー。「RF1」「神戸コロッケ」等のブランドでデパ地下惣菜を展開。東証プライム上場",domain:"rockfield.co.jp"},
+  {name:"鳥幸",industry:"食品製造",area:"関東",size:"中小企業",services:["GenKan"],desc:"鶏肉加工・食品製造を手がける企業",domain:""},
+  {name:"九州エヌエフフーズ",industry:"食品製造",area:"九州",size:"中小企業",services:["GenKan"],desc:"九州地方の食品製造会社。惣菜・食品加工を手がける",domain:"knff.jp"},
+  {name:"武蔵野",industry:"食品製造",area:"関東",size:"中堅企業",services:["GenKan"],desc:"コンビニ向け弁当・おにぎり・調理パン等を製造する大手中食メーカー",domain:"musashino.co.jp"},
+  {name:"山口製作所",industry:"金属加工",area:"関東",size:"中小企業",services:["GenKan"],desc:"金属部品の加工・製造を手がける製造業",domain:"yamaguchi1965.co.jp"},
+  {name:"トーニチ",industry:"精密機器",area:"関東",size:"中堅企業",services:["GenKan"],desc:"東京都のトルク機器専門メーカー。トルクレンチ等の精密締付工具で国内トップシェア",domain:"tohnichi.co.jp"},
+  {name:"にしき食品",industry:"食品製造",area:"東北",size:"中堅企業",services:["ながら記録"],desc:"宮城県のレトルト食品メーカー。カレーやパスタソースなどのレトルトパウチ食品を製造",domain:"nishikishokuhin.co.jp"},
+  {name:"エール・エル",industry:"食品製造",area:"近畿",size:"中小企業",services:["ながら記録"],desc:"神戸発の洋菓子メーカー。「ワッフルケーキ」で知られるスイーツブランドを展開",domain:"rl-waffle.co.jp"},
+  {name:"金印わさび",industry:"食品製造",area:"中部",size:"中堅企業",services:["ながら記録"],desc:"名古屋本社のわさび製品メーカー。業務用・家庭用わさびで国内大手",domain:"kinjirushi.co.jp"},
+  {name:"豊田合成九州",industry:"自動車部品",area:"九州",size:"中堅企業",services:["ながら記録"],desc:"豊田合成グループの九州製造拠点。自動車用ゴム・樹脂部品を製造",domain:"toyoda-gosei.co.jp"},
+  {name:"一光",industry:"食品製造",area:"中部",size:"中小企業",services:["ながら記録"],desc:"食品の製造・加工を手がける企業",domain:""},
+  {name:"印南食品",industry:"食品製造",area:"関東",size:"中小企業",services:["ながら記録"],desc:"食品の製造・加工を行う食品メーカー",domain:""},
+  {name:"レゾナック",industry:"化学",area:"関東",size:"大企業",services:["ながら記録"],desc:"旧昭和電工と日立化成が統合して誕生した総合化学メーカー。半導体材料・化学品等を製造。東証プライム上場",domain:"resonac.com"},
+  {name:"あづまフーズ",industry:"食品製造",area:"近畿",size:"中堅企業",services:["ながら記録"],desc:"大阪本社の水産食品メーカー。寿司ネタ・水産加工品を中心に製造・販売",domain:"azumafoods.co.jp"},
+  {name:"ツガワ",industry:"金属加工",area:"東北",size:"中堅企業",services:["ながら記録"],desc:"山形県の精密板金・金属加工メーカー。電子機器筐体等の精密板金加工を得意とする",domain:"tsugawa.co.jp"},
+  {name:"ノリタケ",industry:"セラミックス",area:"中部",size:"大企業",services:["ながら記録"],desc:"名古屋本社の世界的陶磁器・セラミックスメーカー。洋食器のほか工業用研削砥石・電子部品も展開。東証プライム上場",domain:"noritake.co.jp"},
+  {name:"セロレーベル",industry:"印刷・包装",area:"関東",size:"中小企業",services:["ながら記録"],desc:"ラベル・シールの製造を手がける印刷会社",domain:"cellolabel.co.jp"},
+  {name:"オレンジベイフーズ",industry:"食品製造",area:"関東",size:"中堅企業",services:["ながら記録"],desc:"ハンバーガーパティ等の食肉加工品を製造。大手ファストフードチェーン向けに供給",domain:"obfoods.co.jp"},
+  {name:"日本ケミカル工業",industry:"化学",area:"関東",size:"中堅企業",services:["ながら記録"],desc:"化学薬品・工業用化学製品の製造を手がける化学メーカー",domain:"jci-net.co.jp"},
+  {name:"笠井食品",industry:"食品製造",area:"関東",size:"中小企業",services:["ながら記録"],desc:"食品の製造・加工を行う食品メーカー",domain:"kasaifoods.co.jp"},
+  {name:"ヤマイチ",industry:"食品製造",area:"中部",size:"中小企業",services:["ながら記録"],desc:"食品の製造・加工・販売を手がける企業",domain:"k-yamaichi.co.jp"},
+  {name:"インターナショナル・ケミカル",industry:"化学",area:"関東",size:"中小企業",services:["ながら記録"],desc:"食品包装用フィルム・ラップ等の製造を手がける包装資材メーカー",domain:"interchemix.co.jp"},
+  {name:"三新化学工業",industry:"化学",area:"近畿",size:"中堅企業",services:["ながら記録"],desc:"大阪府の化学メーカー。ゴム用薬品・樹脂添加剤等の特殊化学品を製造",domain:"sanshin-ci.co.jp"},
+  {name:"平牧工房",industry:"食品製造",area:"東北",size:"中小企業",services:["ながら記録"],desc:"山形県の平田牧場グループ。三元豚を使ったハム・ソーセージ等の食肉加工品を製造",domain:"hiraboku.com"},
+  {name:"小林桂",industry:"食品卸",area:"近畿",size:"中堅企業",services:["ながら記録"],desc:"大阪の食品専門商社。ナッツ・ドライフルーツ等の輸入食品を取り扱う",domain:"k-kobayashi.com"},
+  {name:"富士ベークライト",industry:"化学",area:"関東",size:"中堅企業",services:["ながら記録"],desc:"フェノール樹脂等の熱硬化性樹脂メーカー",domain:"fujibake.co.jp"},
+  {name:"日本国民食",industry:"食品製造",area:"関東",size:"中小企業",services:["ながら記録"],desc:"食品の製造・販売を手がける食品会社",domain:""},
+  {name:"ファイマテック",industry:"精密機器",area:"中部",size:"中堅企業",services:["ながら記録"],desc:"精密部品・材料の製造加工を行うメーカー",domain:"fmt.co.jp"},
+  {name:"さんれいフーズ",industry:"食品製造",area:"中国",size:"中堅企業",services:["ながら記録"],desc:"島根県安来市の冷凍食品メーカー",domain:"sanrei-foods.co.jp"},
+  {name:"コスミックSY",industry:"金属加工",area:"関東",size:"中小企業",services:["ながら記録"],desc:"金属加工・製造を手がける企業",domain:"cosmic-d.jp"},
+  {name:"サトウ産業",industry:"食品製造",area:"関東",size:"中小企業",services:["ながら記録"],desc:"食品の製造・販売を手がける企業",domain:""},
+  {name:"三島食品",industry:"食品製造",area:"中国",size:"中堅企業",services:["ながら記録"],desc:"広島本社のふりかけメーカー。「ゆかり」シリーズで全国的に有名",domain:"mishima.co.jp"}
 ];
 
-const MAX_PER_GROUP = 8;
+const MAX_PER_GROUP = 6;
+function logoUrl(domain) {
+  if (!domain) return '';
+  return `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
+}
+function chipHTML(c) {
+  const badge = c.size === '大企業' ? 'badge-large' : c.size === '中堅企業' ? 'badge-mid' : 'badge-small';
+  const sizeShort = c.size === '大企業' ? '大' : c.size === '中堅企業' ? '中堅' : 'SME';
+  const logo = c.domain ? `<img class="chip-logo" src="${logoUrl(c.domain)}" alt="" onerror="this.style.display='none'">` : '';
+  const idx = companies.indexOf(c);
+  return `<span class="company-chip" data-cidx="${idx}" onmouseenter="showPopup(event,${idx})" onmouseleave="hidePopup()">
+    ${logo}${c.name}
+    <span class="chip-badge ${badge}">${sizeShort}</span>
+  </span>`;
+}
 function trackGroup(key) {
   document.querySelectorAll('#trackFilters .filter-btn').forEach(b => b.classList.toggle('active', b.dataset.group === key));
   const grouped = {};
@@ -1693,7 +1773,6 @@ function trackGroup(key) {
     const vals = key === 'service' ? c.services : [c[key]];
     vals.forEach(v => { (grouped[v] = grouped[v] || []).push(c); });
   });
-  // Sort groups by count desc
   const sorted = Object.entries(grouped).sort((a,b) => b[1].length - a[1].length);
   const container = document.getElementById('trackGroups');
   container.innerHTML = sorted.map(([label, items]) => {
@@ -1705,20 +1784,48 @@ function trackGroup(key) {
         <span class="group-count">${items.length}社</span>
       </div>
       <div class="company-grid">
-        ${shown.map(c => {
-          const badge = c.size === '大企業' ? 'badge-large' : c.size === '中堅企業' ? 'badge-mid' : 'badge-small';
-          const sizeShort = c.size === '大企業' ? '大' : c.size === '中堅企業' ? '中堅' : 'SME';
-          return `<span class="company-chip tooltip-trigger" data-tooltip="${c.desc}（${c.area}・${c.size}）${c.services.length > 1 ? ' | ' + c.services.join(', ') : ''}">
-            <span style="font-size:16px">${c.industry.includes('食品') ? '🍽' : c.industry.includes('化学') ? '🧪' : c.industry.includes('電') ? '⚡' : c.industry.includes('金属') ? '🔩' : c.industry.includes('自動車') ? '🚗' : c.industry.includes('セラミ') ? '🏺' : c.industry.includes('精密') ? '🔧' : c.industry.includes('印刷') ? '🏷' : '🏭'}</span>
-            ${c.name}
-            <span class="chip-badge ${badge}">${sizeShort}</span>
-          </span>`;
-        }).join('')}
-        ${remaining > 0 ? `<span class="more-chip">+${remaining}社</span>` : ''}
+        ${shown.map(c => chipHTML(c)).join('')}
+        ${remaining > 0 ? `<span class="more-chip" onclick="expandGroup(this,${JSON.stringify(items.slice(MAX_PER_GROUP).map(c=>companies.indexOf(c)))})">+${remaining}社</span>` : ''}
       </div>
     </div>`;
   }).join('');
 }
+function expandGroup(el, indices) {
+  const grid = el.parentElement;
+  el.remove();
+  indices.forEach(i => { grid.insertAdjacentHTML('beforeend', chipHTML(companies[i])); });
+}
+// Rich popup
+let popupEl;
+function initPopup() {
+  popupEl = document.createElement('div');
+  popupEl.className = 'company-popup';
+  document.body.appendChild(popupEl);
+}
+function showPopup(e, idx) {
+  const c = companies[idx];
+  const logo = c.domain ? `<img class="popup-logo" src="${logoUrl(c.domain)}" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2232%22 height=%2232%22><rect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%23F1F5F9%22/><text x=%2216%22 y=%2220%22 text-anchor=%22middle%22 font-size=%2214%22 fill=%22%2394A3B8%22>${c.name[0]}</text></svg>'">` : `<div class="popup-logo" style="display:flex;align-items:center;justify-content:center;font-size:16px;background:var(--gray-50);border:1px solid var(--gray-100);">${c.name[0]}</div>`;
+  popupEl.innerHTML = `
+    <div class="popup-header">${logo}<span class="popup-name">${c.name}</span></div>
+    <div class="popup-desc">${c.desc}</div>
+    <div class="popup-tags">
+      <span class="popup-tag">${c.industry}</span>
+      <span class="popup-tag">${c.area}</span>
+      <span class="popup-tag tag-blue">${c.size}</span>
+      ${c.services.map(s => `<span class="popup-tag tag-green">${s}</span>`).join('')}
+      ${c.domain ? `<span class="popup-tag">${c.domain}</span>` : ''}
+    </div>`;
+  const r = e.target.closest('.company-chip').getBoundingClientRect();
+  let left = r.left;
+  let top = r.bottom + 8;
+  if (left + 320 > window.innerWidth) left = window.innerWidth - 330;
+  if (top + 160 > window.innerHeight) top = r.top - 160;
+  popupEl.style.left = left + 'px';
+  popupEl.style.top = top + 'px';
+  popupEl.classList.add('visible');
+}
+function hidePopup() { popupEl && popupEl.classList.remove('visible'); }
+initPopup();
 trackGroup('industry');
 
 // ===== SLIDES & NAV =====
