@@ -1,6 +1,7 @@
 import { Composition } from "remotion";
 import { VoiceDemo } from "./animations/VoiceDemo";
 import { BarChart } from "./animations/BarChart";
+import { MissionFlow } from "./animations/MissionFlow";
 import "./styles/global.css";
 
 export const RemotionRoot: React.FC = () => {
@@ -21,6 +22,14 @@ export const RemotionRoot: React.FC = () => {
         fps={30}
         width={700}
         height={300}
+      />
+      <Composition
+        id="MissionFlow"
+        component={MissionFlow}
+        durationInFrames={150}
+        fps={30}
+        width={500}
+        height={220}
       />
     </>
   );
