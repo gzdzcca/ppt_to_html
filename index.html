@@ -1514,40 +1514,24 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
       </div>
     </div>
 
-    <!-- Options (detailed) -->
-    <div class="animate-on-scroll delay-3" style="margin-top:24px;">
-      <div style="display:flex;gap:20px;">
-        <!-- All plans -->
-        <div style="flex:1;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:14px;padding:20px;">
-          <div style="font-size:13px;font-weight:700;color:var(--blue);margin-bottom:12px;">全プラン追加可能</div>
-          <div class="option-item tooltip-trigger" data-tooltip="蓄積データをリアルタイム可視化。生産性推移・不良率分析・タスクスケジュール管理機能を提供。データドリブンな改善活動を実現。" style="margin-bottom:8px;">
-            <span class="option-name" style="font-size:13px;">ながらダッシュボード（分析・スケジュール機能）</span>
-            <span class="option-price">＋5万円/月</span>
-          </div>
-          <div class="option-item" style="margin-bottom:8px;">
-            <span class="option-name" style="font-size:13px;">1マスターあたり3,000行まで拡張</span>
-            <span class="option-price">＋1万円/月</span>
-          </div>
-          <div class="option-item" style="margin-bottom:8px;">
-            <span class="option-name" style="font-size:13px;">1マスターあたり5,000行まで拡張</span>
-            <span class="option-price">＋2万円/月</span>
-          </div>
-          <div class="option-item" style="margin-bottom:0;">
-            <span class="option-name" style="font-size:13px;">1マスターあたり10,000行まで拡張</span>
-            <span class="option-price">＋5万円/月</span>
-          </div>
+    <!-- Options (compact 4-col grid) -->
+    <div class="animate-on-scroll delay-3" style="margin-top:20px;">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;">
+        <div class="option-item tooltip-trigger" data-tooltip="蓄積データをリアルタイム可視化。生産性推移・不良率分析・タスクスケジュール管理機能を提供。">
+          <span class="option-name" style="font-size:12px;">ながらダッシュボード</span>
+          <span class="option-price" style="font-size:12px;">＋5万円/月</span>
         </div>
-        <!-- Business only -->
-        <div style="flex:1;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:14px;padding:20px;">
-          <div style="font-size:13px;font-weight:700;color:var(--blue-dark);margin-bottom:12px;">Businessライセンスのみ追加可能</div>
-          <div class="option-item tooltip-trigger" data-tooltip="ERPや基幹システムとのリアルタイムデータ連携。REST APIで生産データを自動同期。SAP、Oracle、自社システムなどとの接続実績あり。" style="margin-bottom:8px;">
-            <span class="option-name" style="font-size:13px;">APIデータ連携機能</span>
-            <span class="option-price">＋4万円/月</span>
-          </div>
-          <div class="option-item tooltip-trigger" data-tooltip="SAML 2.0対応のシングルサインオン、IP制限によるアクセス制御。セキュリティポリシーの厳しい大企業向け。" style="margin-bottom:0;">
-            <span class="option-name" style="font-size:13px;">SSO / IP制限機能</span>
-            <span class="option-price">＋4万円/月</span>
-          </div>
+        <div class="option-item">
+          <span class="option-name" style="font-size:12px;">マスター行数拡張</span>
+          <span class="option-price" style="font-size:10px;line-height:1.6;">3,000行 ＋1万 ／ 5,000行 ＋2万 ／ 10,000行 ＋5万</span>
+        </div>
+        <div class="option-item tooltip-trigger" data-tooltip="ERPや基幹システムとのリアルタイムデータ連携。REST APIで生産データを自動同期。Businessプラン以上。">
+          <span class="option-name" style="font-size:12px;">APIデータ連携 <span style="font-size:9px;color:var(--gray-400);">Business〜</span></span>
+          <span class="option-price" style="font-size:12px;">＋4万円/月</span>
+        </div>
+        <div class="option-item tooltip-trigger" data-tooltip="SAML 2.0対応のシングルサインオン、IP制限によるアクセス制御。Businessプラン以上。">
+          <span class="option-name" style="font-size:12px;">SSO / IP制限 <span style="font-size:9px;color:var(--gray-400);">Business〜</span></span>
+          <span class="option-price" style="font-size:12px;">＋4万円/月</span>
         </div>
       </div>
     </div>
