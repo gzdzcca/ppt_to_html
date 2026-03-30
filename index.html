@@ -2,14 +2,14 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=1920, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>ながら記録 のご提案 | KOSKA</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
 <style>
 /* ===== RESET & BASE ===== */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-snap-type: y mandatory; scroll-behavior: smooth; overflow-y: scroll; overflow-x: hidden; }
+html { scroll-snap-type: y mandatory; scroll-behavior: smooth; overflow-y: scroll; overflow-x: hidden; background: #000; }
 body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1a2e; -webkit-font-smoothing: antialiased; }
 
 /* ===== DESIGN TOKENS ===== */
@@ -41,14 +41,28 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
 }
 
 /* ===== SLIDE SYSTEM ===== */
-.slide {
+/* Each slide is designed at 1920x1080 and scaled to fit the viewport */
+.slide-wrapper {
   width: 100vw;
   height: 100vh;
   scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #06080F;
+  overflow: hidden;
+}
+.slide-wrapper.light { background: #F8FAFC; }
+.slide-wrapper.white { background: #FFFFFF; }
+.slide {
+  width: 1920px;
+  height: 1080px;
   position: relative;
   overflow: clip;
   display: flex;
   flex-direction: column;
+  transform-origin: center center;
+  flex-shrink: 0;
 }
 .slide-inner {
   width: 100%;
@@ -1142,7 +1156,7 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
 <nav class="nav-dots" id="navDots"></nav>
 
 <!-- ===== SLIDE 1: TITLE ===== -->
-<section class="slide" id="slide-title">
+<div class="slide-wrapper"><section class="slide" id="slide-title">
   <div class="bg-grid"></div>
   <div class="bg-glow"></div>
   <div style="position:relative;z-index:1;">
@@ -1152,10 +1166,9 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
     <div class="divider-line"></div>
     <p class="sub-tagline">AI × 音声入力で、作業しながら帳票記録</p>
   </div>
-</section>
-
+</section></div>
 <!-- ===== SLIDE 2: ABOUT ===== -->
-<section class="slide" id="slide-about">
+<div class="slide-wrapper white"><section class="slide" id="slide-about">
   <div class="slide-inner">
     <div class="slide-header animate-on-scroll">
       <h2>株式会社KOSKAについて</h2>
@@ -1211,10 +1224,9 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
     </div>
   </div>
   <span class="page-num">02</span>
-</section>
-
+</section></div>
 <!-- ===== SLIDE 3: PRODUCTS ===== -->
-<section class="slide" id="slide-products">
+<div class="slide-wrapper light"><section class="slide" id="slide-products">
   <div class="slide-inner">
     <div class="slide-header animate-on-scroll">
       <h2>提供プロダクトについて</h2>
@@ -1253,10 +1265,9 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
     </div>
   </div>
   <span class="page-num">03</span>
-</section>
-
+</section></div>
 <!-- ===== SLIDE 4: TRACK RECORD ===== -->
-<section class="slide" id="slide-track">
+<div class="slide-wrapper white"><section class="slide" id="slide-track">
   <div class="slide-inner">
     <div class="slide-header animate-on-scroll">
       <h2>導入実績</h2>
@@ -1279,10 +1290,9 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
     </div>
   </div>
   <span class="page-num">04</span>
-</section>
-
+</section></div>
 <!-- ===== SLIDE 5: DIVIDER ===== -->
-<section class="slide slide-divider">
+<div class="slide-wrapper"><section class="slide slide-divider">
   <div class="bg-grid"></div>
   <div style="position:relative;z-index:1;">
     <span class="section-num">02</span>
@@ -1290,10 +1300,9 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
     <div class="section-line"></div>
   </div>
   <span class="page-num">05</span>
-</section>
-
+</section></div>
 <!-- ===== SLIDE 6: DX CHALLENGES ===== -->
-<section class="slide" id="slide-dx">
+<div class="slide-wrapper"><section class="slide" id="slide-dx">
   <div class="slide-inner">
     <div class="slide-header animate-on-scroll">
       <h2>デジタル化に向けての課題</h2>
@@ -1345,10 +1354,9 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
     </div>
   </div>
   <span class="page-num">06</span>
-</section>
-
+</section></div>
 <!-- ===== SLIDE 7: PAIN POINTS ===== -->
-<section class="slide" id="slide-pain">
+<div class="slide-wrapper white"><section class="slide" id="slide-pain">
   <div class="slide-inner">
     <div class="slide-header animate-on-scroll">
       <h2>帳票記録におけるよくお聞きする課題</h2>
@@ -1390,10 +1398,9 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
     </div>
   </div>
   <span class="page-num">07</span>
-</section>
-
+</section></div>
 <!-- ===== SLIDE 8: FEATURES ===== -->
-<section class="slide" id="slide-features">
+<div class="slide-wrapper"><section class="slide" id="slide-features">
   <div class="slide-inner">
     <div class="slide-header animate-on-scroll">
       <h2>シンプルかつ簡単操作にこだわった<br>「ながら記録」</h2>
@@ -1435,10 +1442,9 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
     </div>
   </div>
   <span class="page-num">08</span>
-</section>
-
+</section></div>
 <!-- ===== SLIDE 9: DIVIDER ===== -->
-<section class="slide slide-divider">
+<div class="slide-wrapper"><section class="slide slide-divider">
   <div class="bg-grid"></div>
   <div style="position:relative;z-index:1;">
     <span class="section-num">03</span>
@@ -1446,10 +1452,9 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
     <div class="section-line"></div>
   </div>
   <span class="page-num">09</span>
-</section>
-
+</section></div>
 <!-- ===== SLIDE 10: FLOW ===== -->
-<section class="slide" id="slide-flow">
+<div class="slide-wrapper light"><section class="slide" id="slide-flow">
   <div class="slide-inner">
     <div class="slide-header animate-on-scroll">
       <h2>提案 → 導入 → 支援 までの流れ</h2>
@@ -1497,10 +1502,9 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
     </div>
   </div>
   <span class="page-num">10</span>
-</section>
-
+</section></div>
 <!-- ===== SLIDE 11: PRICING + OPTIONS ===== -->
-<section class="slide" id="slide-pricing">
+<div class="slide-wrapper white"><section class="slide" id="slide-pricing">
   <div class="slide-inner" style="padding:48px 80px;">
     <div class="slide-header animate-on-scroll" style="margin-bottom:32px;">
       <h2>ライセンス体系・オプション</h2>
@@ -1612,10 +1616,9 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
     </div>
   </div>
   <span class="page-num">11</span>
-</section>
-
+</section></div>
 <!-- ===== SLIDE 12: COST SIMULATOR ===== -->
-<section class="slide" id="slide-simulator">
+<div class="slide-wrapper light"><section class="slide" id="slide-simulator">
   <div class="slide-inner" style="padding:48px 80px;">
     <div class="slide-header animate-on-scroll" style="margin-bottom:32px;">
       <h2>年間コストシミュレーション</h2>
@@ -1695,8 +1698,7 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
     </div>
   </div>
   <span class="page-num">12</span>
-</section>
-
+</section></div>
 <script>
 // ===== TRACK RECORD DATA & GROUPING =====
 const companies = [
@@ -1828,15 +1830,33 @@ function hidePopup() { popupEl && popupEl.classList.remove('visible'); }
 initPopup();
 trackGroup('industry');
 
+// ===== RESPONSIVE SCALING =====
+function scaleSlides() {
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  const scaleX = vw / 1920;
+  const scaleY = vh / 1080;
+  const scale = Math.min(scaleX, scaleY);
+  document.querySelectorAll('.slide').forEach(s => {
+    s.style.transform = `scale(${scale})`;
+  });
+  // Also scale nav dots position
+  const dots = document.getElementById('navDots');
+  if (dots) dots.style.right = Math.max(12, 32 * scale) + 'px';
+}
+scaleSlides();
+window.addEventListener('resize', scaleSlides);
+
 // ===== SLIDES & NAV =====
 const slides = document.querySelectorAll('.slide');
+const wrappers = document.querySelectorAll('.slide-wrapper');
 const dotsContainer = document.getElementById('navDots');
 
 // Create nav dots
-slides.forEach((slide, i) => {
+wrappers.forEach((wrapper, i) => {
   const dot = document.createElement('div');
   dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
-  dot.addEventListener('click', () => slide.scrollIntoView({ behavior: 'smooth' }));
+  dot.addEventListener('click', () => wrapper.scrollIntoView({ behavior: 'smooth' }));
   dotsContainer.appendChild(dot);
 });
 
@@ -1885,13 +1905,13 @@ document.addEventListener('keydown', (e) => {
   });
   if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') {
     e.preventDefault();
-    const next = Math.min(current + 1, slides.length - 1);
-    slides[next].scrollIntoView({ behavior: 'smooth' });
+    const next = Math.min(current + 1, wrappers.length - 1);
+    wrappers[next].scrollIntoView({ behavior: 'smooth' });
   }
   if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
     e.preventDefault();
     const prev = Math.max(current - 1, 0);
-    slides[prev].scrollIntoView({ behavior: 'smooth' });
+    wrappers[prev].scrollIntoView({ behavior: 'smooth' });
   }
 });
 
