@@ -500,7 +500,7 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
 #slide-track .header-line { background: var(--blue); }
 #slide-track .content { display: flex; gap: 48px; flex: 1; min-height: 0; }
 #slide-track .sidebar {
-  width: 260px; flex-shrink: 0; display: flex; flex-direction: column; gap: 20px;
+  width: 240px; flex-shrink: 0; display: flex; flex-direction: column; gap: 20px;
 }
 #slide-track .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 #slide-track .stat-card {
@@ -523,52 +523,45 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
   border-color: rgba(96,165,250,0.4); color: #fff; box-shadow: 0 0 20px rgba(37,99,235,0.15);
 }
 #slide-track .logo-area { flex: 1; display: flex; flex-direction: column; min-height: 0; }
-#slide-track .group-label-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+#slide-track .group-label-row { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
 #slide-track .group-tag {
   font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 8px;
   background: rgba(96,165,250,0.1); border: 1px solid rgba(96,165,250,0.2); color: var(--blue-light);
 }
-#slide-track .logo-grid {
-  display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; flex: 1; align-content: start;
+/* Floating logo cloud - no borders, organic feel */
+#slide-track .logo-cloud {
+  flex: 1; display: flex; flex-wrap: wrap; align-content: center; justify-content: center;
+  gap: 0; position: relative;
 }
-#slide-track .logo-cell {
-  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 14px; display: flex; flex-direction: column; align-items: center;
-  justify-content: center; gap: 6px; padding: 14px 6px; cursor: default;
-  transition: all 0.3s; position: relative; overflow: hidden;
+#slide-track .logo-node {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 6px; padding: 16px 20px; cursor: default; transition: all 0.4s ease;
+  position: relative; border-radius: 16px;
 }
-#slide-track .logo-cell:hover {
-  background: rgba(96,165,250,0.08); border-color: rgba(96,165,250,0.25);
-  transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+#slide-track .logo-node:hover {
+  background: rgba(96,165,250,0.06);
+  transform: scale(1.08);
 }
-#slide-track .logo-cell.size-large {
-  grid-column: span 2; grid-row: span 2;
-  background: rgba(37,99,235,0.06); border-color: rgba(96,165,250,0.15);
-  box-shadow: 0 0 30px rgba(37,99,235,0.08); padding: 20px 10px;
+#slide-track .logo-node:hover .node-name { color: rgba(255,255,255,0.95); }
+#slide-track .logo-node:hover .node-logo { filter: brightness(1.2) drop-shadow(0 0 12px rgba(96,165,250,0.4)); }
+#slide-track .node-logo {
+  width: 40px; height: 40px; border-radius: 10px; object-fit: contain;
+  background: rgba(255,255,255,0.9); padding: 4px;
+  filter: brightness(1); transition: filter 0.3s;
 }
-#slide-track .logo-cell.size-large .cell-logo { width: 52px; height: 52px; }
-#slide-track .logo-cell.size-large .cell-name { font-size: 14px; }
-#slide-track .logo-cell.size-large .cell-sub { display: block; }
-#slide-track .cell-logo {
-  width: 34px; height: 34px; border-radius: 8px; object-fit: contain;
-  background: rgba(255,255,255,0.9); padding: 3px;
+#slide-track .node-initial {
+  width: 40px; height: 40px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 700; color: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);
 }
-#slide-track .cell-name {
-  font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.85);
-  text-align: center; line-height: 1.3;
+#slide-track .node-name {
+  font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.55);
+  text-align: center; line-height: 1.3; transition: color 0.3s; max-width: 100px;
 }
-#slide-track .cell-sub { font-size: 9px; color: rgba(255,255,255,0.3); display: none; }
-#slide-track .cell-badge {
-  position: absolute; top: 6px; right: 6px; font-size: 8px; font-weight: 700;
-  padding: 1px 5px; border-radius: 4px;
-}
-#slide-track .cell-badge.b-lg { background: rgba(96,165,250,0.2); color: #93C5FD; }
-#slide-track .cell-badge.b-md { background: rgba(139,92,246,0.15); color: #C4B5FD; }
-#slide-track .summary-row {
-  grid-column: 1 / -1; display: flex; align-items: center; justify-content: center;
-  gap: 8px; padding: 8px; border-radius: 12px; background: rgba(255,255,255,0.02);
-  border: 1px dashed rgba(255,255,255,0.08); color: rgba(255,255,255,0.35);
-  font-size: 12px; font-weight: 500;
+#slide-track .summary-text {
+  text-align: center; padding: 12px 0 0; color: rgba(255,255,255,0.25);
+  font-size: 13px; font-weight: 400; letter-spacing: 0.05em;
 }
 /* Rich company popup */
 .company-popup {
@@ -1202,7 +1195,8 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
       </div>
       <div class="logo-area animate-on-scroll delay-2">
         <div class="group-label-row" id="trackLabels"></div>
-        <div class="logo-grid" id="trackGrid"></div>
+        <div class="logo-cloud" id="trackGrid"></div>
+        <div class="summary-text" id="trackSummary"></div>
       </div>
     </div>
   </div>
@@ -1621,12 +1615,12 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
 const companies = [
   {name:"住友電工",industry:"電線・電子機器",area:"近畿",size:"大企業",services:["GenKan"],desc:"世界的電線メーカー。自動車用ワイヤーハーネス、光ファイバー、超硬工具など幅広い事業を展開",domain:"sei.co.jp"},
   {name:"秋田エプソン",industry:"電子機器",area:"東北",size:"中堅企業",services:["GenKan"],desc:"セイコーエプソンの製造子会社。秋田県でプリンター・電子デバイス部品を製造",domain:"epson.co.jp"},
-  {name:"昭和食品",industry:"食品製造",area:"関東",size:"中小企業",services:["GenKan"],desc:"食品の製造・加工を手がける食品メーカー",domain:""},
+  {name:"昭和食品",industry:"食品製造",area:"関東",size:"中小企業",services:["GenKan"],desc:"食品の製造・加工を手がける食品メーカー",domain:"syouwasyokuhin.co.jp"},
   {name:"人形町今半フーズプラント",industry:"食品製造",area:"関東",size:"中堅企業",services:["GenKan"],desc:"老舗すき焼き店「人形町今半」グループの食品製造部門。精肉加工・惣菜製造を展開",domain:"imahan.com"},
   {name:"トオカツフーズ",industry:"食品製造",area:"関東",size:"中堅企業",services:["GenKan"],desc:"日清製粉グループの中食メーカー。コンビニ向け弁当・惣菜の製造を手がける",domain:"tokatsu.co.jp"},
   {name:"苫食",industry:"食品製造",area:"北海道",size:"中小企業",services:["GenKan"],desc:"北海道苫小牧市の食品製造会社。水産加工品などを製造",domain:"tomasyoku.jp"},
   {name:"吉田電材",industry:"電子部品",area:"関東",size:"中小企業",services:["GenKan"],desc:"電気機器・電材の製造を行う企業",domain:"yoshida-denzai.co.jp"},
-  {name:"ファーストフーズ名古屋",industry:"食品製造",area:"中部",size:"中小企業",services:["GenKan"],desc:"名古屋拠点の食品製造会社。中食・弁当等の製造を手がける",domain:""},
+  {name:"ファーストフーズ名古屋",industry:"食品製造",area:"中部",size:"中小企業",services:["GenKan"],desc:"名古屋拠点の食品製造会社。中食・弁当等の製造を手がける",domain:"ffn.jp"},
   {name:"糧商",industry:"食品製造",area:"関東",size:"中小企業",services:["GenKan"],desc:"食品の製造・販売を手がける食品会社",domain:""},
   {name:"戸田フーズ",industry:"食品製造",area:"関東",size:"中小企業",services:["GenKan"],desc:"食品の製造・加工を行う食品メーカー",domain:"todafoods.co.jp"},
   {name:"かね貞",industry:"食品製造",area:"中部",size:"中堅企業",services:["GenKan"],desc:"愛知県の練り製品メーカー。おでん種やはんぺん等の水産練り製品を製造",domain:"kanesada.com"},
@@ -1634,10 +1628,10 @@ const companies = [
   {name:"フジッコNEWデリカ",industry:"食品製造",area:"近畿",size:"中堅企業",services:["GenKan"],desc:"フジッコグループの惣菜製造会社。煮豆・惣菜等を製造",domain:"fujicco.co.jp"},
   {name:"ヨシデン",industry:"電子部品",area:"近畿",size:"中小企業",services:["GenKan","ながら記録"],desc:"電子部品・電子機器の製造を手がける企業",domain:"yoshiden.co.jp"},
   {name:"ジョイアス・フーズ",industry:"食品製造",area:"関東",size:"中小企業",services:["GenKan"],desc:"食品の製造・加工を行う食品メーカー",domain:"joyous.co.jp"},
-  {name:"ホームデリカ",industry:"食品製造",area:"関東",size:"中堅企業",services:["GenKan"],desc:"コンビニ・スーパー向けの弁当・惣菜を製造する中食メーカー",domain:""},
+  {name:"ホームデリカ",industry:"食品製造",area:"関東",size:"中堅企業",services:["GenKan"],desc:"コンビニ・スーパー向けの弁当・惣菜を製造する中食メーカー",domain:"homedelica.jp"},
   {name:"秋本食品",industry:"食品製造",area:"関東",size:"中堅企業",services:["GenKan","ながら記録"],desc:"神奈川県の漬物メーカー。キムチや浅漬けなど各種漬物を製造",domain:"akimoto.co.jp"},
   {name:"ロック・フィールド",industry:"食品製造",area:"近畿",size:"大企業",services:["GenKan"],desc:"神戸本社の惣菜メーカー。「RF1」「神戸コロッケ」等のブランドでデパ地下惣菜を展開。東証プライム上場",domain:"rockfield.co.jp"},
-  {name:"鳥幸",industry:"食品製造",area:"関東",size:"中小企業",services:["GenKan"],desc:"鶏肉加工・食品製造を手がける企業",domain:""},
+  {name:"鳥幸",industry:"食品製造",area:"関東",size:"中小企業",services:["GenKan"],desc:"鶏肉加工・食品製造を手がける企業",domain:"yaki-tori.co.jp"},
   {name:"九州エヌエフフーズ",industry:"食品製造",area:"九州",size:"中小企業",services:["GenKan"],desc:"九州地方の食品製造会社。惣菜・食品加工を手がける",domain:"knff.jp"},
   {name:"武蔵野",industry:"食品製造",area:"関東",size:"中堅企業",services:["GenKan"],desc:"コンビニ向け弁当・おにぎり・調理パン等を製造する大手中食メーカー",domain:"musashino.co.jp"},
   {name:"山口製作所",industry:"金属加工",area:"関東",size:"中小企業",services:["GenKan"],desc:"金属部品の加工・製造を手がける製造業",domain:"yamaguchi1965.co.jp"},
@@ -1670,32 +1664,24 @@ const companies = [
   {name:"三島食品",industry:"食品製造",area:"中国",size:"中堅企業",services:["ながら記録"],desc:"広島本社のふりかけメーカー。「ゆかり」シリーズで全国的に有名",domain:"mishima.co.jp"}
 ];
 
-const MAX_CELLS = 20;
+const MAX_NODES = 24;
 function logoUrl(d) { return d ? `https://www.google.com/s2/favicons?domain=${d}&sz=64` : ''; }
 
-function cellHTML(c, idx) {
-  const isLarge = c.size === '大企業';
-  const isMid = c.size === '中堅企業';
-  const sizeClass = isLarge ? 'size-large' : '';
-  const badge = isLarge ? '<span class="cell-badge b-lg">大企業</span>' : isMid ? '<span class="cell-badge b-md">中堅</span>' : '';
+function nodeHTML(c, idx) {
   const logo = c.domain
-    ? `<img class="cell-logo" src="${logoUrl(c.domain)}" alt="${c.name}" onerror="this.style.display='none'">`
-    : `<div class="cell-logo" style="display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#64748B;background:rgba(255,255,255,0.9)">${c.name[0]}</div>`;
-  return `<div class="logo-cell ${sizeClass}" onmouseenter="showPopup(event,${idx})" onmouseleave="hidePopup()">
-    ${badge}${logo}
-    <span class="cell-name">${c.name}</span>
-    <span class="cell-sub">${c.industry}</span>
+    ? `<img class="node-logo" src="${logoUrl(c.domain)}" alt="${c.name}" onerror="this.outerHTML='<div class=node-initial>${c.name[0]}</div>'">`
+    : `<div class="node-initial">${c.name[0]}</div>`;
+  return `<div class="logo-node" onmouseenter="showPopup(event,${idx})" onmouseleave="hidePopup()">
+    ${logo}<span class="node-name">${c.name}</span>
   </div>`;
 }
 
 function trackGroup(key) {
   document.querySelectorAll('#trackFilters .filter-btn').forEach(b => b.classList.toggle('active', b.dataset.group === key));
 
-  // Sort: 大企業 first, then 中堅, then 中小
   const sizeOrder = {'大企業':0, '中堅企業':1, '中小企業':2};
-  let sorted = [...companies].sort((a,b) => sizeOrder[a.size] - sizeOrder[b.size]);
 
-  // Group labels
+  // Group
   const grouped = {};
   companies.forEach(c => {
     const vals = key === 'service' ? c.services : [c[key]];
@@ -1703,29 +1689,26 @@ function trackGroup(key) {
   });
   const groupKeys = Object.entries(grouped).sort((a,b) => b[1].length - a[1].length);
 
-  // Show group tags
+  // Show group tags (no counts for size groups)
   const labelsEl = document.getElementById('trackLabels');
-  labelsEl.innerHTML = groupKeys.map(([k,v]) => `<span class="group-tag">${k} ${v.length}</span>`).join('');
+  labelsEl.innerHTML = groupKeys.map(([k]) => `<span class="group-tag">${k}</span>`).join('');
 
-  // If grouping by something other than size, sort by group
-  if (key !== 'size') {
-    const groupOrder = {};
-    groupKeys.forEach(([k], i) => groupOrder[k] = i);
-    sorted = [...companies].sort((a,b) => {
-      const aKey = key === 'service' ? a.services[0] : a[key];
-      const bKey = key === 'service' ? b.services[0] : b[key];
-      const gDiff = (groupOrder[aKey]||99) - (groupOrder[bKey]||99);
-      if (gDiff !== 0) return gDiff;
-      return sizeOrder[a.size] - sizeOrder[b.size];
-    });
-  }
+  // Sort by group then by size within group
+  const groupOrder = {};
+  groupKeys.forEach(([k], i) => groupOrder[k] = i);
+  const sorted = [...companies].sort((a,b) => {
+    const aKey = key === 'service' ? a.services[0] : a[key];
+    const bKey = key === 'service' ? b.services[0] : b[key];
+    const gDiff = (groupOrder[aKey]||99) - (groupOrder[bKey]||99);
+    if (gDiff !== 0) return gDiff;
+    return sizeOrder[a.size] - sizeOrder[b.size];
+  });
 
-  const shown = sorted.slice(0, MAX_CELLS);
+  const shown = sorted.slice(0, MAX_NODES);
   const remaining = sorted.length - shown.length;
 
-  const grid = document.getElementById('trackGrid');
-  grid.innerHTML = shown.map(c => cellHTML(c, companies.indexOf(c))).join('') +
-    (remaining > 0 ? `<div class="summary-row">他 ${remaining}社の企業にもご利用いただいています</div>` : '');
+  document.getElementById('trackGrid').innerHTML = shown.map(c => nodeHTML(c, companies.indexOf(c))).join('');
+  document.getElementById('trackSummary').textContent = remaining > 0 ? `他 ${remaining}社にもご利用いただいています` : '';
 }
 
 // Rich popup
@@ -1750,7 +1733,7 @@ function showPopup(e, idx) {
       ${c.services.map(s => `<span class="popup-tag tag-green">${s}</span>`).join('')}
       ${c.domain ? `<span class="popup-tag">${c.domain}</span>` : ''}
     </div>`;
-  const r = e.target.closest('.logo-cell').getBoundingClientRect();
+  const r = e.target.closest('.logo-node').getBoundingClientRect();
   let left = r.right + 12;
   let top = r.top;
   if (left + 320 > window.innerWidth) left = r.left - 330;
