@@ -512,15 +512,25 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
 }
 #slide-track .hero-unit { font-size: 15px; color: rgba(255,255,255,0.5); font-weight: 500; }
 #slide-track .hero-label { font-size: 12px; color: rgba(255,255,255,0.3); margin-left: 2px; }
-#slide-track .filter-row { display: flex; gap: 8px; }
-#slide-track .filter-btn {
-  padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 600;
-  border: 1px solid rgba(255,255,255,0.1); background: transparent;
-  color: rgba(255,255,255,0.4); cursor: pointer; transition: all 0.25s;
+#slide-track .diversity-bar {
+  display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px;
 }
-#slide-track .filter-btn:hover { border-color: rgba(96,165,250,0.3); color: rgba(255,255,255,0.7); }
-#slide-track .filter-btn.active {
-  background: rgba(96,165,250,0.15); border-color: rgba(96,165,250,0.4); color: #93C5FD;
+#slide-track .pill-row {
+  display: flex; gap: 6px; align-items: center; flex-wrap: wrap;
+}
+#slide-track .pill-label {
+  font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.3);
+  margin-right: 4px; min-width: 36px;
+}
+#slide-track .pill {
+  padding: 4px 14px; border-radius: 20px; font-size: 11px; font-weight: 600;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+#slide-track .pill-ind { background: rgba(59,130,246,0.1); color: rgba(147,197,253,0.8); border-color: rgba(59,130,246,0.15); }
+#slide-track .pill-area { background: rgba(139,92,246,0.1); color: rgba(196,181,253,0.8); border-color: rgba(139,92,246,0.15); }
+#slide-track .service-summary {
+  text-align: center; padding: 8px 0 0; color: rgba(255,255,255,0.3);
+  font-size: 13px; font-weight: 500; letter-spacing: 0.03em;
 }
 /* Full-bleed marquee ticker */
 #slide-track .ticker-area {
@@ -564,16 +574,6 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
   border: 1px solid rgba(255,255,255,0.08);
   box-shadow: 0 4px 20px rgba(0,0,0,0.3);
   transition: all 0.4s;
-}
-/* Bottom category chips */
-#slide-track .group-chips {
-  display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
-  margin-top: 12px; padding: 0 60px;
-}
-#slide-track .group-chip {
-  font-size: 11px; font-weight: 500; padding: 4px 14px; border-radius: 20px;
-  background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.25);
-  border: 1px solid rgba(255,255,255,0.06);
 }
 /* Rich company popup */
 .company-popup {
@@ -1197,14 +1197,33 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
           <div class="hero-stat"><span class="hero-num">10+</span><span class="hero-unit">業界</span></div>
           <div class="hero-stat"><span class="hero-num">7</span><span class="hero-unit">地域</span></div>
         </div>
-        <div class="filter-row" id="trackFilters">
-          <button class="filter-btn active" data-group="industry" onclick="trackGroup('industry')">業界別</button>
-          <button class="filter-btn" data-group="area" onclick="trackGroup('area')">地域別</button>
-          <button class="filter-btn" data-group="service" onclick="trackGroup('service')">サービス別</button>
+      </div>
+      <div class="diversity-bar animate-on-scroll delay-1">
+        <div class="pill-row">
+          <span class="pill-label">業界</span>
+          <span class="pill pill-ind">食品製造</span>
+          <span class="pill pill-ind">化学</span>
+          <span class="pill pill-ind">金属加工</span>
+          <span class="pill pill-ind">電子部品</span>
+          <span class="pill pill-ind">精密機器</span>
+          <span class="pill pill-ind">自動車部品</span>
+          <span class="pill pill-ind">セラミックス</span>
+          <span class="pill pill-ind">印刷・包装</span>
+          <span class="pill pill-ind">食品卸</span>
+        </div>
+        <div class="pill-row">
+          <span class="pill-label">地域</span>
+          <span class="pill pill-area">関東</span>
+          <span class="pill pill-area">近畿</span>
+          <span class="pill pill-area">中部</span>
+          <span class="pill pill-area">東北</span>
+          <span class="pill pill-area">九州</span>
+          <span class="pill pill-area">北海道</span>
+          <span class="pill pill-area">中国</span>
         </div>
       </div>
       <div class="ticker-area animate-on-scroll delay-2" id="tickerArea"></div>
-      <div class="group-chips animate-on-scroll delay-3" id="trackChips"></div>
+      <div class="service-summary animate-on-scroll delay-3">GenKan 25社 ・ ながら記録 28社 ・ GenKanデータコンバーター 1社</div>
     </div>
   </div>
   <span class="page-num" style="color:rgba(255,255,255,0.2)">04</span>
@@ -1697,42 +1716,18 @@ function tickerItemHTML(c) {
   </div>`;
 }
 
-function trackGroup(key) {
-  document.querySelectorAll('#trackFilters .filter-btn').forEach(b => b.classList.toggle('active', b.dataset.group === key));
-
-  // Group
-  const grouped = {};
-  companies.forEach(c => {
-    const vals = key === 'service' ? c.services : [c[key]];
-    vals.forEach(v => { (grouped[v] = grouped[v] || []).push(c); });
-  });
-  const groupKeys = Object.entries(grouped).sort((a,b) => b[1].length - a[1].length);
-
-  // Sort companies by group
-  const groupOrder = {};
-  groupKeys.forEach(([k], i) => groupOrder[k] = i);
-  const sorted = [...companies].sort((a,b) => {
-    const aKey = key === 'service' ? a.services[0] : a[key];
-    const bKey = key === 'service' ? b.services[0] : b[key];
-    return (groupOrder[aKey]||99) - (groupOrder[bKey]||99);
-  });
-
-  // Split into 3 ticker rows
-  const rowSize = Math.ceil(sorted.length / 3);
-  const rows = [sorted.slice(0, rowSize), sorted.slice(rowSize, rowSize*2), sorted.slice(rowSize*2)];
+function renderTicker() {
+  // Shuffle companies for visual variety
+  const shuffled = [...companies].sort(() => Math.random() - 0.5);
+  const rowSize = Math.ceil(shuffled.length / 3);
+  const rows = [shuffled.slice(0, rowSize), shuffled.slice(rowSize, rowSize*2), shuffled.slice(rowSize*2)];
 
   const area = document.getElementById('tickerArea');
   area.innerHTML = rows.map((row, ri) => {
     const items = row.map(c => tickerItemHTML(c)).join('');
     const cls = ri === 1 ? 'ticker-row r2' : ri === 2 ? 'ticker-row r3' : 'ticker-row';
-    // Duplicate items for seamless loop
     return `<div class="${cls}">${items}${items}</div>`;
   }).join('');
-
-  // Show group chips
-  document.getElementById('trackChips').innerHTML = groupKeys.map(([k]) =>
-    `<span class="group-chip">${k}</span>`
-  ).join('');
 }
 
 // Rich popup
@@ -1770,7 +1765,7 @@ function showPopup(e, idx) {
 }
 function hidePopup() { popupEl && popupEl.classList.remove('visible'); }
 initPopup();
-trackGroup('size');
+renderTicker();
 
 // ===== RESPONSIVE SCALING =====
 function scaleSlides() {
