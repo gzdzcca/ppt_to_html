@@ -495,73 +495,82 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
 
 /* ===== SLIDE 4: TRACK RECORD ===== */
 #slide-track { background: linear-gradient(160deg, #06080F 0%, #0B1628 40%, #0F1D3D 100%); }
-#slide-track .slide-inner { overflow: hidden; }
+#slide-track .slide-inner { overflow: hidden; padding-bottom: 40px; }
 #slide-track h2 { color: #fff; }
 #slide-track .header-line { background: var(--blue); }
-#slide-track .content { display: flex; gap: 48px; flex: 1; min-height: 0; }
-#slide-track .sidebar {
-  width: 240px; flex-shrink: 0; display: flex; flex-direction: column; gap: 20px;
+#slide-track .content { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+/* Hero stats row */
+#slide-track .hero-stats {
+  display: flex; align-items: baseline; gap: 48px; margin-bottom: 12px;
 }
-#slide-track .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-#slide-track .stat-card {
-  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 14px; padding: 14px; text-align: center;
+#slide-track .hero-stat { display: flex; align-items: baseline; gap: 8px; }
+#slide-track .hero-num {
+  font-size: 56px; font-weight: 900; letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #60A5FA 0%, #818CF8 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
-#slide-track .stat-num { font-size: 28px; font-weight: 800; color: var(--blue-light); }
-#slide-track .stat-label { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 2px; }
-#slide-track .filter-bar { display: flex; flex-direction: column; gap: 6px; }
+#slide-track .hero-unit { font-size: 18px; color: rgba(255,255,255,0.5); font-weight: 500; }
+#slide-track .hero-label { font-size: 13px; color: rgba(255,255,255,0.3); margin-left: 4px; }
+/* Filter pills */
+#slide-track .filter-row { display: flex; gap: 8px; margin-bottom: 24px; }
 #slide-track .filter-btn {
-  padding: 10px 16px; border-radius: 10px; font-size: 13px; font-weight: 600;
-  border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03);
-  color: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.25s; text-align: left;
+  padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 600;
+  border: 1px solid rgba(255,255,255,0.1); background: transparent;
+  color: rgba(255,255,255,0.4); cursor: pointer; transition: all 0.25s;
 }
-#slide-track .filter-btn:hover {
-  border-color: rgba(96,165,250,0.3); color: rgba(255,255,255,0.8); background: rgba(96,165,250,0.06);
-}
+#slide-track .filter-btn:hover { border-color: rgba(96,165,250,0.3); color: rgba(255,255,255,0.7); }
 #slide-track .filter-btn.active {
-  background: linear-gradient(135deg, rgba(37,99,235,0.2), rgba(99,102,241,0.15));
-  border-color: rgba(96,165,250,0.4); color: #fff; box-shadow: 0 0 20px rgba(37,99,235,0.15);
+  background: rgba(96,165,250,0.15); border-color: rgba(96,165,250,0.4); color: #93C5FD;
 }
-#slide-track .logo-area { flex: 1; display: flex; flex-direction: column; min-height: 0; }
-#slide-track .group-label-row { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
-#slide-track .group-tag {
-  font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 8px;
-  background: rgba(96,165,250,0.1); border: 1px solid rgba(96,165,250,0.2); color: var(--blue-light);
+/* Marquee ticker rows */
+#slide-track .ticker-area { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 6px; overflow: hidden; position: relative; }
+#slide-track .ticker-area::before, #slide-track .ticker-area::after {
+  content: ''; position: absolute; top: 0; bottom: 0; width: 120px; z-index: 2; pointer-events: none;
 }
-/* Floating logo cloud - no borders, organic feel */
-#slide-track .logo-cloud {
-  flex: 1; display: flex; flex-wrap: wrap; align-content: center; justify-content: center;
-  gap: 0; position: relative;
+#slide-track .ticker-area::before { left: 0; background: linear-gradient(to right, #0B1628, transparent); }
+#slide-track .ticker-area::after { right: 0; background: linear-gradient(to left, #0B1628, transparent); }
+#slide-track .ticker-row {
+  display: flex; gap: 0; animation: tickerScroll 40s linear infinite; width: max-content;
 }
-#slide-track .logo-node {
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 6px; padding: 16px 20px; cursor: default; transition: all 0.4s ease;
-  position: relative; border-radius: 16px;
+#slide-track .ticker-row.reverse { animation-direction: reverse; }
+#slide-track .ticker-row.slow { animation-duration: 55s; }
+@keyframes tickerScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+#slide-track .ticker-row:hover { animation-play-state: paused; }
+#slide-track .ticker-item {
+  display: flex; align-items: center; gap: 10px; padding: 12px 24px;
+  cursor: default; transition: all 0.3s; border-radius: 12px; flex-shrink: 0;
 }
-#slide-track .logo-node:hover {
-  background: rgba(96,165,250,0.06);
-  transform: scale(1.08);
+#slide-track .ticker-item:hover {
+  background: rgba(96,165,250,0.08);
 }
-#slide-track .logo-node:hover .node-name { color: rgba(255,255,255,0.95); }
-#slide-track .logo-node:hover .node-logo { filter: brightness(1.2) drop-shadow(0 0 12px rgba(96,165,250,0.4)); }
-#slide-track .node-logo {
-  width: 40px; height: 40px; border-radius: 10px; object-fit: contain;
-  background: rgba(255,255,255,0.9); padding: 4px;
-  filter: brightness(1); transition: filter 0.3s;
+#slide-track .ticker-item:hover .t-name { color: #fff; }
+#slide-track .ticker-item:hover .t-logo { filter: brightness(1.3) drop-shadow(0 0 8px rgba(96,165,250,0.3)); }
+#slide-track .t-logo {
+  width: 36px; height: 36px; border-radius: 8px; object-fit: contain;
+  background: rgba(255,255,255,0.9); padding: 3px; flex-shrink: 0;
+  transition: filter 0.3s;
 }
-#slide-track .node-initial {
-  width: 40px; height: 40px; border-radius: 10px;
+#slide-track .t-initial {
+  width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
-  font-size: 18px; font-weight: 700; color: rgba(255,255,255,0.6);
-  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);
+  font-size: 16px; font-weight: 700; color: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.06);
 }
-#slide-track .node-name {
-  font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.55);
-  text-align: center; line-height: 1.3; transition: color 0.3s; max-width: 100px;
+#slide-track .t-name {
+  font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.45);
+  white-space: nowrap; transition: color 0.3s;
 }
-#slide-track .summary-text {
-  text-align: center; padding: 12px 0 0; color: rgba(255,255,255,0.25);
-  font-size: 13px; font-weight: 400; letter-spacing: 0.05em;
+#slide-track .t-industry {
+  font-size: 11px; color: rgba(255,255,255,0.2); white-space: nowrap;
+}
+/* Group label chips below ticker */
+#slide-track .group-chips {
+  display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 16px;
+}
+#slide-track .group-chip {
+  font-size: 11px; font-weight: 500; padding: 4px 14px; border-radius: 20px;
+  background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.3);
+  border: 1px solid rgba(255,255,255,0.06);
 }
 /* Rich company popup */
 .company-popup {
@@ -1179,25 +1188,18 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
       <div class="header-line"></div>
     </div>
     <div class="content">
-      <div class="sidebar animate-on-scroll delay-1">
-        <div class="stat-grid">
-          <div class="stat-card"><div class="stat-num">54</div><div class="stat-label">契約数</div></div>
-          <div class="stat-card"><div class="stat-num">42</div><div class="stat-label">企業</div></div>
-          <div class="stat-card"><div class="stat-num">10+</div><div class="stat-label">業界</div></div>
-          <div class="stat-card"><div class="stat-num">7</div><div class="stat-label">地域</div></div>
-        </div>
-        <div class="filter-bar" id="trackFilters">
-          <button class="filter-btn active" data-group="size" onclick="trackGroup('size')">規模別</button>
-          <button class="filter-btn" data-group="industry" onclick="trackGroup('industry')">業界別</button>
-          <button class="filter-btn" data-group="area" onclick="trackGroup('area')">地域別</button>
-          <button class="filter-btn" data-group="service" onclick="trackGroup('service')">サービス別</button>
-        </div>
+      <div class="hero-stats animate-on-scroll delay-1">
+        <div class="hero-stat"><span class="hero-num">42</span><span class="hero-unit">社</span><span class="hero-label">導入企業</span></div>
+        <div class="hero-stat"><span class="hero-num">10+</span><span class="hero-unit">業界</span></div>
+        <div class="hero-stat"><span class="hero-num">7</span><span class="hero-unit">地域</span></div>
       </div>
-      <div class="logo-area animate-on-scroll delay-2">
-        <div class="group-label-row" id="trackLabels"></div>
-        <div class="logo-cloud" id="trackGrid"></div>
-        <div class="summary-text" id="trackSummary"></div>
+      <div class="filter-row animate-on-scroll delay-1" id="trackFilters">
+        <button class="filter-btn active" data-group="industry" onclick="trackGroup('industry')">業界別</button>
+        <button class="filter-btn" data-group="area" onclick="trackGroup('area')">地域別</button>
+        <button class="filter-btn" data-group="service" onclick="trackGroup('service')">サービス別</button>
       </div>
+      <div class="ticker-area animate-on-scroll delay-2" id="tickerArea"></div>
+      <div class="group-chips animate-on-scroll delay-3" id="trackChips"></div>
     </div>
   </div>
   <span class="page-num" style="color:rgba(255,255,255,0.2)">04</span>
@@ -1664,22 +1666,20 @@ const companies = [
   {name:"三島食品",industry:"食品製造",area:"中国",size:"中堅企業",services:["ながら記録"],desc:"広島本社のふりかけメーカー。「ゆかり」シリーズで全国的に有名",domain:"mishima.co.jp"}
 ];
 
-const MAX_NODES = 24;
 function logoUrl(d) { return d ? `https://www.google.com/s2/favicons?domain=${d}&sz=64` : ''; }
 
-function nodeHTML(c, idx) {
+function tickerItemHTML(c) {
+  const idx = companies.indexOf(c);
   const logo = c.domain
-    ? `<img class="node-logo" src="${logoUrl(c.domain)}" alt="${c.name}" onerror="this.outerHTML='<div class=node-initial>${c.name[0]}</div>'">`
-    : `<div class="node-initial">${c.name[0]}</div>`;
-  return `<div class="logo-node" onmouseenter="showPopup(event,${idx})" onmouseleave="hidePopup()">
-    ${logo}<span class="node-name">${c.name}</span>
+    ? `<img class="t-logo" src="${logoUrl(c.domain)}" alt="${c.name}" onerror="this.outerHTML='<div class=t-initial>${c.name[0]}</div>'">`
+    : `<div class="t-initial">${c.name[0]}</div>`;
+  return `<div class="ticker-item" onmouseenter="showPopup(event,${idx})" onmouseleave="hidePopup()">
+    ${logo}<span class="t-name">${c.name}</span>
   </div>`;
 }
 
 function trackGroup(key) {
   document.querySelectorAll('#trackFilters .filter-btn').forEach(b => b.classList.toggle('active', b.dataset.group === key));
-
-  const sizeOrder = {'大企業':0, '中堅企業':1, '中小企業':2};
 
   // Group
   const grouped = {};
@@ -1689,26 +1689,31 @@ function trackGroup(key) {
   });
   const groupKeys = Object.entries(grouped).sort((a,b) => b[1].length - a[1].length);
 
-  // Show group tags (no counts for size groups)
-  const labelsEl = document.getElementById('trackLabels');
-  labelsEl.innerHTML = groupKeys.map(([k]) => `<span class="group-tag">${k}</span>`).join('');
-
-  // Sort by group then by size within group
+  // Sort companies by group
   const groupOrder = {};
   groupKeys.forEach(([k], i) => groupOrder[k] = i);
   const sorted = [...companies].sort((a,b) => {
     const aKey = key === 'service' ? a.services[0] : a[key];
     const bKey = key === 'service' ? b.services[0] : b[key];
-    const gDiff = (groupOrder[aKey]||99) - (groupOrder[bKey]||99);
-    if (gDiff !== 0) return gDiff;
-    return sizeOrder[a.size] - sizeOrder[b.size];
+    return (groupOrder[aKey]||99) - (groupOrder[bKey]||99);
   });
 
-  const shown = sorted.slice(0, MAX_NODES);
-  const remaining = sorted.length - shown.length;
+  // Split into 3 ticker rows
+  const rowSize = Math.ceil(sorted.length / 3);
+  const rows = [sorted.slice(0, rowSize), sorted.slice(rowSize, rowSize*2), sorted.slice(rowSize*2)];
 
-  document.getElementById('trackGrid').innerHTML = shown.map(c => nodeHTML(c, companies.indexOf(c))).join('');
-  document.getElementById('trackSummary').textContent = remaining > 0 ? `他 ${remaining}社にもご利用いただいています` : '';
+  const area = document.getElementById('tickerArea');
+  area.innerHTML = rows.map((row, ri) => {
+    const items = row.map(c => tickerItemHTML(c)).join('');
+    const cls = ri === 1 ? 'ticker-row reverse' : ri === 2 ? 'ticker-row slow' : 'ticker-row';
+    // Duplicate items for seamless loop
+    return `<div class="${cls}">${items}${items}</div>`;
+  }).join('');
+
+  // Show group chips
+  document.getElementById('trackChips').innerHTML = groupKeys.map(([k]) =>
+    `<span class="group-chip">${k}</span>`
+  ).join('');
 }
 
 // Rich popup
@@ -1733,7 +1738,9 @@ function showPopup(e, idx) {
       ${c.services.map(s => `<span class="popup-tag tag-green">${s}</span>`).join('')}
       ${c.domain ? `<span class="popup-tag">${c.domain}</span>` : ''}
     </div>`;
-  const r = e.target.closest('.logo-node').getBoundingClientRect();
+  const el = e.target.closest('.ticker-item');
+  if (!el) return;
+  const r = el.getBoundingClientRect();
   let left = r.right + 12;
   let top = r.top;
   if (left + 320 > window.innerWidth) left = r.left - 330;
