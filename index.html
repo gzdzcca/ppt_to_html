@@ -1676,7 +1676,10 @@ const companies = [
   {name:"三島食品",industry:"食品製造",area:"中国",size:"中堅企業",services:["ながら記録"],desc:"広島本社のふりかけメーカー。「ゆかり」シリーズで全国的に有名",domain:"mishima.co.jp"}
 ];
 
-function logoUrl(d) { return d ? `https://www.google.com/s2/favicons?domain=${d}&sz=64` : ''; }
+function logoUrl(d) {
+  if (!d) return '';
+  return `remotion-presentation/public/images/company-logos/${d}.png`;
+}
 
 function tickerItemHTML(c) {
   const idx = companies.indexOf(c);
