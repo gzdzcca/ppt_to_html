@@ -494,193 +494,105 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
 }
 
 /* ===== SLIDE 4: TRACK RECORD ===== */
-#slide-track { background: var(--white); }
-#slide-track .filter-bar {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
+#slide-track { background: linear-gradient(160deg, #06080F 0%, #0B1628 40%, #0F1D3D 100%); }
+#slide-track .slide-inner { overflow: hidden; }
+#slide-track h2 { color: #fff; }
+#slide-track .header-line { background: var(--blue); }
+#slide-track .content { display: flex; gap: 48px; flex: 1; min-height: 0; }
+#slide-track .sidebar {
+  width: 260px; flex-shrink: 0; display: flex; flex-direction: column; gap: 20px;
 }
+#slide-track .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+#slide-track .stat-card {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px; padding: 14px; text-align: center;
+}
+#slide-track .stat-num { font-size: 28px; font-weight: 800; color: var(--blue-light); }
+#slide-track .stat-label { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 2px; }
+#slide-track .filter-bar { display: flex; flex-direction: column; gap: 6px; }
 #slide-track .filter-btn {
-  padding: 7px 18px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-  border: 1.5px solid var(--gray-200);
-  background: var(--white);
-  color: var(--gray-500);
-  cursor: pointer;
-  transition: all 0.2s;
+  padding: 10px 16px; border-radius: 10px; font-size: 13px; font-weight: 600;
+  border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03);
+  color: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.25s; text-align: left;
 }
 #slide-track .filter-btn:hover {
-  border-color: var(--blue);
-  color: var(--blue);
+  border-color: rgba(96,165,250,0.3); color: rgba(255,255,255,0.8); background: rgba(96,165,250,0.06);
 }
 #slide-track .filter-btn.active {
-  background: var(--blue);
-  border-color: var(--blue);
-  color: var(--white);
+  background: linear-gradient(135deg, rgba(37,99,235,0.2), rgba(99,102,241,0.15));
+  border-color: rgba(96,165,250,0.4); color: #fff; box-shadow: 0 0 20px rgba(37,99,235,0.15);
 }
-#slide-track .groups-container {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  overflow-y: auto;
-  padding-right: 8px;
-  min-height: 0;
+#slide-track .logo-area { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+#slide-track .group-label-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+#slide-track .group-tag {
+  font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 8px;
+  background: rgba(96,165,250,0.1); border: 1px solid rgba(96,165,250,0.2); color: var(--blue-light);
 }
-#slide-track .groups-container::-webkit-scrollbar { width: 4px; }
-#slide-track .groups-container::-webkit-scrollbar-track { background: transparent; }
-#slide-track .groups-container::-webkit-scrollbar-thumb { background: var(--gray-200); border-radius: 4px; }
-#slide-track .group-section {
-  background: var(--gray-50);
-  border: 1px solid var(--gray-100);
-  border-radius: var(--radius);
-  padding: 14px 18px;
-  flex-shrink: 0;
+#slide-track .logo-grid {
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; flex: 1; align-content: start;
 }
-#slide-track .group-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 12px;
+#slide-track .logo-cell {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 6px; padding: 14px 6px; cursor: default;
+  transition: all 0.3s; position: relative; overflow: hidden;
 }
-#slide-track .group-label {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--gray-800);
+#slide-track .logo-cell:hover {
+  background: rgba(96,165,250,0.08); border-color: rgba(96,165,250,0.25);
+  transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.3);
 }
-#slide-track .group-count {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--blue);
-  background: rgba(37,99,235,0.08);
-  padding: 2px 8px;
-  border-radius: 10px;
+#slide-track .logo-cell.size-large {
+  grid-column: span 2; grid-row: span 2;
+  background: rgba(37,99,235,0.06); border-color: rgba(96,165,250,0.15);
+  box-shadow: 0 0 30px rgba(37,99,235,0.08); padding: 20px 10px;
 }
-#slide-track .company-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+#slide-track .logo-cell.size-large .cell-logo { width: 52px; height: 52px; }
+#slide-track .logo-cell.size-large .cell-name { font-size: 14px; }
+#slide-track .logo-cell.size-large .cell-sub { display: block; }
+#slide-track .cell-logo {
+  width: 34px; height: 34px; border-radius: 8px; object-fit: contain;
+  background: rgba(255,255,255,0.9); padding: 3px;
 }
-#slide-track .company-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
-  border-radius: 10px;
-  background: var(--white);
-  border: 1px solid var(--gray-200);
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--gray-700);
-  cursor: default;
-  transition: all 0.2s;
-  position: relative;
+#slide-track .cell-name {
+  font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.85);
+  text-align: center; line-height: 1.3;
 }
-#slide-track .company-chip:hover {
-  border-color: var(--blue);
-  box-shadow: var(--shadow-sm);
-  transform: translateY(-1px);
+#slide-track .cell-sub { font-size: 9px; color: rgba(255,255,255,0.3); display: none; }
+#slide-track .cell-badge {
+  position: absolute; top: 6px; right: 6px; font-size: 8px; font-weight: 700;
+  padding: 1px 5px; border-radius: 4px;
 }
-#slide-track .company-chip .chip-logo {
-  width: 22px;
-  height: 22px;
-  border-radius: 4px;
-  object-fit: contain;
-  background: var(--gray-50);
+#slide-track .cell-badge.b-lg { background: rgba(96,165,250,0.2); color: #93C5FD; }
+#slide-track .cell-badge.b-md { background: rgba(139,92,246,0.15); color: #C4B5FD; }
+#slide-track .summary-row {
+  grid-column: 1 / -1; display: flex; align-items: center; justify-content: center;
+  gap: 8px; padding: 8px; border-radius: 12px; background: rgba(255,255,255,0.02);
+  border: 1px dashed rgba(255,255,255,0.08); color: rgba(255,255,255,0.35);
+  font-size: 12px; font-weight: 500;
 }
-#slide-track .company-chip .chip-badge {
-  font-size: 10px;
-  font-weight: 600;
-  padding: 1px 5px;
-  border-radius: 4px;
-  margin-left: 2px;
-}
-#slide-track .company-chip .badge-large { background: #DBEAFE; color: #1D4ED8; }
-#slide-track .company-chip .badge-mid { background: #E0E7FF; color: #4338CA; }
-#slide-track .company-chip .badge-small { background: #F1F5F9; color: #64748B; }
-#slide-track .more-chip {
-  padding: 8px 14px;
-  border-radius: 10px;
-  background: rgba(37,99,235,0.05);
-  border: 1px dashed var(--blue);
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--blue);
-  cursor: pointer;
-}
-#slide-track .more-chip:hover { background: rgba(37,99,235,0.1); }
 /* Rich company popup */
 .company-popup {
-  position: fixed;
-  z-index: 9999;
-  background: #FFFFFF;
-  border: 1px solid var(--gray-200);
-  border-radius: 14px;
-  padding: 16px 18px;
-  width: 320px;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.04);
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.15s;
-  backdrop-filter: none;
+  position: fixed; z-index: 9999; background: #1A2744;
+  border: 1px solid rgba(96,165,250,0.2); border-radius: 14px; padding: 16px 18px;
+  width: 320px; box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(96,165,250,0.1);
+  pointer-events: none; opacity: 0; transition: opacity 0.15s;
 }
 .company-popup.visible { opacity: 1; }
-.company-popup .popup-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
-}
+.company-popup .popup-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
 .company-popup .popup-logo {
-  width: 32px;
-  height: 32px;
-  border-radius: 6px;
-  object-fit: contain;
-  background: var(--gray-50);
-  border: 1px solid var(--gray-100);
+  width: 32px; height: 32px; border-radius: 6px; object-fit: contain;
+  background: rgba(255,255,255,0.9); padding: 3px;
 }
-.company-popup .popup-name {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--gray-800);
-}
-.company-popup .popup-desc {
-  font-size: 12px;
-  color: var(--gray-500);
-  line-height: 1.6;
-  margin-bottom: 10px;
-}
-.company-popup .popup-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
+.company-popup .popup-name { font-size: 15px; font-weight: 700; color: #fff; }
+.company-popup .popup-desc { font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.6; margin-bottom: 10px; }
+.company-popup .popup-tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .company-popup .popup-tag {
-  font-size: 10px;
-  font-weight: 600;
-  padding: 3px 8px;
-  border-radius: 6px;
-  background: var(--gray-50);
-  color: var(--gray-500);
-  border: 1px solid var(--gray-100);
+  font-size: 10px; font-weight: 600; padding: 3px 8px; border-radius: 6px;
+  background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.08);
 }
-.company-popup .popup-tag.tag-blue { background: #EFF6FF; color: #1D4ED8; border-color: #DBEAFE; }
-.company-popup .popup-tag.tag-green { background: #ECFDF5; color: #059669; border-color: #D1FAE5; }
-#slide-track .slide-inner { overflow: hidden; }
-#slide-track .content { display: flex; flex-direction: column; flex: 1; min-height: 0; overflow: hidden; }
-#slide-track .stat-bar {
-  display: flex;
-  gap: 24px;
-  margin-bottom: 12px;
-  padding: 8px 0;
-  border-bottom: 1px solid var(--gray-100);
-}
-#slide-track .stat-item { text-align: center; }
-#slide-track .stat-num { font-size: 24px; font-weight: 800; color: var(--blue); }
-#slide-track .stat-label { font-size: 11px; color: var(--gray-400); }
+.company-popup .popup-tag.tag-blue { background: rgba(37,99,235,0.2); color: #93C5FD; border-color: rgba(96,165,250,0.3); }
+.company-popup .popup-tag.tag-green { background: rgba(16,185,129,0.15); color: #6EE7B7; border-color: rgba(16,185,129,0.3); }
+
 
 /* ===== SLIDE 5: SECTION DIVIDER ===== */
 .slide-divider {
@@ -1267,29 +1179,34 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
   <span class="page-num">03</span>
 </section></div>
 <!-- ===== SLIDE 4: TRACK RECORD ===== -->
-<div class="slide-wrapper white"><section class="slide" id="slide-track">
+<div class="slide-wrapper"><section class="slide" id="slide-track">
   <div class="slide-inner">
     <div class="slide-header animate-on-scroll">
       <h2>導入実績</h2>
       <div class="header-line"></div>
     </div>
     <div class="content">
-      <div class="stat-bar animate-on-scroll delay-1">
-        <div class="stat-item"><div class="stat-num">54</div><div class="stat-label">契約数</div></div>
-        <div class="stat-item"><div class="stat-num">42</div><div class="stat-label">企業</div></div>
-        <div class="stat-item"><div class="stat-num">10+</div><div class="stat-label">業界</div></div>
-        <div class="stat-item"><div class="stat-num">7</div><div class="stat-label">地域</div></div>
+      <div class="sidebar animate-on-scroll delay-1">
+        <div class="stat-grid">
+          <div class="stat-card"><div class="stat-num">54</div><div class="stat-label">契約数</div></div>
+          <div class="stat-card"><div class="stat-num">42</div><div class="stat-label">企業</div></div>
+          <div class="stat-card"><div class="stat-num">10+</div><div class="stat-label">業界</div></div>
+          <div class="stat-card"><div class="stat-num">7</div><div class="stat-label">地域</div></div>
+        </div>
+        <div class="filter-bar" id="trackFilters">
+          <button class="filter-btn active" data-group="size" onclick="trackGroup('size')">規模別</button>
+          <button class="filter-btn" data-group="industry" onclick="trackGroup('industry')">業界別</button>
+          <button class="filter-btn" data-group="area" onclick="trackGroup('area')">地域別</button>
+          <button class="filter-btn" data-group="service" onclick="trackGroup('service')">サービス別</button>
+        </div>
       </div>
-      <div class="filter-bar animate-on-scroll delay-2" id="trackFilters">
-        <button class="filter-btn active" data-group="industry" onclick="trackGroup('industry')">業界別</button>
-        <button class="filter-btn" data-group="size" onclick="trackGroup('size')">規模別</button>
-        <button class="filter-btn" data-group="area" onclick="trackGroup('area')">地域別</button>
-        <button class="filter-btn" data-group="service" onclick="trackGroup('service')">サービス別</button>
+      <div class="logo-area animate-on-scroll delay-2">
+        <div class="group-label-row" id="trackLabels"></div>
+        <div class="logo-grid" id="trackGrid"></div>
       </div>
-      <div class="groups-container animate-on-scroll delay-3" id="trackGroups"></div>
     </div>
   </div>
-  <span class="page-num">04</span>
+  <span class="page-num" style="color:rgba(255,255,255,0.2)">04</span>
 </section></div>
 <!-- ===== SLIDE 5: DIVIDER ===== -->
 <div class="slide-wrapper"><section class="slide slide-divider">
@@ -1753,50 +1670,64 @@ const companies = [
   {name:"三島食品",industry:"食品製造",area:"中国",size:"中堅企業",services:["ながら記録"],desc:"広島本社のふりかけメーカー。「ゆかり」シリーズで全国的に有名",domain:"mishima.co.jp"}
 ];
 
-const MAX_PER_GROUP = 6;
-function logoUrl(domain) {
-  if (!domain) return '';
-  return `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
+const MAX_CELLS = 20;
+function logoUrl(d) { return d ? `https://www.google.com/s2/favicons?domain=${d}&sz=64` : ''; }
+
+function cellHTML(c, idx) {
+  const isLarge = c.size === '大企業';
+  const isMid = c.size === '中堅企業';
+  const sizeClass = isLarge ? 'size-large' : '';
+  const badge = isLarge ? '<span class="cell-badge b-lg">大企業</span>' : isMid ? '<span class="cell-badge b-md">中堅</span>' : '';
+  const logo = c.domain
+    ? `<img class="cell-logo" src="${logoUrl(c.domain)}" alt="${c.name}" onerror="this.style.display='none'">`
+    : `<div class="cell-logo" style="display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#64748B;background:rgba(255,255,255,0.9)">${c.name[0]}</div>`;
+  return `<div class="logo-cell ${sizeClass}" onmouseenter="showPopup(event,${idx})" onmouseleave="hidePopup()">
+    ${badge}${logo}
+    <span class="cell-name">${c.name}</span>
+    <span class="cell-sub">${c.industry}</span>
+  </div>`;
 }
-function chipHTML(c) {
-  const badge = c.size === '大企業' ? 'badge-large' : c.size === '中堅企業' ? 'badge-mid' : 'badge-small';
-  const sizeShort = c.size === '大企業' ? '大' : c.size === '中堅企業' ? '中堅' : 'SME';
-  const logo = c.domain ? `<img class="chip-logo" src="${logoUrl(c.domain)}" alt="" onerror="this.style.display='none'">` : '';
-  const idx = companies.indexOf(c);
-  return `<span class="company-chip" data-cidx="${idx}" onmouseenter="showPopup(event,${idx})" onmouseleave="hidePopup()">
-    ${logo}${c.name}
-    <span class="chip-badge ${badge}">${sizeShort}</span>
-  </span>`;
-}
+
 function trackGroup(key) {
   document.querySelectorAll('#trackFilters .filter-btn').forEach(b => b.classList.toggle('active', b.dataset.group === key));
+
+  // Sort: 大企業 first, then 中堅, then 中小
+  const sizeOrder = {'大企業':0, '中堅企業':1, '中小企業':2};
+  let sorted = [...companies].sort((a,b) => sizeOrder[a.size] - sizeOrder[b.size]);
+
+  // Group labels
   const grouped = {};
   companies.forEach(c => {
     const vals = key === 'service' ? c.services : [c[key]];
     vals.forEach(v => { (grouped[v] = grouped[v] || []).push(c); });
   });
-  const sorted = Object.entries(grouped).sort((a,b) => b[1].length - a[1].length);
-  const container = document.getElementById('trackGroups');
-  container.innerHTML = sorted.map(([label, items]) => {
-    const shown = items.slice(0, MAX_PER_GROUP);
-    const remaining = items.length - shown.length;
-    return `<div class="group-section">
-      <div class="group-header">
-        <span class="group-label">${label}</span>
-        <span class="group-count">${items.length}社</span>
-      </div>
-      <div class="company-grid">
-        ${shown.map(c => chipHTML(c)).join('')}
-        ${remaining > 0 ? `<span class="more-chip" onclick="expandGroup(this,${JSON.stringify(items.slice(MAX_PER_GROUP).map(c=>companies.indexOf(c)))})">+${remaining}社</span>` : ''}
-      </div>
-    </div>`;
-  }).join('');
+  const groupKeys = Object.entries(grouped).sort((a,b) => b[1].length - a[1].length);
+
+  // Show group tags
+  const labelsEl = document.getElementById('trackLabels');
+  labelsEl.innerHTML = groupKeys.map(([k,v]) => `<span class="group-tag">${k} ${v.length}</span>`).join('');
+
+  // If grouping by something other than size, sort by group
+  if (key !== 'size') {
+    const groupOrder = {};
+    groupKeys.forEach(([k], i) => groupOrder[k] = i);
+    sorted = [...companies].sort((a,b) => {
+      const aKey = key === 'service' ? a.services[0] : a[key];
+      const bKey = key === 'service' ? b.services[0] : b[key];
+      const gDiff = (groupOrder[aKey]||99) - (groupOrder[bKey]||99);
+      if (gDiff !== 0) return gDiff;
+      return sizeOrder[a.size] - sizeOrder[b.size];
+    });
+  }
+
+  const shown = sorted.slice(0, MAX_CELLS);
+  const remaining = sorted.length - shown.length;
+
+  const grid = document.getElementById('trackGrid');
+  grid.innerHTML = shown.map(c => cellHTML(c, companies.indexOf(c))).join('') +
+    (remaining > 0 ? `<div class="summary-row">他 ${remaining}社の企業にもご利用いただいています</div>` : '');
 }
-function expandGroup(el, indices) {
-  const grid = el.parentElement;
-  el.remove();
-  indices.forEach(i => { grid.insertAdjacentHTML('beforeend', chipHTML(companies[i])); });
-}
+
 // Rich popup
 let popupEl;
 function initPopup() {
@@ -1806,7 +1737,9 @@ function initPopup() {
 }
 function showPopup(e, idx) {
   const c = companies[idx];
-  const logo = c.domain ? `<img class="popup-logo" src="${logoUrl(c.domain)}" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2232%22 height=%2232%22><rect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%23F1F5F9%22/><text x=%2216%22 y=%2220%22 text-anchor=%22middle%22 font-size=%2214%22 fill=%22%2394A3B8%22>${c.name[0]}</text></svg>'">` : `<div class="popup-logo" style="display:flex;align-items:center;justify-content:center;font-size:16px;background:var(--gray-50);border:1px solid var(--gray-100);">${c.name[0]}</div>`;
+  const logo = c.domain
+    ? `<img class="popup-logo" src="${logoUrl(c.domain)}" alt="">`
+    : `<div class="popup-logo" style="display:flex;align-items:center;justify-content:center;font-size:16px;color:#94A3B8;background:rgba(255,255,255,0.1)">${c.name[0]}</div>`;
   popupEl.innerHTML = `
     <div class="popup-header">${logo}<span class="popup-name">${c.name}</span></div>
     <div class="popup-desc">${c.desc}</div>
@@ -1817,18 +1750,18 @@ function showPopup(e, idx) {
       ${c.services.map(s => `<span class="popup-tag tag-green">${s}</span>`).join('')}
       ${c.domain ? `<span class="popup-tag">${c.domain}</span>` : ''}
     </div>`;
-  const r = e.target.closest('.company-chip').getBoundingClientRect();
-  let left = r.left;
-  let top = r.bottom + 8;
-  if (left + 320 > window.innerWidth) left = window.innerWidth - 330;
-  if (top + 160 > window.innerHeight) top = r.top - 160;
+  const r = e.target.closest('.logo-cell').getBoundingClientRect();
+  let left = r.right + 12;
+  let top = r.top;
+  if (left + 320 > window.innerWidth) left = r.left - 330;
+  if (top + 180 > window.innerHeight) top = window.innerHeight - 190;
   popupEl.style.left = left + 'px';
   popupEl.style.top = top + 'px';
   popupEl.classList.add('visible');
 }
 function hidePopup() { popupEl && popupEl.classList.remove('visible'); }
 initPopup();
-trackGroup('industry');
+trackGroup('size');
 
 // ===== RESPONSIVE SCALING =====
 function scaleSlides() {
@@ -1876,7 +1809,7 @@ function getCurrentSlideIndex() {
   return Math.round(scrollTop / vh);
 }
 
-const lightSlides = new Set(['slide-about','slide-products','slide-track','slide-pain','slide-flow','slide-pricing','slide-options','slide-simulator']);
+const lightSlides = new Set(['slide-about','slide-products','slide-pain','slide-flow','slide-pricing','slide-options','slide-simulator']);
 function onScroll() {
   const idx = getCurrentSlideIndex();
   // Activate current slide and adjacent ones
