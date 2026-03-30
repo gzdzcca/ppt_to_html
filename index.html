@@ -722,70 +722,63 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
 }
 
 /* ===== SLIDE 7: PAIN POINTS ===== */
-#slide-pain { background: var(--white); }
-#slide-pain .columns { display: flex; gap: 40px; flex: 1; }
-#slide-pain .column { flex: 1; }
-.column-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 16px 24px;
-  border-radius: var(--radius);
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 20px;
+#slide-pain { background: linear-gradient(160deg, #06080F 0%, #0B1628 40%, #0F1D3D 100%); }
+#slide-pain h2 { color: #fff; }
+#slide-pain .subtitle { color: rgba(255,255,255,0.5); }
+#slide-pain .header-line { background: var(--blue); }
+#slide-pain .pain-layout { display: flex; gap: 32px; flex: 1; }
+/* Impact stats column */
+#slide-pain .impact-col {
+  width: 280px; flex-shrink: 0; display: flex; flex-direction: column; justify-content: center; gap: 20px;
 }
-.column-header.paper { background: #FFF7ED; color: #C2410C; border: 1px solid #FED7AA; }
-.column-header.digital { background: #EFF6FF; color: var(--blue); border: 1px solid #BFDBFE; }
-.pain-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  padding: 18px 20px;
-  border-radius: 14px;
-  border: 1px solid var(--gray-100);
-  margin-bottom: 12px;
-  transition: all 0.2s;
-  background: var(--white);
+#slide-pain .impact-stat {
+  padding: 24px; border-radius: 16px;
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
 }
-.pain-item:hover {
-  border-color: var(--gray-300);
-  box-shadow: var(--shadow);
+#slide-pain .impact-num {
+  font-size: 36px; font-weight: 900; letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #F87171, #FB923C);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
-.pain-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  flex-shrink: 0;
+#slide-pain .impact-unit { font-size: 14px; color: rgba(255,255,255,0.4); }
+#slide-pain .impact-desc { font-size: 12px; color: rgba(255,255,255,0.35); margin-top: 6px; line-height: 1.5; }
+/* Two comparison cards */
+#slide-pain .cards-area { flex: 1; display: flex; gap: 20px; }
+#slide-pain .pain-card {
+  flex: 1; border-radius: 20px; padding: 28px 24px; display: flex; flex-direction: column;
 }
-.pain-icon.orange { background: #FFF7ED; }
-.pain-icon.blue { background: #EFF6FF; }
-.pain-text { font-size: 14px; color: var(--gray-700); line-height: 1.6; }
-.dx-fatigue-box {
-  margin-top: 20px;
-  padding: 20px 24px;
-  background: #FEF2F2;
-  border: 1px solid #FECACA;
-  border-radius: var(--radius);
+#slide-pain .pain-card.paper {
+  background: rgba(251,146,60,0.04); border: 1px solid rgba(251,146,60,0.15);
 }
-.dx-fatigue-box .title {
-  font-size: 14px;
-  font-weight: 700;
-  color: #DC2626;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+#slide-pain .pain-card.digital {
+  background: rgba(96,165,250,0.04); border: 1px solid rgba(96,165,250,0.12);
 }
-.dx-fatigue-box p {
-  font-size: 13px;
-  color: #991B1B;
-  margin-top: 6px;
-  line-height: 1.6;
+#slide-pain .card-header {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
+  padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.06);
 }
+#slide-pain .card-icon { font-size: 22px; }
+#slide-pain .card-title { font-size: 16px; font-weight: 700; color: #fff; }
+#slide-pain .card-title.orange { color: #FB923C; }
+#slide-pain .card-title.blue { color: #60A5FA; }
+#slide-pain .pain-row {
+  display: flex; align-items: flex-start; gap: 12px; padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+#slide-pain .pain-row:last-child { border-bottom: none; }
+#slide-pain .pain-emoji { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+#slide-pain .pain-content { flex: 1; }
+#slide-pain .pain-headline { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.85); }
+#slide-pain .pain-detail { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 3px; line-height: 1.5; }
+/* DX fatigue callout */
+#slide-pain .dx-callout {
+  margin-top: auto; padding: 14px 18px; border-radius: 12px;
+  background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2);
+  display: flex; align-items: center; gap: 10px;
+}
+#slide-pain .dx-callout-icon { font-size: 18px; }
+#slide-pain .dx-callout-text { font-size: 12px; color: #FCA5A5; font-weight: 600; }
+#slide-pain .dx-callout-sub { font-size: 10px; color: rgba(252,165,165,0.5); }
 
 /* ===== COLUMN SEPARATOR ===== */
 .col-sep {
@@ -1293,48 +1286,91 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
   <span class="page-num">06</span>
 </section></div>
 <!-- ===== SLIDE 7: PAIN POINTS ===== -->
-<div class="slide-wrapper white"><section class="slide" id="slide-pain">
+<div class="slide-wrapper"><section class="slide" id="slide-pain">
   <div class="slide-inner">
     <div class="slide-header animate-on-scroll">
       <h2>帳票記録におけるよくお聞きする課題</h2>
       <p class="subtitle">記入に手間がかかるため、現場に負担をかけるだけではなく、デジタル化もなかなか進みにくい</p>
       <div class="header-line"></div>
     </div>
-    <div class="columns">
-      <div class="column">
-        <div class="column-header paper animate-on-scroll">📄 紙</div>
-        <div class="pain-item animate-on-scroll delay-1 tooltip-trigger" data-tooltip="紙に記録した後、同じデータをExcelや基幹システムに手入力する二重作業が発生。1日30分〜1時間のロス。">
-          <div class="pain-icon orange">📝</div>
-          <span class="pain-text">システムに転記する手間がかかる…</span>
+    <div class="pain-layout">
+      <!-- Impact stats -->
+      <div class="impact-col animate-on-scroll delay-1">
+        <div class="impact-stat">
+          <div><span class="impact-num">45</span><span class="impact-unit"> 分/日</span></div>
+          <div class="impact-desc">紙からシステムへの転記作業に費やす平均時間</div>
         </div>
-        <div class="pain-item animate-on-scroll delay-2 tooltip-trigger" data-tooltip="記入忘れや転記ミスが頻発。品質管理上の問題につながるリスクも。">
-          <div class="pain-icon orange">❌</div>
-          <span class="pain-text">抜け漏れが発生する…</span>
+        <div class="impact-stat">
+          <div><span class="impact-num">70</span><span class="impact-unit"> %</span></div>
+          <div class="impact-desc">の製造現場がいまだに紙・Excelで帳票管理</div>
         </div>
-        <div class="pain-item animate-on-scroll delay-3 tooltip-trigger" data-tooltip="紙帳票の保管・検索・集計に膨大な時間がかかる。過去データの活用も困難。">
-          <div class="pain-icon orange">🗄️</div>
-          <span class="pain-text">管理が大変…</span>
+        <div class="impact-stat">
+          <div><span class="impact-num">9.6</span><span class="impact-unit"> %</span></div>
+          <div class="impact-desc">中小企業のDX達成率。ほとんどが導入段階で停滞</div>
         </div>
       </div>
-      <div class="col-sep"></div>
-      <div class="column">
-        <div class="column-header digital animate-on-scroll">📱 電子帳票（タッチ式）</div>
-        <div class="pain-item animate-on-scroll delay-2 tooltip-trigger" data-tooltip="電子帳票システムは設定の専門知識が必要。IT人材不足の現場では展開が停滞し、「DX疲れ」に陥るケースも。">
-          <div class="pain-icon blue">⚙️</div>
-          <span class="pain-text">システムを導入したが設定が難しい…<br>展開出来ず、数帳票で止まっている…</span>
+      <!-- Comparison cards -->
+      <div class="cards-area">
+        <!-- Paper card -->
+        <div class="pain-card paper animate-on-scroll delay-2">
+          <div class="card-header">
+            <span class="card-icon">📄</span>
+            <span class="card-title orange">紙の帳票</span>
+          </div>
+          <div class="pain-row">
+            <span class="pain-emoji">📝</span>
+            <div class="pain-content">
+              <div class="pain-headline">二重入力の手間</div>
+              <div class="pain-detail">紙に記録 → Excelや基幹システムに手入力。1日30分〜1時間のロス</div>
+            </div>
+          </div>
+          <div class="pain-row">
+            <span class="pain-emoji">⚠️</span>
+            <div class="pain-content">
+              <div class="pain-headline">抜け漏れ・転記ミス</div>
+              <div class="pain-detail">記入忘れや転記ミスが頻発。品質管理上のリスクに直結</div>
+            </div>
+          </div>
+          <div class="pain-row">
+            <span class="pain-emoji">🗄️</span>
+            <div class="pain-content">
+              <div class="pain-headline">保管・検索が困難</div>
+              <div class="pain-detail">紙帳票の保管・検索・集計に膨大な時間。過去データの活用も困難</div>
+            </div>
+          </div>
         </div>
-        <div class="pain-item animate-on-scroll delay-3 tooltip-trigger" data-tooltip="手袋着用や手が汚れる環境ではタッチ操作が困難。作業を中断する必要があり、生産性低下の原因に。">
-          <div class="pain-icon blue">😟</div>
-          <span class="pain-text">タブレットを都度タッチするため、<br>現場は入力効率が悪くなって大変…</span>
-        </div>
-        <div class="dx-fatigue-box animate-on-scroll delay-5 tooltip-trigger" data-tooltip="デジタル化に失敗した企業が「やはり紙の方が楽」とアナログに戻る現象。ながら記録はこの課題を音声入力で根本解決。">
-          <p class="title">⚠️ 「DX疲れ」の発生</p>
-          <p>一部の企業ではデジタル化に疲弊し、アナログに回帰する現象も…</p>
+        <!-- Digital card -->
+        <div class="pain-card digital animate-on-scroll delay-3">
+          <div class="card-header">
+            <span class="card-icon">📱</span>
+            <span class="card-title blue">電子帳票（タッチ式）</span>
+          </div>
+          <div class="pain-row">
+            <span class="pain-emoji">⚙️</span>
+            <div class="pain-content">
+              <div class="pain-headline">設定が難しく展開が停滞</div>
+              <div class="pain-detail">IT人材不足の現場では展開が進まず、数帳票で止まるケースが多発</div>
+            </div>
+          </div>
+          <div class="pain-row">
+            <span class="pain-emoji">🧤</span>
+            <div class="pain-content">
+              <div class="pain-headline">タッチ操作で作業が中断</div>
+              <div class="pain-detail">手袋着用や手が汚れる環境でタッチ困難。作業を止める必要あり</div>
+            </div>
+          </div>
+          <div class="dx-callout">
+            <span class="dx-callout-icon">🔥</span>
+            <div>
+              <div class="dx-callout-text">「DX疲れ」の発生</div>
+              <div class="dx-callout-sub">デジタル化に疲弊し、アナログに回帰する企業も</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <span class="page-num">07</span>
+  <span class="page-num" style="color:rgba(255,255,255,0.2)">07</span>
 </section></div>
 <!-- ===== SLIDE 8: FEATURES ===== -->
 <div class="slide-wrapper"><section class="slide" id="slide-features">
@@ -1807,7 +1843,7 @@ function getCurrentSlideIndex() {
   return Math.round(scrollTop / vh);
 }
 
-const lightSlides = new Set(['slide-about','slide-products','slide-pain','slide-flow','slide-pricing','slide-options','slide-simulator']);
+const lightSlides = new Set(['slide-about','slide-products','slide-flow','slide-pricing','slide-options','slide-simulator']);
 function onScroll() {
   const idx = getCurrentSlideIndex();
   // Activate current slide and adjacent ones
