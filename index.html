@@ -1093,13 +1093,11 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
   <div class="bg-glow"></div>
   <div style="position:relative;z-index:1;">
     <img src="remotion-presentation/public/images/koska-logo.png" class="logo" alt="KOSKA">
-    <h1>ながら記録</h1>
+    <h1><span id="pricingToggle" onclick="togglePricingMode()" style="cursor:inherit;user-select:none;">な</span>がら記録</h1>
     <p class="tagline">のご提案</p>
     <div class="divider-line"></div>
     <p class="sub-tagline">AI × 音声入力で、作業しながら帳票記録</p>
   </div>
-  <div id="pricingToggle" onclick="togglePricingMode()" style="position:absolute;bottom:50%;left:50%;transform:translate(-50%,50%);width:60px;height:60px;cursor:default;user-select:none;z-index:10;opacity:0;"></div>
-  <div id="pricingIndicator" style="position:absolute;bottom:24px;left:50%;transform:translateX(-50%);width:8px;height:8px;border-radius:50%;background:transparent;pointer-events:none;z-index:11;transition:background 0.3s;"></div>
 </section></div>
 <!-- ===== SLIDE 2: ABOUT ===== -->
 <div class="slide-wrapper white"><section class="slide" id="slide-about">
@@ -1950,9 +1948,9 @@ function togglePricingMode() {
   // Update simulator button labels
   document.getElementById('simStdLabel').textContent = prices.standard + '万/月';
   document.getElementById('simBizLabel').textContent = prices.business + '万/月';
-  // Subtle indicator dot on slide 1 (only speaker sees)
-  const dot = document.getElementById('pricingIndicator');
-  dot.style.background = pricingMode === 'enterprise' ? 'var(--blue)' : 'transparent';
+  // Subtle indicator: "な" gets a tiny underline in enterprise mode
+  const toggle = document.getElementById('pricingToggle');
+  toggle.style.textDecoration = pricingMode === 'enterprise' ? 'underline' : 'none';
   // Re-render ticker with priority order
   renderTicker();
   simUpdate();
