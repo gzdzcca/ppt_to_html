@@ -1098,6 +1098,8 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
     <div class="divider-line"></div>
     <p class="sub-tagline">AI × 音声入力で、作業しながら帳票記録</p>
   </div>
+  <div id="pricingToggle" onclick="togglePricingMode()" style="position:absolute;bottom:12px;left:12px;width:24px;height:24px;cursor:default;user-select:none;z-index:10;border-radius:50;opacity:0;"></div>
+  <div id="pricingIndicator" style="position:absolute;bottom:14px;left:14px;width:8px;height:8px;border-radius:50%;background:transparent;pointer-events:none;z-index:11;transition:background 0.3s;"></div>
 </section></div>
 <!-- ===== SLIDE 2: ABOUT ===== -->
 <div class="slide-wrapper white"><section class="slide" id="slide-about">
@@ -1622,7 +1624,7 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
       </div>
     </div>
   </div>
-  <span class="page-num" id="pricingPageNum" ondblclick="togglePricingMode()" style="cursor:default;user-select:none;">11</span>
+  <span class="page-num">11</span>
 </section></div>
 <!-- ===== SLIDE 12: COST SIMULATOR ===== -->
 <div class="slide-wrapper light"><section class="slide" id="slide-simulator">
@@ -1704,7 +1706,7 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
       </div>
     </div>
   </div>
-  <span class="page-num" id="simPageNum" ondblclick="togglePricingMode()" style="cursor:default;user-select:none;">12</span>
+  <span class="page-num">12</span>
 </section></div>
 <script>
 // ===== TRACK RECORD DATA & GROUPING =====
@@ -1788,10 +1790,16 @@ function tickerItemHTML(c) {
 }
 
 function renderTicker() {
-  // Shuffle companies for visual variety
-  const shuffled = [...companies].sort(() => Math.random() - 0.5);
-  const rowSize = Math.ceil(shuffled.length / 3);
-  const rows = [shuffled.slice(0, rowSize), shuffled.slice(rowSize, rowSize*2), shuffled.slice(rowSize*2)];
+  // Sort by company size based on pricing mode, then shuffle within groups
+  const sizeOrder = pricingMode === 'enterprise'
+    ? { '大企業': 0, '中堅企業': 1, '中小企業': 2 }
+    : { '中小企業': 0, '中堅企業': 1, '大企業': 2 };
+  const sorted = [...companies].sort((a, b) => {
+    const diff = (sizeOrder[a.size] ?? 2) - (sizeOrder[b.size] ?? 2);
+    return diff !== 0 ? diff : Math.random() - 0.5;
+  });
+  const rowSize = Math.ceil(sorted.length / 3);
+  const rows = [sorted.slice(0, rowSize), sorted.slice(rowSize, rowSize*2), sorted.slice(rowSize*2)];
 
   const area = document.getElementById('tickerArea');
   area.innerHTML = rows.map((row, ri) => {
@@ -1942,10 +1950,11 @@ function togglePricingMode() {
   // Update simulator button labels
   document.getElementById('simStdLabel').textContent = prices.standard + '万/月';
   document.getElementById('simBizLabel').textContent = prices.business + '万/月';
-  // Subtle visual indicator on page numbers
-  const ind = pricingMode === 'enterprise' ? '2px solid var(--blue)' : 'none';
-  document.getElementById('pricingPageNum').style.borderBottom = ind;
-  document.getElementById('simPageNum').style.borderBottom = ind;
+  // Subtle indicator dot on slide 1 (only speaker sees)
+  const dot = document.getElementById('pricingIndicator');
+  dot.style.background = pricingMode === 'enterprise' ? 'var(--blue)' : 'transparent';
+  // Re-render ticker with priority order
+  renderTicker();
   simUpdate();
 }
 
