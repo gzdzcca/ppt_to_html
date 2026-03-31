@@ -1098,6 +1098,7 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
     <div class="divider-line"></div>
     <p class="sub-tagline">AI × 音声入力で、作業しながら帳票記録</p>
   </div>
+  <div id="pricingIndicator" style="position:absolute;bottom:14px;left:50%;transform:translateX(-50%);width:8px;height:8px;border-radius:50%;background:transparent;pointer-events:none;z-index:11;transition:background 0.3s;"></div>
 </section></div>
 <!-- ===== SLIDE 2: ABOUT ===== -->
 <div class="slide-wrapper white"><section class="slide" id="slide-about">
@@ -1948,9 +1949,8 @@ function togglePricingMode() {
   // Update simulator button labels
   document.getElementById('simStdLabel').textContent = prices.standard + '万/月';
   document.getElementById('simBizLabel').textContent = prices.business + '万/月';
-  // Subtle indicator: "な" gets a tiny underline in enterprise mode
-  const toggle = document.getElementById('pricingToggle');
-  toggle.style.textDecoration = pricingMode === 'enterprise' ? 'underline' : 'none';
+  // Subtle indicator: blue dot on slide 1
+  document.getElementById('pricingIndicator').style.background = pricingMode === 'enterprise' ? 'var(--blue)' : 'transparent';
   // Re-render ticker with priority order
   renderTicker();
   simUpdate();
