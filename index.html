@@ -1549,7 +1549,7 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
         <p class="plan-desc">帳票電子化に向けての<br>ベーシックプラン</p>
         <div class="price-display">
           <span class="price-unit">月額</span>
-          <span class="price-value" style="color:var(--blue);">8</span>
+          <span class="price-value" style="color:var(--blue);" id="stdPriceVal">8</span>
           <span class="price-unit">万円</span>
           <p class="price-sub">+ 初期費用 20万円<br>税抜 / 1拠点あたり / 年間</p>
         </div>
@@ -1565,7 +1565,7 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
         <p class="plan-desc">制限を設けず、現場でフル活用<br>データ活用までご支援</p>
         <div class="price-display">
           <span class="price-unit">月額</span>
-          <span class="price-value">15</span>
+          <span class="price-value" id="bizPriceVal">15</span>
           <span class="price-unit">万円</span>
           <p class="price-sub">+ 初期費用 20万円<br>税抜 / 1拠点あたり / 年間</p>
         </div>
@@ -1622,7 +1622,7 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
       </div>
     </div>
   </div>
-  <span class="page-num">11</span>
+  <span class="page-num" id="pricingPageNum" ondblclick="togglePricingMode()" style="cursor:default;user-select:none;">11</span>
 </section></div>
 <!-- ===== SLIDE 12: COST SIMULATOR ===== -->
 <div class="slide-wrapper light"><section class="slide" id="slide-simulator">
@@ -1646,8 +1646,8 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
           <label style="font-size: 15px;color:rgba(255,255,255,0.5);display:block;margin-bottom:8px;">プラン選択</label>
           <div style="display:flex;gap:8px;" id="simPlanBtns">
             <button onclick="simSelectPlan('starter')" class="sim-plan-btn" data-plan="starter" style="flex:1;padding:12px 8px;border-radius:10px;border:1px solid rgba(255,255,255,0.15);background:transparent;color:rgba(255,255,255,0.6);font-size: 16px;font-weight:600;cursor:pointer;transition:all 0.2s;font-family:inherit;">Starter<br><span style='font-size: 13px;opacity:0.6;'>5万/月</span></button>
-            <button onclick="simSelectPlan('standard')" class="sim-plan-btn active" data-plan="standard" style="flex:1;padding:12px 8px;border-radius:10px;border:1px solid var(--blue);background:var(--blue);color:white;font-size: 16px;font-weight:600;cursor:pointer;transition:all 0.2s;font-family:inherit;">Standard<br><span style='font-size: 13px;opacity:0.8;'>8万/月</span></button>
-            <button onclick="simSelectPlan('business')" class="sim-plan-btn" data-plan="business" style="flex:1;padding:12px 8px;border-radius:10px;border:1px solid rgba(255,255,255,0.15);background:transparent;color:rgba(255,255,255,0.6);font-size: 16px;font-weight:600;cursor:pointer;transition:all 0.2s;font-family:inherit;">Business<br><span style='font-size: 13px;opacity:0.6;'>15万/月</span></button>
+            <button onclick="simSelectPlan('standard')" class="sim-plan-btn active" data-plan="standard" style="flex:1;padding:12px 8px;border-radius:10px;border:1px solid var(--blue);background:var(--blue);color:white;font-size: 16px;font-weight:600;cursor:pointer;transition:all 0.2s;font-family:inherit;">Standard<br><span style='font-size: 13px;opacity:0.8;' id="simStdLabel">8万/月</span></button>
+            <button onclick="simSelectPlan('business')" class="sim-plan-btn" data-plan="business" style="flex:1;padding:12px 8px;border-radius:10px;border:1px solid rgba(255,255,255,0.15);background:transparent;color:rgba(255,255,255,0.6);font-size: 16px;font-weight:600;cursor:pointer;transition:all 0.2s;font-family:inherit;">Business<br><span style='font-size: 13px;opacity:0.6;' id="simBizLabel">15万/月</span></button>
           </div>
         </div>
 
@@ -1704,7 +1704,7 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
       </div>
     </div>
   </div>
-  <span class="page-num">12</span>
+  <span class="page-num" id="simPageNum" ondblclick="togglePricingMode()" style="cursor:default;user-select:none;">12</span>
 </section></div>
 <script>
 // ===== TRACK RECORD DATA & GROUPING =====
@@ -1924,8 +1924,30 @@ document.addEventListener('keydown', (e) => {
 });
 
 // ===== COST SIMULATOR =====
-const simPlanPrices = { starter: 5, standard: 8, business: 15 };
+const smbPrices = { starter: 5, standard: 8, business: 15 };
+const entPrices = { starter: 5, standard: 12, business: 20 };
+let pricingMode = 'smb';
+let simPlanPrices = { starter: 5, standard: 8, business: 15 };
 let simSelectedPlan = 'standard';
+
+function togglePricingMode() {
+  pricingMode = pricingMode === 'smb' ? 'enterprise' : 'smb';
+  const prices = pricingMode === 'smb' ? smbPrices : entPrices;
+  // Update pricing cards
+  document.getElementById('stdPriceVal').textContent = prices.standard;
+  document.getElementById('bizPriceVal').textContent = prices.business;
+  // Update simulator prices
+  simPlanPrices.standard = prices.standard;
+  simPlanPrices.business = prices.business;
+  // Update simulator button labels
+  document.getElementById('simStdLabel').textContent = prices.standard + '万/月';
+  document.getElementById('simBizLabel').textContent = prices.business + '万/月';
+  // Subtle visual indicator on page numbers
+  const ind = pricingMode === 'enterprise' ? '2px solid var(--blue)' : 'none';
+  document.getElementById('pricingPageNum').style.borderBottom = ind;
+  document.getElementById('simPageNum').style.borderBottom = ind;
+  simUpdate();
+}
 
 function simSelectPlan(plan) {
   simSelectedPlan = plan;
