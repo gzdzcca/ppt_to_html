@@ -303,17 +303,17 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
 
 /* ===== SLIDE 2: ABOUT ===== */
 #slide-about { background: var(--white); }
-#slide-about .content { display: flex; gap: 64px; flex: 1; }
-#slide-about .info-section { flex: 1.15; }
+#slide-about .content { display: flex; gap: 48px; flex: 1; }
+#slide-about .info-section { flex: 1; display: flex; flex-direction: column; }
 #slide-about .info-table { width: 100%; }
 #slide-about .info-row {
   display: flex;
   align-items: baseline;
-  padding: 14px 0;
+  padding: 12px 0;
   border-bottom: 1px solid var(--gray-100);
 }
 #slide-about .info-label {
-  width: 100px;
+  width: 110px;
   font-size: 16px;
   color: var(--gray-400);
   font-weight: 500;
@@ -324,65 +324,87 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
   color: var(--gray-800);
   font-weight: 500;
 }
+/* --- Investors --- */
 #slide-about .investor-section {
-  margin-top: 24px;
-  padding: 20px 24px;
-  background: var(--white);
-  border-radius: 12px;
+  margin-top: 20px;
+  padding: 24px 28px;
+  background: linear-gradient(135deg, #FAFBFF 0%, #F5F3FF 100%);
+  border-radius: 16px;
   border: 1px solid var(--gray-200);
   box-shadow: var(--shadow-sm);
 }
 #slide-about .investor-section-label {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 700;
   color: var(--gray-400);
-  letter-spacing: 0.05em;
-  margin-bottom: 16px;
+  letter-spacing: 0.1em;
+  margin-bottom: 20px;
   text-transform: uppercase;
 }
 #slide-about .investor-logos {
   display: flex;
-  gap: 32px;
+  gap: 40px;
   align-items: center;
 }
 #slide-about .investor-logo {
-  height: 28px;
-  max-width: 140px;
+  height: 44px;
+  max-width: 180px;
   object-fit: contain;
-  opacity: 0.65;
-  transition: opacity 0.2s;
+  opacity: 0.7;
+  transition: all 0.3s;
+  filter: grayscale(0.3);
 }
-#slide-about .investor-logo:hover { opacity: 1; }
-#slide-about .badges { display: flex; gap: 12px; margin-top: 16px; }
-#slide-about .badge {
-  flex: 1;
+#slide-about .investor-logo:hover { opacity: 1; filter: grayscale(0); transform: scale(1.05); }
+/* --- Awards --- */
+#slide-about .awards-section {
+  margin-top: 16px;
+}
+#slide-about .awards-grid {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 12px 16px;
-  border-radius: 12px;
-  font-size: 15px;
-  font-weight: 600;
+  gap: 12px;
+}
+#slide-about .award-card {
+  flex: 1;
+  padding: 16px 18px;
+  border-radius: 14px;
   background: var(--white);
   border: 1px solid var(--gray-200);
-  color: var(--gray-600);
-  transition: all 0.2s;
   box-shadow: var(--shadow-sm);
-  white-space: nowrap;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
-#slide-about .badge:hover {
+#slide-about .award-card:hover {
   border-color: var(--blue);
-  background: rgba(37,99,235,0.04);
+  box-shadow: 0 8px 24px rgba(37,99,235,0.12);
+  transform: translateY(-2px);
+}
+#slide-about .award-year {
+  font-size: 12px;
+  font-weight: 700;
   color: var(--blue);
-  box-shadow: var(--shadow);
+  letter-spacing: 0.05em;
 }
-#slide-about .badge img {
-  height: 18px;
+#slide-about .award-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gray-800);
+  line-height: 1.4;
+}
+#slide-about .award-source {
+  font-size: 12px;
+  color: var(--gray-400);
+  font-weight: 500;
+}
+#slide-about .award-icon {
+  height: 28px;
   object-fit: contain;
+  align-self: flex-start;
 }
+/* --- Mission --- */
 #slide-about .mission-card {
-  flex: 1;
+  flex: 0.9;
   background: linear-gradient(145deg, #F0F4FF 0%, #EEF2FF 50%, #F5F3FF 100%);
   border-radius: var(--radius-lg);
   padding: 36px 32px;
@@ -1110,17 +1132,33 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #06080F; color: #1a1
           </div>
         </div>
         <div class="investor-section animate-on-scroll delay-5">
-          <div class="investor-section-label">主要株主</div>
+          <div class="investor-section-label">主要株主・投資家</div>
           <div class="investor-logos">
             <img src="remotion-presentation/public/images/global-brain-logo.png" alt="Global Brain" class="investor-logo tooltip-trigger" data-tooltip="日本最大級のVC。AI・SaaS領域に強み。シリーズAリード投資。">
             <img src="remotion-presentation/public/images/coral-capital-logo.png" alt="Coral Capital" class="investor-logo tooltip-trigger" data-tooltip="500 Startups Japan後継。シード・アーリー特化VC。">
             <img src="remotion-presentation/public/images/deepcore-logo.png" alt="DEEPCORE" class="investor-logo tooltip-trigger" data-tooltip="ソフトバンクグループのAI特化型VC。ディープテック領域に特化。">
           </div>
         </div>
-        <div class="badges animate-on-scroll delay-6">
-          <span class="badge tooltip-trigger" data-tooltip="FOOMA JAPAN 2025（国際食品工業展）でDX推進ソリューションとして最優秀賞受賞。"><img src="remotion-presentation/public/images/fooma-logo.png" alt="FOOMA"> グランプリ受賞</span>
-          <span class="badge tooltip-trigger" data-tooltip="Forbes Asiaが選ぶアジアを代表する30歳未満の30人にCEO曽根が選出（2021年）。"><img src="remotion-presentation/public/images/forbes-badge.png" alt="Forbes 30 Under 30"> 選出</span>
-          <span class="badge">📰 週刊東洋経済 すごいベンチャー100</span>
+        <div class="awards-section animate-on-scroll delay-6">
+          <div class="awards-grid">
+            <div class="award-card tooltip-trigger" data-tooltip="FOOMA JAPAN 2025（国際食品工業展）のスタートアップグランプリ。革新的な技術を持つ30社の中から最多票を獲得し受賞。">
+              <span class="award-year">2025</span>
+              <img src="remotion-presentation/public/images/fooma-logo.png" alt="FOOMA" class="award-icon">
+              <span class="award-title">スタートアップ<br>グランプリ受賞</span>
+              <span class="award-source">FOOMA JAPAN 2025</span>
+            </div>
+            <div class="award-card tooltip-trigger" data-tooltip="Forbes Asiaが選ぶアジアを代表する30歳未満の30人。Industry, Manufacturing & Energy部門でCEO曽根が選出。">
+              <span class="award-year">2021</span>
+              <img src="remotion-presentation/public/images/forbes-badge.png" alt="Forbes" class="award-icon">
+              <span class="award-title">Forbes 30<br>Under 30 Asia</span>
+              <span class="award-source">Forbes Asia</span>
+            </div>
+            <div class="award-card tooltip-trigger" data-tooltip="東洋経済が選ぶ革新的な技術・サービスを持つベンチャー企業100社に選出。製造業向けDXスタートアップとして掲載。">
+              <span class="award-year">2020</span>
+              <span class="award-title">すごい<br>ベンチャー100</span>
+              <span class="award-source">週刊東洋経済</span>
+            </div>
+          </div>
         </div>
       </div>
       <div class="mission-card animate-on-scroll delay-3">
