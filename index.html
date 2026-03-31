@@ -1791,7 +1791,8 @@ function tickerItemHTML(c) {
 
 function renderTicker() {
   // Sort by company size based on pricing mode, then shuffle within groups
-  const sizeOrder = pricingMode === 'enterprise'
+  const mode = typeof pricingMode !== 'undefined' ? pricingMode : 'smb';
+  const sizeOrder = mode === 'enterprise'
     ? { '大企業': 0, '中堅企業': 1, '中小企業': 2 }
     : { '中小企業': 0, '中堅企業': 1, '大企業': 2 };
   const sorted = [...companies].sort((a, b) => {
